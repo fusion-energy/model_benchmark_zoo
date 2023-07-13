@@ -1,18 +1,17 @@
-
 import cadquery as cq
 import openmc
 from cad_to_dagmc import CadToDagmc
 
-class Sphere():
 
+class Sphere:
     def __init__(self, radius=10):
-      self.radius = radius
+        self.radius = radius
 
     def csg_model(self):
-        import openmc
-        surface = openmc.sphere(radius=self.radius, boundary_type='vacuum')
+        surface = openmc.sphere(radius=self.radius, boundary_type="vacuum")
         region = -surface
         cell = openmc.cell(region=region)
+        # TODO return openmc.model object
         return cell
 
     def cadquery_assembly(self):
@@ -21,12 +20,14 @@ class Sphere():
         assembly.add(sphere)
         return assembly
 
-    def stp_file(self, filename='sphere.step'):
+    def stp_file(self, filename="sphere.step"):
         self.cadquery_assembly().save(filename)
 
-    def dag_model(self, min_mesh_element_size=1)
+    def dagmc_model(self, filename="sphere.h5m", min_mesh_size=1.0, max_mesh_size=100.0):
         assembly = self.cadquery_assembly()
         ctd = CadToDagmc()
         ctd.add_cadquery_object(assembly)
-        ctd.export_dagmc('sphere.h5m', min_mesh_element_size=1)
-        dag_model = openmc.DAGMCUniverse('sphere.h5m').bounded_universe()
+        ctd.export_dagmc_h5m_file(filename, min_mesh_size=min_mesh_size, max_mesh_size=min_mesh_element_size)
+        dag_model = openmc.DAGMCUniverse(filename).bounded_universe()
+        # TODO return openmc.model object
+        return dag_model
