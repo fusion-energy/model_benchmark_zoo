@@ -1,4 +1,4 @@
-# model_benchmark_zoo
+
 A collection of parametric CAD and equivalent Constructive Solid Geometry
 models (CSG) for comparing neutronics simulations with both geometry types.
 
