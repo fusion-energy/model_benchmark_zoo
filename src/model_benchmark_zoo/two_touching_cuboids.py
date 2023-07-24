@@ -15,16 +15,22 @@ class Cuboid:
         self.materials = materials
 
     def csg_model(self):
-        surface = openmc.model.RectangularParallelepiped(
-            -0.5*self.width1,
-            0.5*self.width1,
-            -0.5*self.width1,
-            0.5*self.width1,
-            -0.5*self.width1,
-            0.5*self.width1,
-            boundary_type="vacuum"
-        )
-        region = -surface
+        surface1 = openmc.ZPlane(z0=self.width1*0.5, boundary_type="vacuum")
+        surface2 = openmc.ZPlane(z0=self.width1*-0.5, boundary_type="vacuum")
+        surface3 = openmc.XPlane(x0=self.width1*0.5, boundary_type="vacuum")
+        surface4 = openmc.XPlane(x0=self.width1*-0.5, boundary_type="vacuum")
+        surface5 = openmc.YPlane(x0=self.width1*0.5)
+        surface6 = openmc.YPlane(x0=self.width1*-0.5, boundary_type="vacuum")
+        surface7 = openmc.YPlane(x0=self.width1*0.5+self.width2, boundary_type="vacuum")
+
+        region1 = -surface1 & +surface2 & -surface3 & +surface4
+        region2 = -surface2
+        region3 = -surface3
+        region4 = -surface4
+        region5 = -surface5
+        region6 = -surface6
+        region7 = -surface7
+
         cell = openmc.Cell(region=region)
         cell.fill = self.materials[0]
         geometry = openmc.Geometry([cell])
