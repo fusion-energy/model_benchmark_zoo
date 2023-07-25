@@ -39,9 +39,10 @@ class SphericalShell:
         material_tags = [self.materials[0].name, self.materials[1].name]
         ctd.add_cadquery_object(assembly, material_tags=material_tags)
         ctd.export_dagmc_h5m_file(
-            filename,
+            filename=filename,
             min_mesh_size=min_mesh_size,
-            max_mesh_size=max_mesh_size
+            max_mesh_size=max_mesh_size,
+            msh_filename='sphericalshell.msh'  # this arg allows the gmsh file to be written out
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
         geometry = openmc.Geometry(universe)
