@@ -4,7 +4,7 @@ from cad_to_dagmc import CadToDagmc
 
 
 class SphericalShell:
-    def __init__(self, materials, radius1=10, radius2=1):
+    def __init__(self, materials, radius1=10, radius2=5):
         self.radius1 = radius1
         self.radius2 = radius2
         self.materials = materials
@@ -23,7 +23,7 @@ class SphericalShell:
         return model
 
     def cadquery_assembly(self):
-        assembly = cq.Assembly(name="sphere")
+        assembly = cq.Assembly(name="sphericalshell")
         sphere1 = cq.Workplane().sphere(self.radius1)
         sphere2 = cq.Workplane().sphere(self.radius1 + self.radius2).cut(sphere1)
         assembly.add(sphere1)
@@ -33,10 +33,10 @@ class SphericalShell:
     def export_stp_file(self, filename="sphere.step"):
         self.cadquery_assembly().save(filename, "STEP")
 
-    def dagmc_model(self, filename="sphere.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
+    def dagmc_model(self, filename="sphericalshell.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
         assembly = self.cadquery_assembly()
         ctd = CadToDagmc()
-        material_tags = [self.materials[0].name, self.materials[2].name]
+        material_tags = [self.materials[0].name, self.materials[1].name]
         ctd.add_cadquery_object(assembly, material_tags=material_tags)
         ctd.export_dagmc_h5m_file(
             filename,
