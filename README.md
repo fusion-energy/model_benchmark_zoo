@@ -1,3 +1,7 @@
+[![sphere](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphere.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphere.yml)
+[![spherical shell](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphericalshell.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphericalshell.yml)
+[![Cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cuboid.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cuboid.yml)
+[![two touching cuboids](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_two_touching_cuboids.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_two_touching_cuboids.yml)
 
 A collection of parametric CAD and equivalent Constructive Solid Geometry
 models (CSG) for comparing neutronics simulations with both geometry types.
