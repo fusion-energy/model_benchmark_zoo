@@ -1,0 +1,30 @@
+
+name: Cuboid
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container:
+      image: continuumio/miniconda3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: install dependencies
+        run: |
+          conda install -c conda-forge mamba
+          mamba install -c cadquery -c conda-forge moab gmsh python-gmsh cadquery=master -y
+
+      - name: install package with tests
+        run: |
+          pip install .
+
+      - name: Run tests
+        run: |
+          pytest tests/test_csg_cad_sphere.py

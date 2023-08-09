@@ -1,5 +1,5 @@
 
-name: CI with install
+name: spherical shell
 
 on:
   pull_request:
@@ -27,4 +27,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest tests
+          pytest tests/test_csg_cad_sphericalshell.py
