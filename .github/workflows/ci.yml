@@ -11,7 +11,7 @@ jobs:
   testing:
     runs-on: ubuntu-latest
     container:
-      image: docker pull continuumio/miniconda3
+      image: continuumio/miniconda3
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
