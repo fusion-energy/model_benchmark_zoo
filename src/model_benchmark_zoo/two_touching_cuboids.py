@@ -2,11 +2,14 @@ import cadquery as cq
 import openmc
 from cad_to_dagmc import CadToDagmc
 
-#     *----------*----*
+#     *----------*
+#     |          |
+#     |          |----*
 #     |          |    |
 #     |          |    |
-#     |          |    |
-#     *----------*----*
+#     |          |----*
+#     |          |
+#     *----------*
 
 class TwoTouchingCuboids:
     def __init__(self, materials, width1=10, width2=4):
