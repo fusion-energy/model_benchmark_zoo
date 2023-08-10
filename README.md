@@ -33,7 +33,7 @@ mamba activate new_env
 
 Install the dependencies
 ```bash
-mamba install -c cadquery -c conda-forge moab gmsh python-gmsh cadquery=master -y
+mamba install -y -c cadquery -c conda-forge moab gmsh python-gmsh cadquery=master openmc
 ```
 
 Then you can install the cad_to_dagmc package with ```pip```
