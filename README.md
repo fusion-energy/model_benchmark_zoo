@@ -9,8 +9,6 @@ models (CSG) for comparing neutronics simulations with both geometry types.
 |         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374954-20dee8fb-5199-4fc2-86a7-00452b6bdc89.png" width="100"></p>  |     [![Cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphericalshell.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphericalshell.yml) |
 |         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374945-aea2582b-1d5f-40b1-a77b-bef79dce50da.png" width="100"></p>  |     [![Cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_two_touching_cuboids.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_two_touching_cuboids.yml) |
 
-
-
 # Installation prerequisite
 
 In principle, any Conda/Mamba distribution will work. A few Conda/Mamba options are:
