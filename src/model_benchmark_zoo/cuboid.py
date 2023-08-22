@@ -1,6 +1,4 @@
 import cadquery as cq
-import openmc
-from cad_to_dagmc import CadToDagmc
 
 
 class Cuboid:
@@ -9,6 +7,8 @@ class Cuboid:
         self.materials = materials
 
     def csg_model(self):
+        import openmc
+        
         surface = openmc.model.RectangularParallelepiped(
             -0.5*self.width,
             0.5*self.width,
@@ -35,6 +35,9 @@ class Cuboid:
         self.cadquery_assembly().save(filename, "STEP")
 
     def dagmc_model(self, filename="Cuboid.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
+        from cad_to_dagmc import CadToDagmc
+        import openmc
+
         assembly = self.cadquery_assembly()
         ctd = CadToDagmc()
         material_tags = [self.materials[0].name]
