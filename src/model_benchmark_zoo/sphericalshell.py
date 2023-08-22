@@ -1,7 +1,4 @@
 import cadquery as cq
-import openmc
-from cad_to_dagmc import CadToDagmc
-
 
 class SphericalShell:
     def __init__(self, materials, radius1=10, radius2=5):
@@ -10,6 +7,8 @@ class SphericalShell:
         self.materials = materials
 
     def csg_model(self):
+        import openmc
+        
         surface1 = openmc.Sphere(r=self.radius1)
         surface2 = openmc.Sphere(r=self.radius1+self.radius2, boundary_type="vacuum")
         region1 = -surface1
@@ -34,6 +33,9 @@ class SphericalShell:
         self.cadquery_assembly().save(filename, "STEP")
 
     def dagmc_model(self, filename="sphericalshell.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
+        from cad_to_dagmc import CadToDagmc
+        import openmc
+        
         assembly = self.cadquery_assembly()
         ctd = CadToDagmc()
         material_tags = [self.materials[0].name, self.materials[1].name]

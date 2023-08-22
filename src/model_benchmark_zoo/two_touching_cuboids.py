@@ -1,6 +1,4 @@
 import cadquery as cq
-import openmc
-from cad_to_dagmc import CadToDagmc
 
 #     *----------*
 #     |          |
@@ -18,6 +16,7 @@ class TwoTouchingCuboids:
         self.materials = materials
 
     def csg_model(self):
+        import openmc
         surface1 = openmc.ZPlane(z0=self.width1*0.5, boundary_type="vacuum")
         surface2 = openmc.ZPlane(z0=self.width1*-0.5, boundary_type="vacuum")
         surface3 = openmc.XPlane(x0=self.width1*0.5, boundary_type="vacuum")
@@ -51,7 +50,11 @@ class TwoTouchingCuboids:
         self.cadquery_assembly().save(filename, "STEP")
 
     def dagmc_model(self, filename="TwoTouchingCuboids.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
+        from cad_to_dagmc import CadToDagmc
+        import openmc
+
         assembly = self.cadquery_assembly()
+
         ctd = CadToDagmc()
         material_tags = [self.materials[0].name, self.materials[1].name]
         ctd.add_cadquery_object(assembly, material_tags=material_tags)
