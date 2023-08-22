@@ -1,10 +1,15 @@
-[![sphere](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphere.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphere.yml)
-[![spherical shell](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphericalshell.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphericalshell.yml)
-[![Cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cuboid.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cuboid.yml)
-[![two touching cuboids](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_two_touching_cuboids.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_two_touching_cuboids.yml)
 
 A collection of parametric CAD and equivalent Constructive Solid Geometry
 models (CSG) for comparing neutronics simulations with both geometry types.
+
+| Model | Testing Status |
+|---|---|
+|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374951-5e711a8b-a3db-4476-8f56-03a620d74b93.png" width="100"></p>  |     [![Cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cuboid.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cuboid.yml) |
+|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374950-ef8696dd-adbc-4fd8-bd44-c5304e1d0709.png" width="100"></p>  |     [![Cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphere.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphere.yml) |
+|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374954-20dee8fb-5199-4fc2-86a7-00452b6bdc89.png" width="100"></p>  |     [![Cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphericalshell.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_sphericalshell.yml) |
+|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374945-aea2582b-1d5f-40b1-a77b-bef79dce50da.png" width="100"></p>  |     [![Cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_two_touching_cuboids.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_two_touching_cuboids.yml) |
+
+
 
 # Installation prerequisite
 
