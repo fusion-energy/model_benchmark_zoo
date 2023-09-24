@@ -16,7 +16,7 @@ class SphericalShell:
         cell1 = openmc.Cell(region=region1)
         cell1.fill = self.materials[0]
         cell2 = openmc.Cell(region=region2)
-        cell2.fill = self.materials[0]
+        cell2.fill = self.materials[1]
         geometry = openmc.Geometry([cell1, cell2])
         model = openmc.Model(geometry=geometry)
         return model
