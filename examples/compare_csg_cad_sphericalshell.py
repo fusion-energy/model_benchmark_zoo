@@ -54,7 +54,7 @@ with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
     csg_result_mat_1 = sp_from_csg.get_tally(name="mat1_flux_tally")
     csg_result_mat_2 = sp_from_csg.get_tally(name="mat2_flux_tally")
 csg_result_mat_1_str = f'CSG tally mean {csg_result_mat_1.mean} std dev {csg_result_mat_1.std_dev}'
-csg_result_mat_2_str = f'CSG tally mean {csg_result_mat_1.mean} std dev {csg_result_mat_1.std_dev}'
+csg_result_mat_2_str = f'CSG tally mean {csg_result_mat_2.mean} std dev {csg_result_mat_2.std_dev}'
 
 # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
 dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
