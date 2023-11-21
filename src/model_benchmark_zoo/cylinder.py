@@ -8,9 +8,9 @@ class Cylinder:
     def csg_model(self):
         import openmc
 
-        surface_1 = openmc.ZCylinder(x0=0.0, y0=0.0, r=self.radius)
-        surface_2 = openmc.ZPlane(z0=0.5*self.height)
-        surface_3 = openmc.ZPlane(z0=-0.5*self.height)
+        surface_1 = openmc.ZCylinder(x0=0.0, y0=0.0, r=self.radius, boundary_type="vacuum")
+        surface_2 = openmc.ZPlane(z0=0.5*self.height, boundary_type="vacuum")
+        surface_3 = openmc.ZPlane(z0=-0.5*self.height, boundary_type="vacuum")
     
         region = -surface_1 & -surface_2 & +surface_3
         cell = openmc.Cell(region=region)
