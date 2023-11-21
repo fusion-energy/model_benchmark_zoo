@@ -1,4 +1,3 @@
-import cadquery as cq
 
 
 class Sphere:
@@ -19,6 +18,7 @@ class Sphere:
         return model
 
     def cadquery_assembly(self):
+        import cadquery as cq
         assembly = cq.Assembly(name="sphere")
         sphere = cq.Workplane().sphere(self.radius)
         assembly.add(sphere)
