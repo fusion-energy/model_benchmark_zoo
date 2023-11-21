@@ -1,8 +1,9 @@
 
 class Cylinder:
-    def __init__(self, materials, radius=10):
+    def __init__(self, materials, radius=1, height=100):
         self.materials = materials
         self.radius = radius
+        self.height = height
 
     def csg_model(self):
         import openmc
