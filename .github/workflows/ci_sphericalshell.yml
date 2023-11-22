@@ -1,4 +1,3 @@
-
 name: spherical shell
 
 on:
@@ -6,34 +5,25 @@ on:
     branches:
       - develop
       - main
+    push:
+      - main
 
 jobs:
   testing:
     runs-on: ubuntu-latest
-    container:
-      image: continuumio/miniconda3:23.3.1-0
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
 
-      - name: install dependencies
-        run: |
-          apt-get --allow-releaseinfo-change update
-          apt-get update -y
-          apt-get upgrade -y
-          apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
-          conda install -y -c conda-forge mamba
-          mamba install -y -c cadquery -c conda-forge moab gmsh python-gmsh cadquery=master "openmc=0.13.3=dagmc*nompi*"
-          pip install cad_to_dagmc openmc_data_downloader
-          openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9
-          pwd
+      - name: checkout actions
+        uses: actions/checkout@v4
 
-      - name: install package with tests
-        run: |
-          pip install .[tests]
+      - name: use upstream test composite action
+        uses: ./.github/actions/dependencies
 
-      - name: Run tests
+      - shell: bash
         env:
-          OPENMC_CROSS_SECTIONS: /__w/model_benchmark_zoo/model_benchmark_zoo/cross_sections.xml
+          OPENMC_CROSS_SECTIONS: /home/runner/work/model_benchmark_zoo/model_benchmark_zoo/cross_sections.xml
         run: |
+          source "${HOME}/conda/etc/profile.d/conda.sh"
+          source "${HOME}/conda/etc/profile.d/mamba.sh"
+          mamba activate
           pytest tests/test_csg_cad_sphericalshell.py
