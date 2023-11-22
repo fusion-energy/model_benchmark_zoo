@@ -13,7 +13,7 @@ jobs:
     steps:
 
       - name: use upstream test composite action
-        uses: ./.github/actions/dependencies
+        uses: actions/dependencies
 
       - name: Run tests
         env:
