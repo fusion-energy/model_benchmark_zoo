@@ -27,6 +27,8 @@ on:
     branches:
       - develop
       - main
+    push:
+      - main
 
 jobs:
   testing:
