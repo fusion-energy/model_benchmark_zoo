@@ -1,8 +1,6 @@
 name: composite action
 description: builds 
 runs:
-    container:
-      image: continuumio/miniconda3:23.3.1-0
     using: "composite"
     steps:
       - name: Checkout repository
@@ -11,6 +9,8 @@ runs:
       - name: install dependencies
         shell: bash
         run: |
+          curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+          bash Miniforge3-$(uname)-$(uname -m).sh
           sudo apt-get --allow-releaseinfo-change update
           sudo apt-get update -y
           sudo apt-get upgrade -y
