@@ -17,6 +17,8 @@ jobs:
 
       - name: use upstream test composite action
         uses: ./.github/actions/dependencies
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run tests
         env:
