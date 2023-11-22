@@ -15,11 +15,11 @@ jobs:
 
       - name: checkout actions
         uses: actions/checkout@v4
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
 
       - name: use upstream test composite action
         uses: ./.github/actions/dependencies
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
 
       - shell: bash
         env:
