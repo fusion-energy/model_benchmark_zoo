@@ -6,27 +6,6 @@ on:
     branches:
       - develop
       - main
-
-jobs:
-  testing:
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: use upstream test composite action
-        uses: actions/dependencies
-
-      - name: Run tests
-        env:
-          OPENMC_CROSS_SECTIONS: /__w/model_benchmark_zoo/model_benchmark_zoo/cross_sections.xml
-        run: |
-
-name: Cuboid
-
-on:
-  pull_request:
-    branches:
-      - develop
-      - main
     push:
       - main
 
