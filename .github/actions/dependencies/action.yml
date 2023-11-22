@@ -1,6 +1,8 @@
 name: composite action
 description: builds 
 runs:
+    container:
+      image: continuumio/miniconda3:23.3.1-0
     using: "composite"
     steps:
       - name: Checkout repository
