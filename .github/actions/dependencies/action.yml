@@ -7,6 +7,7 @@ runs:
         uses: actions/checkout@v3
 
       - name: install dependencies
+        shell: bash
         run: |
           apt-get --allow-releaseinfo-change update
           apt-get update -y
