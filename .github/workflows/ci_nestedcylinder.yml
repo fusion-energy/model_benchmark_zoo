@@ -1,4 +1,4 @@
-name: spherical shell
+name: nested cylinder
 
 on:
   pull_request:
