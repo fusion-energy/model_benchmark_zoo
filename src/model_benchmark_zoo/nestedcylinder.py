@@ -1,6 +1,6 @@
 
 class NestedCylinder:
-    def __init__(self, materials, height1=155.8, height2=85, radius1=155.8, radius2=85):
+    def __init__(self, materials, height1=15, height2=8, radius1=15, radius2=8):
         
         if height1<=height2:
             raise ValueError('height1 should be greater than height2')
