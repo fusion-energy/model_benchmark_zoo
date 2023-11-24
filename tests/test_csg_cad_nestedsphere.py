@@ -1,4 +1,4 @@
-from model_benchmark_zoo import SphericalShell
+from model_benchmark_zoo import NestedSphere
 import openmc
 import math
 
@@ -14,9 +14,9 @@ def test_compare():
     my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
-    common_geometry_object = SphericalShell(materials=my_materials, radius1=10, radius2=1)
+    common_geometry_object = NestedSphere(materials=my_materials, radius1=10, radius2=1)
     # just writing a CAD step file for visulisation
-    common_geometry_object.export_stp_file("sphericalshell.stp")
+    common_geometry_object.export_stp_file("nestedsphere.stp")
 
     mat1_filter = openmc.MaterialFilter(mat1)
     tally1 = openmc.Tally(name='mat1_flux_tally')
