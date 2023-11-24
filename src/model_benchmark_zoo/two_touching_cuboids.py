@@ -1,4 +1,3 @@
-import cadquery as cq
 
 #     *----------*
 #     |          |
@@ -39,6 +38,7 @@ class TwoTouchingCuboids:
         return model
 
     def cadquery_assembly(self):
+        import cadquery as cq
         assembly = cq.Assembly(name="TwoTouchingCuboids")
         cuboid1 = cq.Workplane().box(self.width1, self.width1, self.width1)
         assembly.add(cuboid1)

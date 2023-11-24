@@ -1,5 +1,4 @@
 
-
 class Sphere:
     def __init__(self, materials, radius=10):
         self.radius = radius
