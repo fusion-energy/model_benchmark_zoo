@@ -1,4 +1,4 @@
-name: spherical shell
+name: nested sphere
 
 on:
   pull_request:
