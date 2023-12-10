@@ -1,6 +1,5 @@
-import cadquery as cq
 
-class SphericalShell:
+class NestedSphere:
     def __init__(self, materials, radius1=10, radius2=5):
         self.radius1 = radius1
         self.radius2 = radius2
@@ -22,7 +21,8 @@ class SphericalShell:
         return model
 
     def cadquery_assembly(self):
-        assembly = cq.Assembly(name="sphericalshell")
+        import cadquery as cq
+        assembly = cq.Assembly(name="nestedshpere")
         sphere1 = cq.Workplane().sphere(self.radius1)
         sphere2 = cq.Workplane().sphere(self.radius1 + self.radius2).cut(sphere1)
         assembly.add(sphere1)
@@ -32,7 +32,7 @@ class SphericalShell:
     def export_stp_file(self, filename="sphere.step"):
         self.cadquery_assembly().save(filename, "STEP")
 
-    def dagmc_model(self, filename="sphericalshell.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
+    def dagmc_model(self, filename="nestedshpere.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
         from cad_to_dagmc import CadToDagmc
         import openmc
         
@@ -44,7 +44,7 @@ class SphericalShell:
             filename=filename,
             min_mesh_size=min_mesh_size,
             max_mesh_size=max_mesh_size,
-            msh_filename='sphericalshell.msh'  # this arg allows the gmsh file to be written out
+            msh_filename='nestedshpere.msh'  # this arg allows the gmsh file to be written out
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
         geometry = openmc.Geometry(universe)

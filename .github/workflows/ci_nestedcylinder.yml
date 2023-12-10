@@ -1,5 +1,4 @@
-
-name: sphere
+name: nested cylinder
 
 on:
   pull_request:
@@ -27,4 +26,4 @@ jobs:
           source "${HOME}/conda/etc/profile.d/conda.sh"
           source "${HOME}/conda/etc/profile.d/mamba.sh"
           mamba activate
-          pytest tests/test_csg_cad_sphere.py
+          pytest tests/test_csg_cad_nestedcylinder.py

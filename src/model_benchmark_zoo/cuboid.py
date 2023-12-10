@@ -1,5 +1,3 @@
-import cadquery as cq
-
 
 class Cuboid:
     def __init__(self, materials, width=10):
@@ -26,6 +24,7 @@ class Cuboid:
         return model
 
     def cadquery_assembly(self):
+        import cadquery as cq
         assembly = cq.Assembly(name="Cuboid")
         Cuboid = cq.Workplane().box(self.width, self.width, self.width)
         assembly.add(Cuboid)

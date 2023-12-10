@@ -1,4 +1,4 @@
-from model_benchmark_zoo import SphericalShell
+from model_benchmark_zoo import NestedCylinder
 import openmc
 
 # single material used in both simulations
@@ -12,9 +12,9 @@ mat2.set_density('g/cm3', 1)
 my_materials = openmc.Materials([mat1, mat2])
 
 # geometry used in both simulations
-common_geometry_object = SphericalShell(materials=my_materials, radius1=10, radius2=1)
+common_geometry_object = NestedCylinder(materials=my_materials)  # default sizes
 # just writing a CAD step file for visulisation
-common_geometry_object.export_stp_file("sphericalshell.stp")
+common_geometry_object.export_stp_file("nestedcylinder.stp")
 
 mat1_filter = openmc.MaterialFilter(mat1)
 tally1 = openmc.Tally(name='mat1_flux_tally')
