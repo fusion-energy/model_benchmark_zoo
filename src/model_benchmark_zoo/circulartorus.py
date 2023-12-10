@@ -45,7 +45,3 @@ class Circulartorus:
 
         model = openmc.Model(geometry=geometry)
         return model
-
-    
-    
-    
