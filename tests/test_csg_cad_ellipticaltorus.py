@@ -1,8 +1,9 @@
 from model_benchmark_zoo import Ellipticaltorus
 import openmc
 import math
+import numpy as np
 
-def test_comparing():
+def test_compare():
     # single material used in both simulations
     mat1 = openmc.Material(name='1')
     mat1.add_nuclide('Fe56', 1)
@@ -63,4 +64,3 @@ def test_comparing():
         cad_result = sp_from_cad.get_tally(name="mat1_flux_tally")
 
     assert math.isclose(cad_result.mean, csg_result.mean)
-
