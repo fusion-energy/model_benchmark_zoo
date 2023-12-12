@@ -24,7 +24,8 @@ class Ellipticaltorus:
     def cadquery_assembly(self):
         import cadquery as cq
         assembly = cq.Assembly(name="ellipticaltorus")
-        ellipticaltorus = cq.Workplane("XZ", origin=(self.major_radius, 0, 0)).ellipse(self.minor_radius2, self.minor_radius1).revolve(359.999999999, (-self.major_radius,0,0), (-self.major_radius,1,0))
+        # ellipticaltorus = cq.Workplane("XZ", origin=(self.major_radius, 0, 0)).ellipse(self.minor_radius2, self.minor_radius1).revolve(360, (-self.major_radius,0,0), (-self.major_radius,1,0), clean=False)
+        ellipticaltorus = cq.Workplane("XZ", origin=(10, 0, 0)).ellipse(2, 4).revolve(180, (-10,0,0), (-10,1,0)).moveTo(-20, 0).ellipse(2, 4).revolve(180, (-10,0,0), (-10,1,0))
         assembly.add(ellipticaltorus)
         return assembly
 
