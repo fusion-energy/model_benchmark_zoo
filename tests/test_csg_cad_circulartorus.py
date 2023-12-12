@@ -1,7 +1,7 @@
 from model_benchmark_zoo import Circulartorus
 import openmc
 import math
-
+import numpy as np
 def test_compare():
     # single material used in both simulations
     mat1 = openmc.Material(name='1')
