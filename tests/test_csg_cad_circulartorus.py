@@ -10,7 +10,9 @@ def test_compare():
     my_materials = openmc.Materials([mat1])
 
     # geometry used in both simulations
-    common_geometry_object = Circulartorus(materials=my_materials, major_radius=10, minor_radius=4)
+    major_radius = 10
+    minor_radius = 4
+    common_geometry_object = Circulartorus(materials=my_materials, major_radius, minor_radius)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("circulartorus.stp")
 
