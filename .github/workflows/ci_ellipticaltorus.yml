@@ -1,0 +1,29 @@
+name: elliptical torus
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+    push:
+      - main
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout actions
+        uses: actions/checkout@v4
+
+      - name: use upstream test composite action
+        uses: ./.github/actions/dependencies
+
+      - shell: bash
+        env:
+          OPENMC_CROSS_SECTIONS: /home/runner/work/model_benchmark_zoo/model_benchmark_zoo/cross_sections.xml
+        run: |
+          source "${HOME}/conda/etc/profile.d/conda.sh"
+          source "${HOME}/conda/etc/profile.d/mamba.sh"
+          mamba activate
+          pytest tests/test_csg_cad_ellipticaltorus.py

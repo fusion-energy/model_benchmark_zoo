@@ -6,3 +6,4 @@ from .nestedsphere import *
 from .cylinder import *
 from .circulartorus import *
 from .nestedcylinder import *
+from .ellipticaltorus import *
