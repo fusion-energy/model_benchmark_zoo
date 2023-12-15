@@ -68,3 +68,21 @@ class TwoTouchingCuboids:
         geometry = openmc.Geometry(universe)
         model = openmc.Model(geometry=geometry)
         return model
+
+    def c2omc_model(self, filename="TwoTouchingCuboids.h5m"):
+        from CAD_to_OpenMC import assembly
+        from pathlib import Path
+        import openmc
+        stepfn=str(Path(filename).with_suffix('.stp'))
+
+        #mesh/triangulate
+        a=assembly.Assembly([stepfn])
+        a.verbose=2
+        assembly.mesher_config['threads']=1
+        material_tags = [self.materials[0].name, self.materials[1].name]
+        a.run(backend='stl2',merge=True,h5m_filename=filename, sequential_tags=material_tags, scale=1.0)
+
+        universe = openmc.DAGMCUniverse(filename ,auto_geom_ids=True).bounded_universe()
+        geometry = openmc.Geometry(universe)
+        model = openmc.Model(geometry=geometry)
+        return model
