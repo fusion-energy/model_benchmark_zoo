@@ -1,4 +1,4 @@
-name: two touching cuboids - cad to dagmc
+name: two touching cuboids - cad to openmc
 
 on:
   pull_request:
