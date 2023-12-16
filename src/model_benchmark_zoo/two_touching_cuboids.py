@@ -1,3 +1,4 @@
+from pathlib import Path
 
 #     *----------*
 #     |          |
@@ -49,7 +50,7 @@ class TwoTouchingCuboids:
     def export_stp_file(self, filename="TwoTouchingCuboids.step"):
         self.cadquery_assembly().save(filename, "STEP")
 
-    def dagmc_model(self, filename="TwoTouchingCuboids.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
+    def dagmc_model_with_cad_to_dagmc(self, filename="TwoTouchingCuboids.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
         from cad_to_dagmc import CadToDagmc
         import openmc
 
@@ -69,20 +70,24 @@ class TwoTouchingCuboids:
         model = openmc.Model(geometry=geometry)
         return model
 
-    def c2omc_model(self, filename="TwoTouchingCuboids.h5m"):
+    def dagmc_model_with_cad_to_openmc(self, filename="TwoTouchingCuboids.h5m"):
         from CAD_to_OpenMC import assembly
-        from pathlib import Path
         import openmc
-        stepfn=str(Path(filename).with_suffix('.stp'))
 
-        #mesh/triangulate
-        a=assembly.Assembly([stepfn])
+        self.export_stp_file()
+
+        a=assembly.Assembly(["TwoTouchingCuboids.step"])
         a.verbose=2
         assembly.mesher_config['threads']=1
-        material_tags = [self.materials[0].name, self.materials[1].name]
-        a.run(backend='stl2',merge=True,h5m_filename=filename, sequential_tags=material_tags, scale=1.0)
+        a.run(
+            backend='stl2',
+            merge=True,
+            h5m_filename=filename,
+            sequential_tags=[self.materials[0].name, self.materials[1].name],
+            scale=1.0
+        )
 
-        universe = openmc.DAGMCUniverse(filename ,auto_geom_ids=True).bounded_universe()
+        universe = openmc.DAGMCUniverse(filename, auto_geom_ids=True).bounded_universe()
         geometry = openmc.Geometry(universe)
         model = openmc.Model(geometry=geometry)
         return model

@@ -1,4 +1,4 @@
-name: nested cylinder
+name: two touching cuboids - cad to dagmc
 
 on:
   pull_request:
@@ -26,4 +26,4 @@ jobs:
           source "${HOME}/conda/etc/profile.d/conda.sh"
           source "${HOME}/conda/etc/profile.d/mamba.sh"
           mamba activate
-          pytest tests/test_csg_cad_nestedcylinder.py
+          pytest tests/test_cad_to_dagmc/test_csg_cad_two_touching_cuboids.py

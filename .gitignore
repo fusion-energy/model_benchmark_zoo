@@ -139,3 +139,5 @@ dmypy.json
 *.pkl
 *.ipynb
 *.zip
+
+**/_version.py

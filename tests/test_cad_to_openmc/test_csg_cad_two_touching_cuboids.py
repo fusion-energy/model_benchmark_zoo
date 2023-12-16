@@ -56,7 +56,7 @@ def test_compare():
         csg_result2 = sp_from_csg.get_tally(name="mat2_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a TwoTouchingCuboids
-    dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
+    dag_model = common_geometry_object.dagmc_model_with_cad_to_openmc()
     dag_model.materials = my_materials
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
