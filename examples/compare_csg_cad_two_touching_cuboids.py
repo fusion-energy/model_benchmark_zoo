@@ -70,8 +70,24 @@ with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
 cad_result_1 = f'CAD tally mat 1 mean {cad_result1.mean} std dev {cad_result1.std_dev}'
 cad_result_2 = f'CAD tally mat 2 mean {cad_result2.mean} std dev {cad_result2.std_dev}'
 
+dag_model2 = common_geometry_object.c2omc_model()
+dag_model2.materials = my_materials
+dag_model2.tallies = my_tallies
+dag_model2.settings = my_settings
+
+output_file_from_c2omc = dag_model2.run()
+
+with openmc.StatePoint(output_file_from_c2omc) as sp_from_c2omc:
+    c2omc_result1 = sp_from_c2omc.get_tally(name="mat1_flux_tally")
+    c2omc_result2 = sp_from_c2omc.get_tally(name="mat2_flux_tally")
+c2omc_result_1 = f'C2O tally mat 1 mean {c2omc_result1.mean} std dev {c2omc_result1.std_dev}'
+c2omc_result_2 = f'C2O tally mat 2 mean {c2omc_result2.mean} std dev {c2omc_result2.std_dev}'
+
+
 # printing both tally results
 print(csg_result_1)
 print(cad_result_1)
+print(c2omc_result_1)
 print(csg_result_2)
 print(cad_result_2)
+print(c2omc_result_2)

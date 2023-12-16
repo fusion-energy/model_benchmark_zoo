@@ -1,4 +1,4 @@
-name: circulartorus
+name: circular torus - cad to dagmc
 
 on:
   pull_request:
@@ -26,4 +26,4 @@ jobs:
           source "${HOME}/conda/etc/profile.d/conda.sh"
           source "${HOME}/conda/etc/profile.d/mamba.sh"
           mamba activate
-          pytest tests/test_csg_cad_circulartorus.py
+          pytest tests/test_cad_to_dagmc/test_csg_cad_circulartorus.py
