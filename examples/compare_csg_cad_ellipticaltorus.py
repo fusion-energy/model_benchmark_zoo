@@ -27,7 +27,7 @@ my_settings.inactive = 0
 my_settings.particles = 500
 my_settings.run_mode = 'fixed source'
 
-# Create a DT point source
+# Create a DT ring source
 my_source = openmc.Source()
 r = openmc.stats.Discrete([major_radius], [1])
 phi = openmc.stats.Uniform(0, 2*np.pi)
