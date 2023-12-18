@@ -46,3 +46,25 @@ class Cylinder:
         geometry = openmc.Geometry(universe)
         model = openmc.Model(geometry=geometry)
         return model
+
+    def dagmc_model_with_cad_to_openmc(self, filename="cylinder.h5m"):
+        from CAD_to_OpenMC import assembly
+        import openmc
+
+        self.export_stp_file()
+
+        a=assembly.Assembly(["cylinder.step"])
+        a.verbose=0
+        assembly.mesher_config['threads']=1
+        a.run(
+            backend='stl2',
+            merge=True,
+            h5m_filename=filename,
+            sequential_tags=[self.materials[0].name],
+            scale=1.0
+        )
+
+        universe = openmc.DAGMCUniverse(filename, auto_geom_ids=True).bounded_universe()
+        geometry = openmc.Geometry(universe)
+        model = openmc.Model(geometry=geometry)
+        return model
