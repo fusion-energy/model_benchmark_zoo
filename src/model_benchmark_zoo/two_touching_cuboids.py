@@ -66,8 +66,9 @@ class TwoTouchingCuboids:
             msh_filename='TwoTouchingCuboids.msh'
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
         geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
 
     def dagmc_model_with_cad_to_openmc(self, filename="TwoTouchingCuboids.h5m"):
@@ -88,6 +89,7 @@ class TwoTouchingCuboids:
         )
 
         universe = openmc.DAGMCUniverse(filename, auto_geom_ids=True).bounded_universe()
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
         geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model

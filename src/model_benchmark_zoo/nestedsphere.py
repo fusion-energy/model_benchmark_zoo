@@ -48,6 +48,7 @@ class NestedSphere:
             msh_filename='nestedshpere.msh'  # this arg allows the gmsh file to be written out
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
         geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model

@@ -37,7 +37,6 @@ my_settings.source = my_source
 
 # making openmc.Model with CSG geometry
 csg_model = common_geometry_object.csg_model()
-csg_model.materials = my_materials
 csg_model.tallies = my_tallies
 csg_model.settings = my_settings
 
@@ -50,7 +49,6 @@ csg_result = f'CSG tally mean {csg_result.mean} std dev {csg_result.std_dev}'
 
 # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
 dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
-dag_model.materials = my_materials
 dag_model.tallies = my_tallies
 dag_model.settings = my_settings
 

@@ -15,8 +15,9 @@ class Cylinder:
         region = -surface_1 & -surface_2 & +surface_3
         cell = openmc.Cell(region=region)
         cell.fill = self.materials[0]
+        materials = openmc.Materials([self.materials[0]])
         geometry = openmc.Geometry([cell])
-        model = openmc.Model(geometry=geometry)
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
     
     def cadquery_assembly(self):
@@ -43,6 +44,7 @@ class Cylinder:
             max_mesh_size=max_mesh_size
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
+        materials = openmc.Materials([self.materials[0]])
         geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model

@@ -20,7 +20,8 @@ class Cuboid:
         cell = openmc.Cell(region=region)
         cell.fill = self.materials[0]
         geometry = openmc.Geometry([cell])
-        model = openmc.Model(geometry=geometry)
+        materials = openmc.Materials([self.materials[0]])
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
 
     def cadquery_assembly(self):
@@ -48,5 +49,6 @@ class Cuboid:
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
         geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
+        materials = openmc.Materials([self.materials[0]])
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
