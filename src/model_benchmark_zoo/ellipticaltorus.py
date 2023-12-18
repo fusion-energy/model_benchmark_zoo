@@ -65,7 +65,7 @@ class Ellipticaltorus:
             backend='stl2',
             merge=True,
             h5m_filename=filename,
-            sequential_tags=[self.materials[0].name, self.materials[1].name],
+            sequential_tags=[self.materials[0].name],
             scale=1.0
         )
 
