@@ -69,7 +69,7 @@ class NestedCylinder:
         from CAD_to_OpenMC import assembly
         import openmc
 
-        self.export_stp_file()
+        self.export_stp_file("nestedcylinder.step")
 
         a=assembly.Assembly(["nestedcylinder.step"])
         a.verbose=2
