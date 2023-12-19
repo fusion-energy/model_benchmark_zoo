@@ -26,4 +26,4 @@ jobs:
           source "${HOME}/conda/etc/profile.d/conda.sh"
           source "${HOME}/conda/etc/profile.d/mamba.sh"
           mamba activate
-          pytest tests/test_cad_to_dagmc/test_csg_cad_sphere.py
+          pytest tests/test_cad_to_dagmc/test_csg_cad_cuboid.py
