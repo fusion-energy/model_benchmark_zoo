@@ -17,8 +17,9 @@ class Ellipticaltorus:
         region = -surface
         cell = openmc.Cell(region=region)
         cell.fill = self.materials[0]
+        materials = openmc.Materials([self.materials[0]])
         geometry = openmc.Geometry([cell])
-        model = openmc.Model(geometry=geometry)
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
 
     def cadquery_assembly(self):
@@ -47,7 +48,30 @@ class Ellipticaltorus:
             max_mesh_size=max_mesh_size
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
+        materials = openmc.Materials([self.materials[0]])
         geometry = openmc.Geometry(universe)
 
+        model = openmc.Model(geometry=geometry, materials=materials)
+        return model
+
+    def dagmc_model_with_cad_to_openmc(self, filename="ellipticaltorus.h5m"):
+        from CAD_to_OpenMC import assembly
+        import openmc
+
+        self.export_stp_file()
+
+        a=assembly.Assembly(["ellipticaltorus.step"])
+        a.verbose=2
+        assembly.mesher_config['threads']=1
+        a.run(
+            backend='stl2',
+            merge=True,
+            h5m_filename=filename,
+            sequential_tags=[self.materials[0].name],
+            scale=1.0
+        )
+
+        universe = openmc.DAGMCUniverse(filename, auto_geom_ids=True).bounded_universe()
+        geometry = openmc.Geometry(universe)
         model = openmc.Model(geometry=geometry)
         return model

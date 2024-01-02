@@ -1,4 +1,4 @@
-from model_benchmark_zoo import Cylinder
+from model_benchmark_zoo import Sphere
 import openmc
 import math
 
@@ -10,9 +10,9 @@ def test_compare():
     my_materials = openmc.Materials([mat1])
 
     # geometry used in both simulations
-    common_geometry_object = Cylinder(materials=my_materials, radius=1, height=100)
+    common_geometry_object = Sphere(materials=my_materials, radius=10)
     # just writing a CAD step file for visulisation
-    common_geometry_object.export_stp_file("cylinder.stp")
+    common_geometry_object.export_stp_file("sphere.stp")
 
     mat_filter = openmc.MaterialFilter(mat1)
     tally = openmc.Tally(name='mat1_flux_tally')
@@ -35,6 +35,7 @@ def test_compare():
 
     # making openmc.Model with CSG geometry
     csg_model = common_geometry_object.csg_model()
+    csg_model.materials = my_materials
     csg_model.tallies = my_tallies
     csg_model.settings = my_settings
 
@@ -44,8 +45,9 @@ def test_compare():
     with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
         csg_result = sp_from_csg.get_tally(name="mat1_flux_tally")
 
-    # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a cylinder
-    dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
+    # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
+    dag_model = common_geometry_object.dagmc_model_with_cad_to_openmc()
+    dag_model.materials = my_materials
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
 

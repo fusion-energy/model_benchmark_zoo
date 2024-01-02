@@ -39,6 +39,7 @@ def test_compare():
 
     # making openmc.Model with CSG geometry
     csg_model = common_geometry_object.csg_model()
+    csg_model.materials = my_materials
     csg_model.tallies = my_tallies
     csg_model.settings = my_settings
 
@@ -49,7 +50,8 @@ def test_compare():
         csg_result = sp_from_csg.get_tally(name="mat1_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a circular torus
-    dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
+    dag_model = common_geometry_object.dagmc_model_with_cad_to_openmc()
+    dag_model.materials = my_materials
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
 
