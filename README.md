@@ -45,7 +45,8 @@ Install the dependencies, if this fails to solve the environment you could also 
 mamba install -y -c conda-forge moab gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
 ```
 
-CadQuery should then be installed, here is the mamba command and the pip command. If the mamba command fails to solve the environment then try the pip command as this points to a specific version (before OCP 7.7.2 was made the default).
+CadQuery should then be installed, here is the mamba command and the pip command.
+If the mamba command fails to solve the environment then try the pip command as this points to a specific version (before OCP 7.7.2 was made the default).
 ```bash
 mamba install -y -c cadquery cadquery=master
 pip install git+https://github.com/CadQuery/cadquery.git@79e64e557e87d63b84c1c8a60c0df8e941a1a4a1
