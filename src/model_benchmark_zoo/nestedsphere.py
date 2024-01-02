@@ -17,7 +17,8 @@ class NestedSphere:
         cell2 = openmc.Cell(region=region2)
         cell2.fill = self.materials[1]
         geometry = openmc.Geometry([cell1, cell2])
-        model = openmc.Model(geometry=geometry)
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
 
     def cadquery_assembly(self):
@@ -47,6 +48,7 @@ class NestedSphere:
             msh_filename='nestedshpere.msh'  # this arg allows the gmsh file to be written out
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
         geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model

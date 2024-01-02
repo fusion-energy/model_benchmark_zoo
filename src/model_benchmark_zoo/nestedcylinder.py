@@ -27,11 +27,12 @@ class NestedCylinder:
         region_1 = -surface_1 & -surface_2 & +surface_3
         region_2 = -surface_3 & -surface_4 & +surface_5
 
-        cell_1 = openmc.Cell(region=region_1 & ~ region_2)
-        cell_2 = openmc.Cell(region=region_2)
+        cell_1 = openmc.Cell(region=region_1 & ~ region_2, fill=self.materials[0])
+        cell_2 = openmc.Cell(region=region_2, fill=self.materials[1])
 
         geometry = openmc.Geometry([cell_1, cell_2])
-        model = openmc.Model(geometry=geometry)
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
 
     def cadquery_assembly(self):
@@ -62,5 +63,6 @@ class NestedCylinder:
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
         geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model

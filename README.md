@@ -39,7 +39,7 @@ Activate the environment
 mamba activate new_env
 ```
 
-Install the dependencies
+Install the dependencies, if this fails to solve the enivornmet you could also try [installing OpenMC from source](https://docs.openmc.org/en/stable/quickinstall.html) which might be prefered.
 
 ```bash
 mamba install -y -c cadquery -c conda-forge moab gmsh python-gmsh cadquery=master "openmc=0.13.3=dagmc*nompi*"
