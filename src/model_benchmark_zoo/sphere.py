@@ -12,7 +12,7 @@ class Sphere:
         cell = openmc.Cell(region=region)
         cell.fill = self.materials[0]
         geometry = openmc.Geometry([cell])
-        materials = openmc.Geometry([self.materials[0]])
+        materials = openmc.Materials([self.materials[0]])
         model = openmc.Model(geometry=geometry, materials=materials)
         # TODO return openmc.model object
         return model

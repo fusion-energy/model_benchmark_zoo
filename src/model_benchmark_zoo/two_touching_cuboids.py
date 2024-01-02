@@ -35,7 +35,8 @@ class TwoTouchingCuboids:
         cell2.fill = self.materials[1]
 
         geometry = openmc.Geometry([cell1, cell2])
-        model = openmc.Model(geometry=geometry)
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
 
     def cadquery_assembly(self):
