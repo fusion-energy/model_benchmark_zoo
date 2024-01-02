@@ -24,7 +24,8 @@ class SimpleTokamak:
         cell3.fill = self.materials[1]
 
         geometry = openmc.Geometry([cell1, cell2, cell3])
-        model = openmc.Model(geometry=geometry)
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
 
     def cadquery_assembly(self):
@@ -57,9 +58,9 @@ class SimpleTokamak:
             filename=filename,
             min_mesh_size=min_mesh_size,
             max_mesh_size=max_mesh_size,
-            msh_filename='nestedshpere.msh'  # this arg allows the gmsh file to be written out
         )
         universe = openmc.DAGMCUniverse(filename).bounded_universe()
         geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
+        materials = openmc.Materials([self.materials[0], self.materials[1]])
+        model = openmc.Model(geometry=geometry, materials=materials)
         return model
