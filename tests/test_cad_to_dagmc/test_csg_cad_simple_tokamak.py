@@ -14,7 +14,7 @@ def test_compare():
     my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
-    common_geometry_object = SimpleTokamak(materials=my_materials, radius1=10, radius2=1)
+    common_geometry_object = SimpleTokamak(materials=my_materials, radius=500, blanket_thicknesses=100, center_column_thicknesses=50)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("SimpleTokamak.stp")
 

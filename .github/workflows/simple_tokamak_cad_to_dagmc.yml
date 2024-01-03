@@ -1,4 +1,4 @@
-name: two touching cuboids - cad to dagmc
+name: simple tokamak - cad to dagmc
 
 on:
   pull_request:
