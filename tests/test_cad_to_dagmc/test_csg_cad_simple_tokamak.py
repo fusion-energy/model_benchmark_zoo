@@ -36,10 +36,13 @@ def test_compare():
     my_settings.particles = 500
     my_settings.run_mode = 'fixed source'
 
-    # Create a DT point source
+    # Create a DT ring source
     my_source = openmc.Source()
-    my_source.space = openmc.stats.Point((0, 0, 0))
-    my_source.angle = openmc.stats.Isotropic()
+    source_r = common_geometry_object.center_column_thicknesses + (common_geometry_object.radius-common_geometry_object.center_column_thicknesses) /2
+    r = openmc.stats.Discrete([source_r], [1])
+    phi = openmc.stats.Uniform(0, 2*math.pi)
+    z = openmc.stats.Discrete([0], [1])
+    my_source.space = openmc.stats.CylindricalIndependent(r, phi, z)
     my_source.energy = openmc.stats.Discrete([14e6], [1])
     my_settings.source = my_source
 
