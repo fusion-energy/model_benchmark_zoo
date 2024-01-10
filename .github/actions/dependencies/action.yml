@@ -22,6 +22,6 @@ runs:
           mamba install -y -c conda-forge moab gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
           pip install git+https://github.com/CadQuery/cadquery.git
           pip install cad_to_dagmc openmc_data_downloader
-          pip install --pre CAD_to_OpenMC
+          pip install CAD_to_OpenMC
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9
           pip install .[tests]
