@@ -20,7 +20,7 @@ runs:
           sudo apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
           mamba activate
           mamba install -y -c conda-forge moab gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
-          pip install git+https://github.com/CadQuery/cadquery.git
+          pip install cadquery==2.4.0
           pip install cad_to_dagmc openmc_data_downloader
           pip install CAD_to_OpenMC
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9
