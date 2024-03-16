@@ -1,6 +1,6 @@
 from .utils import BaseCommonGeometryObject
 class NestedSphere(BaseCommonGeometryObject):
-    def __init__(self, materials, radius1=10, radius2=5):
+    def __init__(self, radius1=10, radius2=5):
         self.radius1 = radius1
         self.radius2 = radius2
 

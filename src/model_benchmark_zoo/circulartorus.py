@@ -20,3 +20,11 @@ class Circulartorus(BaseCommonGeometryObject):
         materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=materials)
         return model
+
+    def cadquery_assembly(self):
+        import cadquery as cq
+
+        assembly = cq.Assembly(name="circulartorus")
+        circulartorus = cq.Solid.makeTorus(self.major_radius, self.minor_radius)
+        assembly.add(circulartorus)
+        return assembly

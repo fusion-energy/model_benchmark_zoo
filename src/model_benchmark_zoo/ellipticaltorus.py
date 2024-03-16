@@ -1,11 +1,9 @@
 from .utils import BaseCommonGeometryObject
 class Ellipticaltorus(BaseCommonGeometryObject):
-    def __init__(self, materials, major_radius=10, minor_radius1=2, minor_radius2=1):
+    def __init__(self, major_radius=10, minor_radius1=2, minor_radius2=1):
         """
         input: minor_radius1 parallel to axis of revolution, minor_radius2 perpendicular to axis of revolution
         """
-        self.materials = materials
-        self.material_tags = [material.name for material in self.materials]
         self.major_radius = major_radius
         self.minor_radius1 = minor_radius1
         self.minor_radius2 = minor_radius2
