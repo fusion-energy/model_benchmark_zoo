@@ -14,7 +14,7 @@ def test_compare():
     my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
-    common_geometry_object = NestedCylinder(materials=my_materials) #default size
+    common_geometry_object = NestedCylinder() #default size
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("nestedcylinders.stp")
 

@@ -13,8 +13,7 @@ def test_compare():
     my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
-    common_geometry_object = TwoTouchingCuboids(
-        materials=my_materials, width1=10, width2=4)
+    common_geometry_object = TwoTouchingCuboids(width1=10, width2=4)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("TwoTouchingCuboids.stp")
 
@@ -55,8 +54,16 @@ def test_compare():
         csg_result2 = sp_from_csg.get_tally(name="mat2_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a TwoTouchingCuboids
-    common_geometry_object.export_h5m_file_with_cad_to_dagmc(min_mesh_size=0.01, max_mesh_size=0.5)
-    dag_model = common_geometry_object.dagmc_model()
+    common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+        h5m_filename='twotouchingcuboids.h5m',
+        material_tags=['1'],
+        min_mesh_size=0.01,
+        max_mesh_size=0.5
+    )
+    dag_model = common_geometry_object.dagmc_model(
+        h5m_filename='twotouchingcuboids.h5m',
+        materials=[mat1]
+    )
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
 

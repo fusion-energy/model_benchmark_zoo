@@ -12,7 +12,7 @@ def test_compare():
     # geometry used in both simulations
     major_radius = 10
     minor_radius = 4
-    common_geometry_object = Circulartorus(materials=my_materials, major_radius=major_radius, minor_radius=minor_radius)
+    common_geometry_object = Circulartorus(major_radius=major_radius, minor_radius=minor_radius)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("circulartorus.stp")
 

@@ -14,7 +14,7 @@ def test_compare():
     major_radius = 10
     minor_radius1 = 4
     minor_radius2 = 2
-    common_geometry_object = Ellipticaltorus(materials = my_materials, major_radius=major_radius, minor_radius1=minor_radius1, minor_radius2 = minor_radius2)
+    common_geometry_object = Ellipticaltorus(major_radius=major_radius, minor_radius1=minor_radius1, minor_radius2 = minor_radius2)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("ellipticaltorus.stp")
 

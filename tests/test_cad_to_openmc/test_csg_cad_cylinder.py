@@ -10,7 +10,7 @@ def test_compare():
     my_materials = openmc.Materials([mat1])
 
     # geometry used in both simulations
-    common_geometry_object = Cylinder(materials=my_materials, radius=1, height=100)
+    common_geometry_object = Cylinder(radius=1, height=100)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("cylinder.stp")
 

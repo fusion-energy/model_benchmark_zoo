@@ -12,7 +12,7 @@ def test_compare():
     # geometry used in both simulations
     major_radius = 10
     minor_radius = 4
-    common_geometry_object = Circulartorus(materials=my_materials, major_radius=major_radius, minor_radius=minor_radius)
+    common_geometry_object = Circulartorus(major_radius=major_radius, minor_radius=minor_radius)
 
     mat_filter = openmc.MaterialFilter(mat1)
     tally = openmc.Tally(name='mat1_flux_tally')

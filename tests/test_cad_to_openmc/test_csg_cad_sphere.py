@@ -10,7 +10,7 @@ def test_compare():
     my_materials = openmc.Materials([mat1])
 
     # geometry used in both simulations
-    common_geometry_object = Sphere(materials=my_materials, radius=10)
+    common_geometry_object = Sphere(radius=10)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("sphere.stp")
 

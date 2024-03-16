@@ -10,7 +10,7 @@ def test_comparing():
     my_materials = openmc.Materials([mat1])
 
     # geometry used in both simulations
-    common_geometry_object = Cuboid(materials=my_materials, width=10)
+    common_geometry_object = Cuboid(width=10)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("cuboid.stp")
 

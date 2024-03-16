@@ -14,7 +14,7 @@ def test_compare():
     my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
-    common_geometry_object = NestedSphere(materials=my_materials, radius1=10, radius2=1)
+    common_geometry_object = NestedSphere(radius1=10, radius2=1)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("nestedsphere.stp")
 

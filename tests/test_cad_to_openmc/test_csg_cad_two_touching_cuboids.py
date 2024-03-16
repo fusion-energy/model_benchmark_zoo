@@ -13,8 +13,7 @@ def test_compare():
     my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
-    common_geometry_object = TwoTouchingCuboids(
-        materials=my_materials, width1=10, width2=4)
+    common_geometry_object = TwoTouchingCuboids(width1=10, width2=4)
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("TwoTouchingCuboids.stp")
 
