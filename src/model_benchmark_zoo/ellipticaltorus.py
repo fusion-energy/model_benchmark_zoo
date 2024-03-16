@@ -1,77 +1,31 @@
-
-class Ellipticaltorus:
-    def __init__(self, materials, major_radius=10, minor_radius1=2, minor_radius2=1):
+from .utils import BaseCommonGeometryObject
+class Ellipticaltorus(BaseCommonGeometryObject):
+    def __init__(self, major_radius=10, minor_radius1=2, minor_radius2=1):
         """
         input: minor_radius1 parallel to axis of revolution, minor_radius2 perpendicular to axis of revolution
         """
-        self.materials = materials
         self.major_radius = major_radius
         self.minor_radius1 = minor_radius1
         self.minor_radius2 = minor_radius2
 
-    def csg_model(self):
+    def csg_model(self, materials):
         import openmc
 
         surface = openmc.ZTorus(a=self.major_radius, b=self.minor_radius1, c=self.minor_radius2, boundary_type="vacuum")
-    
         region = -surface
         cell = openmc.Cell(region=region)
-        cell.fill = self.materials[0]
-        materials = openmc.Materials([self.materials[0]])
+        cell.fill = materials[0]
+        my_materials = openmc.Materials(materials)
         geometry = openmc.Geometry([cell])
-        model = openmc.Model(geometry=geometry, materials=materials)
+        model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
 
     def cadquery_assembly(self):
         import cadquery as cq
+
         assembly = cq.Assembly(name="ellipticaltorus")
         ellipticaltorus1 = cq.Workplane("XZ", origin=(self.major_radius, 0, 0)).ellipse(self.minor_radius2, self.minor_radius1).revolve(180, (-self.major_radius,0,0), (-self.major_radius,1,0))
         ellipticaltorus2 = cq.Workplane("XZ", origin=(-self.major_radius, 0, 0)).ellipse(self.minor_radius2, self.minor_radius1).revolve(180, (self.major_radius,0,0), (self.major_radius,1,0))
         ellipticaltorus = ellipticaltorus1.union(ellipticaltorus2)        
         assembly.add(ellipticaltorus)
         return assembly
-
-    def export_stp_file(self, filename="ellipticaltorus.step"):
-        self.cadquery_assembly().save(filename, "STEP")
-
-    def dagmc_model(self, filename="ellipticaltorus.h5m", min_mesh_size=0.1, max_mesh_size=100.0):
-        from cad_to_dagmc import CadToDagmc
-        import openmc
-        
-        assembly = self.cadquery_assembly()
-        ctd = CadToDagmc()
-        material_tags = [self.materials[0].name]
-        ctd.add_cadquery_object(assembly, material_tags=material_tags)
-        ctd.export_dagmc_h5m_file(
-            filename,
-            min_mesh_size=min_mesh_size,
-            max_mesh_size=max_mesh_size
-        )
-        universe = openmc.DAGMCUniverse(filename).bounded_universe()
-        materials = openmc.Materials([self.materials[0]])
-        geometry = openmc.Geometry(universe)
-
-        model = openmc.Model(geometry=geometry, materials=materials)
-        return model
-
-    def dagmc_model_with_cad_to_openmc(self, filename="ellipticaltorus.h5m"):
-        from CAD_to_OpenMC import assembly
-        import openmc
-
-        self.export_stp_file()
-
-        a=assembly.Assembly(["ellipticaltorus.step"])
-        a.verbose=2
-        assembly.mesher_config['threads']=1
-        a.run(
-            backend='stl2',
-            merge=True,
-            h5m_filename=filename,
-            sequential_tags=[self.materials[0].name],
-            scale=1.0
-        )
-
-        universe = openmc.DAGMCUniverse(filename, auto_geom_ids=True).bounded_universe()
-        geometry = openmc.Geometry(universe)
-        model = openmc.Model(geometry=geometry)
-        return model
