@@ -13,8 +13,6 @@ def test_compare():
     major_radius = 10
     minor_radius = 4
     common_geometry_object = Circulartorus(materials=my_materials, major_radius=major_radius, minor_radius=minor_radius)
-    # just writing a CAD step file for visulisation
-    common_geometry_object.export_stp_file("circulartorus.stp")
 
     mat_filter = openmc.MaterialFilter(mat1)
     tally = openmc.Tally(name='mat1_flux_tally')
@@ -49,7 +47,16 @@ def test_compare():
         csg_result = sp_from_csg.get_tally(name="mat1_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a circular torus
-    dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
+    common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+        h5m_filename='circulartorus.h5m',
+        material_tags=['1'],
+        min_mesh_size=0.01,
+        max_mesh_size=0.5
+    )
+    dag_model = common_geometry_object.dagmc_model(
+        h5m_filename='circulartorus.h5m',
+        materials=[mat1]
+    )
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
 

@@ -48,25 +48,26 @@ mamba install -y -c conda-forge moab gmsh python-gmsh "openmc=0.14.0=dagmc*nompi
 CadQuery should then be installed, here is the mamba command and the pip command.
 
 ```bash
-mamba install -y -c cadquery cadquery=master
+mamba install -y -c cadquery ocp=7.7.4 cadquery=2.4.0
 ```
 
 If the mamba command fails to solve the environment then try this pip command.
 
 ```bash
-pip install git+https://github.com/CadQuery/cadquery.git
+python -m pip install git+https://github.com/CadQuery/cadquery.git
 ```
 
-Then you can install the cad_to_dagmc package with ```pip```
+Then you can install which ever convertor you want to test. The cad_to_dagmc and the CAD_to_OpenMC packages can both be installed with ```pip```
 
 ```bash
-pip install cad_to_dagmc
+python -m pip install cad_to_dagmc
+python -m pip install CAD_to_OpenMC
 ```
 
 Then you can install the model benchmark zoo with ```pip```
 
 ```bash
-pip install git+git://github.com/fusion-energy/model_benchmark_zoo.git
+python -m pip install git+git://github.com/fusion-energy/model_benchmark_zoo.git
 ```
 
 # Usage

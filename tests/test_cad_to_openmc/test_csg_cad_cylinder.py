@@ -46,7 +46,14 @@ def test_compare():
         csg_result = sp_from_csg.get_tally(name="mat1_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a cylinder
-    dag_model = common_geometry_object.dagmc_model_with_cad_to_openmc()
+    common_geometry_object.export_h5m_file_with_cad_to_openmc(
+        h5m_filename='cylinder.h5m',
+        material_tags=['1'],
+    )
+    dag_model = common_geometry_object.dagmc_model(
+        h5m_filename='cylinder.h5m',
+        materials=[mat1]
+    )
     dag_model.materials = my_materials
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
