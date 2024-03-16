@@ -35,7 +35,7 @@ my_settings.particles = 500
 my_settings.run_mode = 'fixed source'
 
 # Create a DT point source
-my_source = openmc.Source()
+my_source = openmc.IndependentSource()
 my_source.space = openmc.stats.Point((0, 0, 0))
 my_source.angle = openmc.stats.Isotropic()
 my_source.energy = openmc.stats.Discrete([14e6], [1])

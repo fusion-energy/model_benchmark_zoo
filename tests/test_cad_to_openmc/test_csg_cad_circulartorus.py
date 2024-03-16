@@ -28,7 +28,7 @@ def test_compare():
     my_settings.run_mode = 'fixed source'
 
     # Create a DT point source
-    my_source = openmc.Source()
+    my_source = openmc.IndependentSource()
     r = openmc.stats.Discrete([major_radius], [1])
     phi = openmc.stats.Uniform(0, 2*np.pi)
     z = openmc.stats.Discrete([0], [1])
