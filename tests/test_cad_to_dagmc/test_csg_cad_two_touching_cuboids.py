@@ -8,7 +8,7 @@ def test_compare():
     mat1.add_nuclide('Fe56', 1)
     mat1.set_density('g/cm3', 1)
     mat2 = openmc.Material(name='2')
-    mat2.add_nuclide('Fe56', 1)
+    mat2.add_nuclide('Be9', 1)
     mat2.set_density('g/cm3', 1)
 
     # geometry used in both simulations
@@ -55,13 +55,13 @@ def test_compare():
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a TwoTouchingCuboids
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
         h5m_filename='twotouchingcuboids.h5m',
-        material_tags=['1'],
+        material_tags=['1', '2'],
         min_mesh_size=0.01,
         max_mesh_size=0.5
     )
     dag_model = common_geometry_object.dagmc_model(
         h5m_filename='twotouchingcuboids.h5m',
-        materials=[mat1]
+        materials=[mat1, mat2]
     )
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
