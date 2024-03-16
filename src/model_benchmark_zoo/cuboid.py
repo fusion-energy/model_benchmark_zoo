@@ -20,8 +20,8 @@ class Cuboid(BaseCommonGeometryObject):
         cell = openmc.Cell(region=region)
         cell.fill = materials[0]
         geometry = openmc.Geometry([cell])
-        materials = openmc.Materials(materials[0])
-        model = openmc.Model(geometry=geometry, materials=materials)
+        my_materials = openmc.Materials(materials)
+        model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
 
     def cadquery_assembly(self):

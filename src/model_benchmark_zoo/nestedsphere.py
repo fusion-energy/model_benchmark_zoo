@@ -16,8 +16,8 @@ class NestedSphere(BaseCommonGeometryObject):
         cell2 = openmc.Cell(region=region2)
         cell2.fill = materials[1]
         geometry = openmc.Geometry([cell1, cell2])
-        materials = openmc.Materials(materials)
-        model = openmc.Model(geometry=geometry, materials=materials)
+        my_materials = openmc.Materials(materials)
+        model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
 
     def cadquery_assembly(self):

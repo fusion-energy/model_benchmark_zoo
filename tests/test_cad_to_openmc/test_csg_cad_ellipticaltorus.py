@@ -8,7 +8,6 @@ def test_compare():
     mat1 = openmc.Material(name='1')
     mat1.add_nuclide('Fe56', 1)
     mat1.set_density('g/cm3', 1)
-    my_materials = openmc.Materials([mat1])
 
     # geometry used in both simulations
     major_radius = 10
@@ -40,8 +39,7 @@ def test_compare():
     my_settings.source = my_source
 
     # making openmc.Model with CSG geometry
-    csg_model = common_geometry_object.csg_model()
-    csg_model.materials = my_materials
+    csg_model = common_geometry_object.csg_model(materials=[mat1])
     csg_model.tallies = my_tallies
     csg_model.settings = my_settings
 
@@ -60,7 +58,6 @@ def test_compare():
         h5m_filename='ellipticaltorus.h5m',
         materials=[mat1]
     )
-    dag_model.materials = my_materials
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
 

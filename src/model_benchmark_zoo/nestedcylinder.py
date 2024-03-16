@@ -30,8 +30,8 @@ class NestedCylinder(BaseCommonGeometryObject):
         cell_2 = openmc.Cell(region=region_2, fill=materials[1])
 
         geometry = openmc.Geometry([cell_1, cell_2])
-        materials = openmc.Materials(materials)
-        model = openmc.Model(geometry=geometry, materials=materials)
+        my_materials = openmc.Materials(materials)
+        model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
 
     def cadquery_assembly(self):

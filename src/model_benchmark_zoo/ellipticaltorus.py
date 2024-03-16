@@ -15,9 +15,9 @@ class Ellipticaltorus(BaseCommonGeometryObject):
         region = -surface
         cell = openmc.Cell(region=region)
         cell.fill = materials[0]
-        materials = openmc.Materials(materials)
+        my_materials = openmc.Materials(materials)
         geometry = openmc.Geometry([cell])
-        model = openmc.Model(geometry=geometry, materials=materials)
+        model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
 
     def cadquery_assembly(self):

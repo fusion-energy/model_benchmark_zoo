@@ -10,7 +10,6 @@ def test_compare():
     mat2 = openmc.Material(name='2')
     mat2.add_nuclide('Fe56', 1)
     mat2.set_density('g/cm3', 1)
-    my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
     common_geometry_object = TwoTouchingCuboids(width1=10, width2=4)
@@ -42,7 +41,7 @@ def test_compare():
     my_settings.source = my_source
 
     # making openmc.Model with CSG geometry
-    csg_model = common_geometry_object.csg_model()
+    csg_model = common_geometry_object.csg_model(materials=[mat1, mat2])
     csg_model.tallies = my_tallies
     csg_model.settings = my_settings
 
