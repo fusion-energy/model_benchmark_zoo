@@ -29,4 +29,5 @@ runs:
           python -m pip install CAD_to_OpenMC
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9
           python -m pip install .[tests]
-          conda list
+          conda env export > environment.yml
+          cat environment.yml
