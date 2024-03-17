@@ -25,5 +25,5 @@ jobs:
         run: |
           source "${HOME}/conda/etc/profile.d/conda.sh"
           source "${HOME}/conda/etc/profile.d/mamba.sh"
-          mamba activate
+          mamba activate new_env
           pytest tests/test_cad_to_openmc/test_csg_cad_ellipticaltorus.py
