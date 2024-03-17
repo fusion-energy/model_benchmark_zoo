@@ -26,7 +26,6 @@ runs:
           python -m pip install cadquery-ocp==7.7.2
           python -m pip install cadquery==2.4.0
           python -m pip install openmc_data_downloader
-          python -m pip install CAD_to_OpenMC
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9
           python -m pip install .[tests]
           conda env export > environment.yml
