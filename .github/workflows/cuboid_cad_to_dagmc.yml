@@ -5,7 +5,8 @@ on:
     branches:
       - develop
       - main
-    push:
+  push:
+    branches:
       - main
 
 jobs:
@@ -17,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: use upstream test composite action
-        uses: ./.github/actions/dependencies
+        uses: ./.github/actions/dependencies_cad_to_dagmc
 
       - shell: bash
         env:

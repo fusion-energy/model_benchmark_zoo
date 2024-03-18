@@ -1,17 +1,18 @@
 
 from pathlib import Path
+from typing import Sequence
 
 class BaseCommonGeometryObject:
 
-    def export_stp_file(self, filename="common_geometry_object.step"):
+    def export_stp_file(self, filename: str="common_geometry_object.step"):
         self.cadquery_assembly().save(filename, "STEP")
 
     def export_h5m_file_with_cad_to_dagmc(
         self,
-        h5m_filename,
-        material_tags,
-        min_mesh_size=0.1,
-        max_mesh_size=100.0
+        h5m_filename: str,
+        material_tags: Sequence[str],
+        min_mesh_size: float=0.1,
+        max_mesh_size: float=100.0
     ):
         from cad_to_dagmc import CadToDagmc
 
@@ -27,10 +28,9 @@ class BaseCommonGeometryObject:
 
     def export_h5m_file_with_cad_to_openmc(
         self,
-        h5m_filename,
-        material_tags,
+        h5m_filename: str,
+        material_tags: Sequence[str],
     ):
-
         from CAD_to_OpenMC import assembly
 
         self.export_stp_file('tempory_file.step')  # todo put this is a temp folder
@@ -45,8 +45,7 @@ class BaseCommonGeometryObject:
             scale=1.0
         )
 
-    def dagmc_model(self, h5m_filename, materials):
-        from cad_to_dagmc import CadToDagmc
+    def dagmc_model(self, h5m_filename: str, materials):
         import openmc
 
         if not Path(h5m_filename).exists():
