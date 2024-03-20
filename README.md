@@ -26,11 +26,10 @@ In principle, any Conda/Mamba distribution will work. A few Conda/Mamba options 
 This example assumes you have installed the MambaForge option or separately
 installed Mamba with ```conda install -c conda-forge mamba -y```
 
-Create a new conda environment, I've chosen Python 3.9 here but new versions are
-also supported.
+Create a new conda environment, I've chosen Python 3.10 here but new versions should also work.
 
 ```bash
-mamba create --name new_env python=3.9 -y
+mamba create --name new_env python=3.10 -y
 ```
 
 Activate the environment
@@ -42,31 +41,35 @@ mamba activate new_env
 Install the dependencies, if this fails to solve the environment you could also try [installing OpenMC from source](https://docs.openmc.org/en/stable/quickinstall.html) which might be prefered.
 
 ```bash
-mamba install -y -c conda-forge moab gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
+mamba install -y -c conda-forge moab>=5.3.0 gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
 ```
 
 CadQuery should then be installed, here is the mamba command and the pip command.
 
 ```bash
-mamba install -y -c cadquery cadquery=master
+mamba install -y -c conda-forge ocp=7.7.2 cadquery=2.4.0
 ```
 
 If the mamba command fails to solve the environment then try this pip command.
 
 ```bash
-pip install git+https://github.com/CadQuery/cadquery.git
+python -m pip install cadquery-ocp==7.7.2 cadquery==2.4.0
 ```
 
-Then you can install the cad_to_dagmc package with ```pip```
+Then you can install which ever convertor you want to test. The cad_to_dagmc and the CAD_to_OpenMC packages can both be installed with ```pip```. **Warning** these should be installed in separate environments as they require a different version of Open Cascade.
 
 ```bash
-pip install cad_to_dagmc
+python -m pip install cad_to_dagmc
+```
+or
+```bash
+python -m pip install CAD_to_OpenMC
 ```
 
 Then you can install the model benchmark zoo with ```pip```
 
 ```bash
-pip install git+git://github.com/fusion-energy/model_benchmark_zoo.git
+python -m pip install git+git://github.com/fusion-energy/model_benchmark_zoo.git
 ```
 
 # Usage

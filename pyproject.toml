@@ -10,7 +10,7 @@ authors = [
 license = {file = "LICENSE.txt"}
 description = "Collection of geometries for testing neutronics simulations in CSG and CAD format"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 keywords = ["dagmc", "geometry", "test", "benchmark"]
 classifiers = [
     "Programming Language :: Python :: 3",

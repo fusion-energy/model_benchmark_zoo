@@ -11,10 +11,9 @@ def test_compare():
     mat2 = openmc.Material(name='2')
     mat2.add_nuclide('Be9', 1)
     mat2.set_density('g/cm3', 1)
-    my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
-    common_geometry_object = NestedCylinder(materials=my_materials) #default size
+    common_geometry_object = NestedCylinder() #default size
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("nestedcylinders.stp")
 
@@ -37,14 +36,14 @@ def test_compare():
     my_settings.run_mode = 'fixed source'
 
     # Create a DT point source
-    my_source = openmc.Source()
+    my_source = openmc.IndependentSource()
     my_source.space = openmc.stats.Point((0, 0, 0))
     my_source.angle = openmc.stats.Isotropic()
     my_source.energy = openmc.stats.Discrete([14e6], [1])
     my_settings.source = my_source
 
     # making openmc.Model with CSG geometry
-    csg_model = common_geometry_object.csg_model()
+    csg_model = common_geometry_object.csg_model(materials=[mat1, mat2])
     csg_model.tallies = my_tallies
     csg_model.settings = my_settings
 
@@ -56,7 +55,16 @@ def test_compare():
         csg_result_mat_2 = sp_from_csg.get_tally(name="mat2_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
-    dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
+    common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+        h5m_filename='nestedcylinder.h5m',
+        material_tags=['1', '2'],
+        min_mesh_size=0.01,
+        max_mesh_size=0.5
+    )
+    dag_model = common_geometry_object.dagmc_model(
+        h5m_filename='nestedcylinder.h5m',
+        materials=[mat1, mat2]
+    )
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
 
