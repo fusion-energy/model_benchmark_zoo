@@ -41,7 +41,7 @@ mamba activate new_env
 Install the dependencies, if this fails to solve the environment you could also try [installing OpenMC from source](https://docs.openmc.org/en/stable/quickinstall.html) which might be prefered.
 
 ```bash
-mamba install -y -c conda-forge moab>=5.3.0 gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
+mamba install -y -c conda-forge gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
 ```
 
 CadQuery should then be installed, here is the mamba command and the pip command.

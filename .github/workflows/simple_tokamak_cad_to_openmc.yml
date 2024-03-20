@@ -1,4 +1,4 @@
-name: simple tokamak - cad to openmc
+name: simple tokamak - cad to dagmc
 
 on:
   pull_request:
@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: use upstream test composite action
-        uses: ./.github/actions/dependencies_cad_to_dagmc
+        uses: ./.github/actions/dependencies_cad_to_openmc
 
       - shell: bash
         env:
@@ -27,4 +27,4 @@ jobs:
           source "${HOME}/conda/etc/profile.d/conda.sh"
           source "${HOME}/conda/etc/profile.d/mamba.sh"
           mamba activate
-          pytest tests/test_cad_to_dagmc/test_csg_cad_simple_tokamak.py
+          pytest tests/test_cad_to_openmc/test_csg_cad_simple_tokamak.py

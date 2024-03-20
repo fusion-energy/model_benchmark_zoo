@@ -59,11 +59,9 @@ def test_compare():
         csg_result_mat_1 = sp_from_csg.get_tally(name="mat1_flux_tally")
         csg_result_mat_2 = sp_from_csg.get_tally(name="mat2_flux_tally")
 
-    common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+    common_geometry_object.export_h5m_file_with_cad_to_openmc(
         h5m_filename='simpletokamak.h5m',
         material_tags=['1', '2'],
-        min_mesh_size=0.01,
-        max_mesh_size=0.5
     )
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
     dag_model = common_geometry_object.dagmc_model(materials=[mat1, mat2])
