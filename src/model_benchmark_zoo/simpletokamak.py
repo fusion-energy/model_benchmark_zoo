@@ -48,8 +48,6 @@ class SimpleTokamak(BaseCommonGeometryObject):
 
         assembly = cq.Assembly(name="simpletokamak")
 
-        # sphere_envelope = cq.Workplane().sphere(self.radius + self.blanket_thicknesses)
-
         center_column_height = self.radius + self.blanket_thicknesses + self.center_column_extent_beyond_blanket
 
         sphere1 = cq.Workplane().sphere(self.radius)
