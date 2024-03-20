@@ -64,7 +64,7 @@ def test_compare():
         material_tags=['1', '2'],
     )
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
-    dag_model = common_geometry_object.dagmc_model(materials=[mat1, mat2])
+    dag_model = common_geometry_object.dagmc_model(h5m_filename='simpletokamak.h5m', materials=[mat1, mat2])
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
 

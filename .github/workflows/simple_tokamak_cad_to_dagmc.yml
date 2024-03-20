@@ -1,4 +1,4 @@
-name: simple tokamak - cad to openmc
+name: simple tokamak - cad to dagmc
 
 on:
   pull_request:

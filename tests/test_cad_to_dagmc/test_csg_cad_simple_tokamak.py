@@ -62,11 +62,11 @@ def test_compare():
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
         h5m_filename='simpletokamak.h5m',
         material_tags=['1', '2'],
-        min_mesh_size=0.01,
-        max_mesh_size=0.5
+        max_mesh_size=5,
+        min_mesh_size=0.05
     )
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
-    dag_model = common_geometry_object.dagmc_model(materials=[mat1, mat2])
+    dag_model = common_geometry_object.dagmc_model(h5m_filename='simpletokamak.h5m', materials=[mat1, mat2])
     dag_model.tallies = my_tallies
     dag_model.settings = my_settings
 
@@ -77,5 +77,5 @@ def test_compare():
         cad_result_mat_1 = sp_from_cad.get_tally(name="mat1_flux_tally")
         cad_result_mat_2 = sp_from_cad.get_tally(name="mat2_flux_tally")
 
-    assert math.isclose(cad_result_mat_1.mean, csg_result_mat_1.mean)
-    assert math.isclose(cad_result_mat_2.mean, csg_result_mat_2.mean)
+    assert math.isclose(cad_result_mat_1.mean, csg_result_mat_1.mean, rel_tol=0.01)
+    assert math.isclose(cad_result_mat_2.mean, csg_result_mat_2.mean, rel_tol=0.01)

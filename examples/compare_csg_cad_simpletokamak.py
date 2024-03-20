@@ -2,7 +2,6 @@ from model_benchmark_zoo import SimpleTokamak
 import openmc
 import math
 
-# single material used in both simulations
 mat1 = openmc.Material(name='1')
 mat1.add_nuclide('Fe56', 1)
 mat1.set_density('g/cm3', 1)
@@ -11,12 +10,15 @@ mat2 = openmc.Material(name='2')
 mat2.add_nuclide('Be9', 1)
 mat2.set_density('g/cm3', 1)
 
-my_materials = openmc.Materials([mat1, mat2])
-
 # geometry used in both simulations
-common_geometry_object = SimpleTokamak(materials=my_materials, radius=500, blanket_thicknesses=100, center_column_thicknesses=50)
+common_geometry_object = SimpleTokamak(
+    radius=500,
+    blanket_thicknesses=100,
+    center_column_thicknesses=150,
+    center_column_extent_beyond_blanket=20,
+)
 # just writing a CAD step file for visulisation
-common_geometry_object.export_stp_file("nestedsphere.stp")
+common_geometry_object.export_stp_file("simpletokamak.stp")
 
 mat1_filter = openmc.MaterialFilter(mat1)
 tally1 = openmc.Tally(name='mat1_flux_tally')
@@ -37,7 +39,7 @@ my_settings.particles = 500
 my_settings.run_mode = 'fixed source'
 
 # Create a DT ring source
-my_source = openmc.Source()
+my_source = openmc.IndependentSource()
 source_r = common_geometry_object.center_column_thicknesses + (common_geometry_object.radius-common_geometry_object.center_column_thicknesses) /2
 r = openmc.stats.Discrete([source_r], [1])
 phi = openmc.stats.Uniform(0, 2*math.pi)
@@ -47,7 +49,7 @@ my_source.energy = openmc.stats.Discrete([14e6], [1])
 my_settings.source = my_source
 
 # making openmc.Model with CSG geometry
-csg_model = common_geometry_object.csg_model()
+csg_model = common_geometry_object.csg_model(materials=[mat1, mat2])
 csg_model.tallies = my_tallies
 csg_model.settings = my_settings
 
@@ -57,11 +59,20 @@ output_file_from_csg = csg_model.run()
 with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
     csg_result_mat_1 = sp_from_csg.get_tally(name="mat1_flux_tally")
     csg_result_mat_2 = sp_from_csg.get_tally(name="mat2_flux_tally")
+
 csg_result_mat_1_str = f'CSG tally mean {csg_result_mat_1.mean} std dev {csg_result_mat_1.std_dev}'
 csg_result_mat_2_str = f'CSG tally mean {csg_result_mat_2.mean} std dev {csg_result_mat_2.std_dev}'
 
+common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+    h5m_filename='simpletokamak.h5m',
+    material_tags=['1', '2'],
+    # the small mesh sizes make a large detailed mesh which is needed to get similar answers
+    min_mesh_size=0.01,
+    max_mesh_size=0.5
+)
 # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
-dag_model = common_geometry_object.dagmc_model(min_mesh_size=1., max_mesh_size=50.)
+dag_model = common_geometry_object.dagmc_model(
+    h5m_filename='simpletokamak.h5m', materials=[mat1, mat2])
 dag_model.tallies = my_tallies
 dag_model.settings = my_settings
 
@@ -71,6 +82,7 @@ output_file_from_cad = dag_model.run()
 with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
     cad_result_mat_1 = sp_from_cad.get_tally(name="mat1_flux_tally")
     cad_result_mat_2 = sp_from_cad.get_tally(name="mat2_flux_tally")
+
 cad_result_mat_1_str = f'CAD tally mean {cad_result_mat_1.mean} std dev {cad_result_mat_1.std_dev}'
 cad_result_mat_2_str = f'CAD tally mean {cad_result_mat_2.mean} std dev {cad_result_mat_2.std_dev}'
 
@@ -79,3 +91,6 @@ print(csg_result_mat_1_str)
 print(cad_result_mat_1_str)
 print(csg_result_mat_2_str)
 print(cad_result_mat_2_str)
+
+assert math.isclose(cad_result_mat_1.mean, csg_result_mat_1.mean, rel_tol=0.01)
+assert math.isclose(cad_result_mat_2.mean, csg_result_mat_2.mean, rel_tol=0.01)
