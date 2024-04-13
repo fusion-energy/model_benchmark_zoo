@@ -18,9 +18,11 @@ class BaseCommonGeometryObject:
 
         ctd = CadToDagmc()
 
-        ctd.add_cadquery_object(self.cadquery_assembly())
-        ctd.export_dagmc_h5m_file(
+        ctd.add_cadquery_object(
+            cadquery_object=self.cadquery_assembly(),
             material_tags=material_tags,
+            )
+        ctd.export_dagmc_h5m_file(
             filename=h5m_filename,
             min_mesh_size=min_mesh_size,
             max_mesh_size=max_mesh_size,
