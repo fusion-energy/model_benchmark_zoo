@@ -17,17 +17,16 @@ models (CSG) for comparing neutronics simulations with both geometry types.
 # Installation prerequisite
 
 In principle, any Conda/Mamba distribution will work. A few Conda/Mamba options are:
-- [Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
-- [Miniforge](https://github.com/conda-forge/miniforge#miniforge-pypy3)
+- [Miniforge](https://github.com/conda-forge/miniforge#miniforge-pypy3) (recommended as it includes mamba)
 - [Anaconda](https://www.anaconda.com/download)
 - [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 
 # Install using Mamba and pip
 
-This example assumes you have installed the MambaForge option or separately
+This example assumes you have installed the MiniForge option or separately
 installed Mamba with ```conda install -c conda-forge mamba -y```
 
-Create a new conda environment, I've chosen Python 3.10 here but new versions should also work.
+Create a new conda environment, I've chosen Python 3.10 here but newer versions should also work.
 
 ```bash
 mamba create --name new_env python=3.10 -y
@@ -39,7 +38,7 @@ Activate the environment
 mamba activate new_env
 ```
 
-Install the dependencies, if this fails to solve the environment you could also try [installing OpenMC from source](https://docs.openmc.org/en/stable/quickinstall.html) which might be prefered.
+Install the dependencies, if this fails to solve the environment you could also try [installing OpenMC from source](https://docs.openmc.org/en/stable/quickinstall.html) which might be preferred.
 
 ```bash
 mamba install -y -c conda-forge gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
@@ -57,7 +56,7 @@ If the mamba command fails to solve the environment then try this pip command.
 python -m pip install cadquery-ocp==7.7.2 cadquery==2.4.0
 ```
 
-Then you can install which ever convertor you want to test. The cad_to_dagmc and the CAD_to_OpenMC packages can both be installed with ```pip```. **Warning** these should be installed in separate environments as they require a different version of Open Cascade.
+Then you can install whichever convertor you want to test. The cad_to_dagmc and the CAD_to_OpenMC packages can both be installed with ```pip``` or ```conda```. **Warning** these should be installed in separate environments as they require a different version of Open Cascade.
 
 ```bash
 python -m pip install cad_to_dagmc
