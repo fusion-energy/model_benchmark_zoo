@@ -1,6 +1,6 @@
 from .utils import BaseCommonGeometryObject
 
-class oktavian(BaseCommonGeometryObject):
+class Oktavian(BaseCommonGeometryObject):
 
     def csg_model(materials):
         import openmc
@@ -38,6 +38,8 @@ class oktavian(BaseCommonGeometryObject):
     def cadquery_assembly(self):
         import cadquery as cq
     
+        assembly = cq.Assembly(name="oktavian")
+
         sphere1_radius = 10
         cylinder_radius = 5.55
         cylinder2_radius = cylinder_radius+0.2
@@ -62,7 +64,6 @@ class oktavian(BaseCommonGeometryObject):
         outer_wall =  sphere4.cut(sphere3).cut(cylinder2)
         wall = outer_wall.union(inner_wall).cut(sphere1)
 
-        assembly = cq.Assembly()
         assembly.add(wall)
         assembly.add(mid_wall)
         return assembly
