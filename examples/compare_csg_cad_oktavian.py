@@ -34,7 +34,7 @@ mat2.add_nuclide("Ni64", 0.00102786, "wo")
 my_materials = openmc.Materials([mat1, mat2])
 
 # geometry used in both simulations
-common_geometry_object = Oktavian(materials=my_materials)  # default sizes
+common_geometry_object = Oktavian(materials=my_materials)
 # just writing a CAD step file for visulisation
 common_geometry_object.export_stp_file("oktavian.stp")
 
