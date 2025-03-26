@@ -17,9 +17,9 @@ runs:
           sudo apt-get --allow-releaseinfo-change update
           sudo apt-get update -y
           sudo apt-get upgrade -y
-          sudo apt-get install -y libgl1-mesa-glx libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
+          sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
           mamba activate
-          mamba install -y -c conda-forge "openmc=0.14.0=dagmc*nompi*"
+          mamba install -y -c conda-forge "openmc=0.15.0=dagmc*nompi*"
           pip install CAD_to_OpenMC
           pip install openmc_data_downloader
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9
