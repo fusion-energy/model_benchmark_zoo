@@ -55,7 +55,7 @@ def test_compare():
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
     common_geometry_object.export_h5m_file_with_cad_to_openmc(
         h5m_filename='oktavian.h5m',
-        material_tags=['2', '1']
+        material_tags=['1', '2']
     )
     dag_model = common_geometry_object.dagmc_model(
         h5m_filename='oktavian.h5m',

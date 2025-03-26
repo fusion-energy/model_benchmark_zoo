@@ -74,7 +74,7 @@ csg_result = f'CSG tally mean {csg_result.mean} std dev {csg_result.std_dev}'
 
 common_geometry_object.export_h5m_file_with_cad_to_dagmc(
     h5m_filename='oktavian.h5m',
-    material_tags=['2', '1'],
+    material_tags=['1', '2'],
     # the small mesh sizes make a large detailed mesh which is needed to get similar answers
     min_mesh_size=0.01,
     max_mesh_size=0.5

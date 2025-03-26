@@ -64,6 +64,6 @@ class Oktavian(BaseCommonGeometryObject):
         outer_wall =  sphere4.cut(sphere3).cut(cylinder2)
         wall = outer_wall.union(inner_wall).cut(sphere1)
 
-        assembly.add(wall)
         assembly.add(mid_wall)
+        assembly.add(wall)
         return assembly
