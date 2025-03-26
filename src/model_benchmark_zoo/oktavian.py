@@ -2,7 +2,7 @@ from .utils import BaseCommonGeometryObject
 
 class Oktavian(BaseCommonGeometryObject):
 
-    def csg_model(materials):
+    def csg_model(self, materials):
         import openmc
     
         # surfaces
