@@ -36,7 +36,7 @@ def test_compare():
     my_materials = openmc.Materials([mat1, mat2])
 
     # geometry used in both simulations
-    common_geometry_object = Oktavian(materials=my_materials)
+    common_geometry_object = Oktavian()
 
     # just writing a CAD step file for visulisation
     common_geometry_object.export_stp_file("oktavian.stp")
