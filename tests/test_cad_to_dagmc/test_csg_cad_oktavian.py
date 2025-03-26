@@ -41,7 +41,7 @@ def test_compare():
     my_settings.source = my_source
 
     # making openmc.Model with CSG geometry
-    csg_model = common_geometry_object.csg_model(materials=[mat1, mat2])
+    csg_model = common_geometry_object.csg_model(materials=my_materials)
     csg_model.tallies = my_tallies
     csg_model.settings = my_settings
 
