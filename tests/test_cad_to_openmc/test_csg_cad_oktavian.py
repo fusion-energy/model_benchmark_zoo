@@ -6,32 +6,11 @@ def test_compare():
     # single material used in both simulations
     mat1 = openmc.Material(name='1')
     mat1.set_density("g/cm3", 1.223)
-    mat1.add_nuclide("Al27", 0.9975488, "ao")
-    mat1.add_nuclide("Si28", 0.001329808, "ao")
-    mat1.add_nuclide("Si29", 6.752131e-05, "ao")
-    mat1.add_nuclide("Si30", 4.450956e-05, "ao")
-    mat1.add_nuclide("Fe54", 5.651123e-05, "ao")
-    mat1.add_nuclide("Fe56", 0.0008871055, "ao")
-    mat1.add_nuclide("Fe57", 2.048713e-05, "ao")
-    mat1.add_nuclide("Fe58", 2.726461e-06, "ao")
-    mat1.add_nuclide("Cu63", 2.938581e-05, "ao")
-    mat1.add_nuclide("Cu65", 1.309765e-05, "ao")
+    mat1.add_nuclide("Al27", 1)
 
     mat2 = openmc.Material(name='2')
     mat2.set_density("g/cm3", 7.824)
-    mat2.add_nuclide("Cr50", 0.00803825, "wo")
-    mat2.add_nuclide("Cr52", 0.15501, "wo")
-    mat2.add_nuclide("Cr53", 0.0175768, "wo")
-    mat2.add_nuclide("Cr54", 0.00437525, "wo")
-    mat2.add_nuclide("Fe54", 0.0411488, "wo")
-    mat2.add_nuclide("Fe56", 0.645948, "wo")
-    mat2.add_nuclide("Fe57", 0.0149178, "wo")
-    mat2.add_nuclide("Fe58", 0.00198528, "wo")
-    mat2.add_nuclide("Ni58", 0.0755655, "wo")
-    mat2.add_nuclide("Ni60", 0.0291075, "wo")
-    mat2.add_nuclide("Ni61", 0.0012654, "wo")
-    mat2.add_nuclide("Ni62", 0.00403374, "wo")
-    mat2.add_nuclide("Ni64", 0.00102786, "wo")
+    mat2.add_nuclide("Fe56", 1)
 
     my_materials = openmc.Materials([mat1, mat2])
 
@@ -76,7 +55,7 @@ def test_compare():
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
     common_geometry_object.export_h5m_file_with_cad_to_openmc(
         h5m_filename='oktavian.h5m',
-        material_tags=['1', '2']
+        material_tags=['2', '1']
     )
     dag_model = common_geometry_object.dagmc_model(
         h5m_filename='oktavian.h5m',
