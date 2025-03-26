@@ -5,6 +5,7 @@ import math
 mat1 = openmc.Material(name='1')
 mat1.set_density("g/cm3", 1.223)
 mat1.add_nuclide("Al27", 1)
+# commented out material definitions are from original benchmark
 # mat1.add_nuclide("Al27", 0.9975488, "ao")
 # mat1.add_nuclide("Si28", 0.001329808, "ao")
 # mat1.add_nuclide("Si29", 6.752131e-05, "ao")
