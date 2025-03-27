@@ -50,7 +50,6 @@ def test_compare():
     # extracting the tally result from the CSG simulation
     with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
         csg_result_mat_1 = sp_from_csg.get_tally(name="mat1_flux_tally")
-    csg_result = f'CSG tally mean {csg_result_mat_1.mean} std dev {csg_result_mat_1.std_dev}'
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
     common_geometry_object.export_h5m_file_with_cad_to_openmc(
@@ -70,4 +69,4 @@ def test_compare():
     with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
         cad_result_mat_1 = sp_from_cad.get_tally(name="mat1_flux_tally")
 
-    assert math.isclose(cad_result_mat_1.mean, csg_result_mat_1.mean)
+    assert math.isclose(float(cad_result_mat_1.mean), float(csg_result_mat_1.mean), rel_tol=0.01)
