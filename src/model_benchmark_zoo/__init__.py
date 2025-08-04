@@ -10,3 +10,4 @@ from .ellipticaltorus import *
 from .simpletokamak import *
 from .oktavian import *
 from .tetrahedral import *
+from .two_tetrahedrons import *
