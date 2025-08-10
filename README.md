@@ -1,5 +1,6 @@
 
-A collection of parametric CAD and equivalent Constructive Solid Geometry
+# A collection of parametric CAD and equivalent Constructive Solid Geometry
+
 models (CSG) for comparing neutronics simulations with both geometry types.
 
 | Model | Testing Status |
@@ -15,15 +16,17 @@ models (CSG) for comparing neutronics simulations with both geometry types.
 |         <p align="center"><img src="https://github.com/fusion-energy/model_benchmark_zoo/blob/580db0c0368cccba7638bf9abfbcb31a18fe15e6/examples/simpletokamak.png?raw=true" width="100"></p>  |     [![simple_tokamak](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/simple_tokamak_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/simple_tokamak_cad_to_dagmc.yml) <br> [![elliptical torus - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/simple_tokamak_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/simple_tokamak_cad_to_openmc.yml) |
 |         <p align="center"><img src="assets/oktavian.png" width="100"></p>  |     [![oktavian](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/oktavian_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/oktavian_cad_to_dagmc.yml) <br> [![oktavian - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/oktavian_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/oktavian_cad_to_openmc.yml) |
 |         <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/tetrahedral.png" width="100"></p>  |     [![tetrahedral](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/tetrahedral_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/tetrahedral_cad_to_dagmc.yml) <br> [![tetrahedral - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/tetrahedral_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/tetrahedral_cad_to_openmc.yml) |
+|         <p align="center"><img src="examples/two_tetrahedrons.png" alt="Two Tetrahedrons" width="100"></p>  |     [![two_tetrahedrons](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_tetrahedrons_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_tetrahedrons_cad_to_dagmc.yml) <br> [![two tetrahedrons - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_tetrahedrons_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_tetrahedrons_cad_to_openmc.yml) |
 
-# Installation prerequisite
+## Installation prerequisite
 
 In principle, any Conda/Mamba distribution will work. A few Conda/Mamba options are:
+
 - [Miniforge](https://github.com/conda-forge/miniforge#miniforge-pypy3) (recommended as it includes mamba)
 - [Anaconda](https://www.anaconda.com/download)
 - [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 
-# Install using Mamba and pip
+## Install using Mamba and pip
 
 This example assumes you have installed the MiniForge option or separately
 installed Mamba with ```conda install -c conda-forge mamba -y```
@@ -63,7 +66,9 @@ Then you can install whichever convertor you want to test. The cad_to_dagmc and 
 ```bash
 python -m pip install cad_to_dagmc
 ```
+
 or
+
 ```bash
 python -m pip install CAD_to_OpenMC
 ```
@@ -74,6 +79,6 @@ Then you can install the model benchmark zoo with ```pip```
 python -m pip install git+git://github.com/fusion-energy/model_benchmark_zoo.git
 ```
 
-# Usage
+## Usage
 
 Example scripts that make CSG and DAGMC geometry can be found in [the examples folder](https://github.com/fusion-energy/model_benchmark_zoo/tree/main/examples)
