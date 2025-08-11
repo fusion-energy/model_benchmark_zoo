@@ -1,4 +1,4 @@
-name: tetrahedral - cad to openmc
+name: two tetrahedral - cad to openmc
 
 on:
   pull_request:

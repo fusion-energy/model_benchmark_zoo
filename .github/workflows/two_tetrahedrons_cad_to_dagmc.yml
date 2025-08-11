@@ -1,4 +1,4 @@
-name: tetrahedral - cad to dagmc
+name: two tetrahedral - cad to dagmc
 
 on:
   pull_request:
