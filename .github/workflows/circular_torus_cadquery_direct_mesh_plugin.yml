@@ -1,4 +1,4 @@
-name: circular torus - cad to dagmc
+name: circular torus - cadquery direct mesh plugin
 
 on:
   pull_request:
