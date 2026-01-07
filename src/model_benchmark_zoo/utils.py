@@ -55,8 +55,18 @@ class BaseCommonGeometryObject:
         angular_tolerance: float=0.1
     ):
         import cadquery_direct_mesh_plugin
+        import cad_to_dagmc
+        
         assembly = self.cadquery_assembly()
-        mesh = assembly.toMesh(
+        original_ids = cad_to_dagmc.get_ids_from_assembly(assembly)
+
+        # both id lists should be the same length as each other and the same
+        # length as the self.material_tags
+        if len(original_ids) != len(material_tags):
+            msg = f"Number of volumes {len(original_ids)} is not equal to number of material tags {len(material_tags)}"
+            raise ValueError(msg)
+
+        cq_mesh = assembly.toMesh(
             imprint=True,
             tolerance=tolerance,
             angular_tolerance=angular_tolerance,
@@ -72,17 +82,18 @@ class BaseCommonGeometryObject:
                 "imprinted_solids_with_orginal_ids"
             ]
 
-            scrambled_ids = get_ids_from_imprinted_assembly(
+            scrambled_ids = cad_to_dagmc.get_ids_from_imprinted_assembly(
                 imprinted_solids_with_org_id
             )
 
-            material_tags_in_brep_order = order_material_ids_by_brep_order(
-                original_ids, scrambled_ids, self.material_tags
+            material_tags_in_brep_order = cad_to_dagmc.order_material_ids_by_brep_order(
+                original_ids, scrambled_ids, material_tags
             )
         else:
-            material_tags_in_brep_order = self.material_tags
+            material_tags_in_brep_order = material_tags
 
-        cad_to_dagmc.check_material_tags(material_tags_in_brep_order, self.parts)
+        # this is in the cad-to-dagmc module but skipping this for the direct-mesh plugin as it works with a single assembly only
+        # cad_to_dagmc.check_material_tags(material_tags_in_brep_order, parts)
 
         # Extract the mesh information to allow export to h5m from the direct-mesh result
         vertices = cq_mesh["vertices"]
@@ -93,7 +104,7 @@ class BaseCommonGeometryObject:
             triangles_by_solid_by_face=triangles_by_solid_by_face,
             material_tags=material_tags_in_brep_order,
             h5m_filename=h5m_filename,
-            implicit_complement_material_tag=implicit_complement_material_tag,
+            # implicit_complement_material_tag=implicit_complement_material_tag, not used in test suit yet
         )
 
     def dagmc_model(self, h5m_filename: str, materials):
