@@ -23,7 +23,4 @@ jobs:
         env:
           OPENMC_CROSS_SECTIONS: /home/runner/work/model_benchmark_zoo/model_benchmark_zoo/cross_sections.xml
         run: |
-          source "${HOME}/conda/etc/profile.d/conda.sh"
-          source "${HOME}/conda/etc/profile.d/mamba.sh"
-          mamba activate
           pytest tests/test_cad_to_dagmc/test_csg_cad_ellipticaltorus.py
