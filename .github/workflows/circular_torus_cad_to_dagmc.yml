@@ -17,11 +17,20 @@ jobs:
       - name: checkout actions
         uses: actions/checkout@v4
 
-      - name: use upstream test composite action
-        uses: ./.github/actions/dependencies_cad_to_dagmc
-
       - shell: bash
         env:
           OPENMC_CROSS_SECTIONS: /home/runner/work/model_benchmark_zoo/model_benchmark_zoo/cross_sections.xml
         run: |
+          sudo apt-get --allow-releaseinfo-change update
+          sudo apt-get update -y
+          sudo apt-get upgrade -y
+          sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
+          pip install --extra-index-url https://shimwell.github.io/wheels openmc moab
+          pip install cadquery-ocp
+          pip install cadquery
+          pip install cadquery-vtk
+          pip install cad_to_dagmc
+          pip install openmc_data_downloader
+          openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9 Al27
+          pip install .[tests]
           pytest tests/test_cad_to_dagmc/test_csg_cad_circulartorus.py
