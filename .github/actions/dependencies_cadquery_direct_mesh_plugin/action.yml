@@ -1,0 +1,29 @@
+name: composite action
+description: builds 
+runs:
+    using: "composite"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: install dependencies
+        shell: bash
+        run: |
+
+          wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+          bash Miniforge3.sh -b -p "${HOME}/conda"
+          source "${HOME}/conda/etc/profile.d/conda.sh"
+          source "${HOME}/conda/etc/profile.d/mamba.sh"
+          sudo apt-get --allow-releaseinfo-change update
+          sudo apt-get update -y
+          sudo apt-get upgrade -y
+          sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
+          mamba activate
+          mamba install -y -c conda-forge moab>=5.3.0 gmsh python-gmsh "openmc=0.15.0=dagmc*nompi*"
+          pip install cadquery-ocp==7.7.2
+          pip install cadquery==2.4.0
+          pip install cad_to_dagmc
+          pip install git+https://github.com/jmwright/cadquery-direct-mesh-plugin
+          pip install openmc_data_downloader
+          openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9 Al27
+          pip install .[tests]

@@ -47,7 +47,7 @@ class BaseCommonGeometryObject:
             scale=1.0
         )
 
-    def export_h5m_file_with_direct_mesher(
+    def export_h5m_file_with_cadquery_direct_mesh_plugin(
         self,
         h5m_filename: str,
         material_tags: Sequence[str],
