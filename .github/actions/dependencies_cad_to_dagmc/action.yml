@@ -14,8 +14,8 @@ runs:
           sudo apt-get upgrade -y
           sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
           pip install --extra-index-url https://shimwell.github.io/wheels openmc moab
-          pip install cadquery-ocp==7.7.2
-          pip install cadquery==2.4.0
+          pip install cadquery-ocp
+          pip install cadquery
           pip install cad_to_dagmc
           pip install openmc_data_downloader
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9 Al27
