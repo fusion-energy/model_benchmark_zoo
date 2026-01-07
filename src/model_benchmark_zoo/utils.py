@@ -47,6 +47,55 @@ class BaseCommonGeometryObject:
             scale=1.0
         )
 
+    def export_h5m_file_with_direct_mesher(
+        self,
+        h5m_filename: str,
+        material_tags: Sequence[str],
+        tolerance: float=0.1,
+        angular_tolerance: float=0.1
+    ):
+        import cadquery_direct_mesh_plugin
+        assembly = self.cadquery_assembly()
+        mesh = assembly.toMesh(
+            imprint=True,
+            tolerance=tolerance,
+            angular_tolerance=angular_tolerance,
+            scale_factor=1.0,
+            include_brep_edges=False,
+            include_brep_vertices=False,
+            parallel = True,
+        )
+
+        # Fix the material tag order for imprinted assemblies
+        if cq_mesh["imprinted_assembly"] is not None:
+            imprinted_solids_with_org_id = cq_mesh[
+                "imprinted_solids_with_orginal_ids"
+            ]
+
+            scrambled_ids = get_ids_from_imprinted_assembly(
+                imprinted_solids_with_org_id
+            )
+
+            material_tags_in_brep_order = order_material_ids_by_brep_order(
+                original_ids, scrambled_ids, self.material_tags
+            )
+        else:
+            material_tags_in_brep_order = self.material_tags
+
+        cad_to_dagmc.check_material_tags(material_tags_in_brep_order, self.parts)
+
+        # Extract the mesh information to allow export to h5m from the direct-mesh result
+        vertices = cq_mesh["vertices"]
+        triangles_by_solid_by_face = cq_mesh["solid_face_triangle_vertex_map"]
+
+        cad_to_dagmc.vertices_to_h5m(
+            vertices=vertices,
+            triangles_by_solid_by_face=triangles_by_solid_by_face,
+            material_tags=material_tags_in_brep_order,
+            h5m_filename=h5m_filename,
+            implicit_complement_material_tag=implicit_complement_material_tag,
+        )
+
     def dagmc_model(self, h5m_filename: str, materials):
         import openmc
 
