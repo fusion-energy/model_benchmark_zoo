@@ -2,6 +2,9 @@ from model_benchmark_zoo import Circulartorus
 import openmc
 import math
 import numpy as np
+
+
+
 def test_compare():
     # single material used in both simulations
     mat1 = openmc.Material(name='1')
@@ -46,11 +49,17 @@ def test_compare():
         csg_result = sp_from_csg.get_tally(name="mat1_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a circular torus
+    # common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+    #     h5m_filename='circulartorus.h5m',
+    #     material_tags=['1'],
+    #     min_mesh_size=0.01,
+    #     max_mesh_size=0.5
+    # )
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
-        h5m_filename='circulartorus.h5m',
         material_tags=['1'],
-        min_mesh_size=0.01,
-        max_mesh_size=0.5
+        filename='circulartorus.h5m',
+        tolerance=0.1,
+        angular_tolerance=0.1,
     )
     dag_model = common_geometry_object.dagmc_model(
         h5m_filename='circulartorus.h5m',

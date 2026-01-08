@@ -9,10 +9,8 @@ class BaseCommonGeometryObject:
 
     def export_h5m_file_with_cad_to_dagmc(
         self,
-        h5m_filename: str,
-        material_tags: Sequence[str],
-        min_mesh_size: float=0.1,
-        max_mesh_size: float=100.0
+        material_tags,
+        **kwargs
     ):
         from cad_to_dagmc import CadToDagmc
 
@@ -23,9 +21,7 @@ class BaseCommonGeometryObject:
             material_tags=material_tags,
             )
         ctd.export_dagmc_h5m_file(
-            filename=h5m_filename,
-            min_mesh_size=min_mesh_size,
-            max_mesh_size=max_mesh_size,
+            **kwargs
         )
 
     def export_h5m_file_with_cad_to_openmc(
