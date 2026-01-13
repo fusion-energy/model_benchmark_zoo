@@ -2,8 +2,15 @@ from model_benchmark_zoo import Nestedtorus
 import openmc
 import math
 import numpy as np
+import pytest
 
-def test_compare():
+kwargs_options = [{'min_mesh_size': 0.01,
+        'max_mesh_size': 0.5},
+        {'tolerance': 0.1,
+        'angular_tolerance': 0.1,},]
+
+@pytest.mark.parametrize('kwargs', kwargs_options)
+def test_compare(kwargs):
     # materials used in both simulations
     mat1 = openmc.Material(name='1')
     mat1.add_nuclide('Fe56', 1)
@@ -63,10 +70,9 @@ def test_compare():
 
     # making openmc.Model with DAGMC geometry
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
-        h5m_filename='nestedtorus.h5m',
+        filename='nestedtorus.h5m',
         material_tags=material_tags,
-        min_mesh_size=0.1,
-        max_mesh_size=0.5
+        **kwargs
     )
     dag_model = common_geometry_object.dagmc_model(
         h5m_filename='nestedtorus.h5m',

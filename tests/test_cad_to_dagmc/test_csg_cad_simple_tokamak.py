@@ -1,8 +1,15 @@
 from model_benchmark_zoo import SimpleTokamak
 import openmc
 import math
+import pytest
 
-def test_compare():
+kwargs_options = [{'min_mesh_size': 0.01,
+        'max_mesh_size': 0.5},
+        {'tolerance': 0.1,
+        'angular_tolerance': 0.1,},]
+
+@pytest.mark.parametrize('kwargs', kwargs_options)
+def test_compare(kwargs):
     # single material used in both simulations
     mat1 = openmc.Material(name='1')
     mat1.add_nuclide('Fe56', 1)
@@ -60,10 +67,9 @@ def test_compare():
         csg_result_mat_2 = sp_from_csg.get_tally(name="mat2_flux_tally")
 
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
-        h5m_filename='simpletokamak.h5m',
+        filename='simpletokamak.h5m',
         material_tags=['1', '2'],
-        max_mesh_size=5,
-        min_mesh_size=0.05
+        **kwargs
     )
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
     dag_model = common_geometry_object.dagmc_model(h5m_filename='simpletokamak.h5m', materials=[mat1, mat2])
