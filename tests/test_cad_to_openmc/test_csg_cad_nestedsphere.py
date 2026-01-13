@@ -73,5 +73,5 @@ def test_compare():
         cad_result_mat_1 = sp_from_cad.get_tally(name="mat1_flux_tally")
         cad_result_mat_2 = sp_from_cad.get_tally(name="mat2_flux_tally")
 
-    assert math.isclose(cad_result_mat_1.mean, csg_result_mat_1.mean)
-    assert math.isclose(cad_result_mat_2.mean, csg_result_mat_2.mean)
+    assert math.isclose(cad_result_mat_1.mean.flatten()[0], csg_result_mat_1.mean.flatten()[0])
+    assert math.isclose(cad_result_mat_2.mean.flatten()[0], csg_result_mat_2.mean.flatten()[0])

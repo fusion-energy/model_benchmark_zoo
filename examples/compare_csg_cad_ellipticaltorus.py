@@ -46,7 +46,7 @@ output_file_from_csg = csg_model.run()
 # extracting the tally result from the CSG simulation
 with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
     csg_result = sp_from_csg.get_tally(name="mat1_flux_tally")
-csg_result = f'CSG tally mean {csg_result.mean} std dev {csg_result.std_dev}'
+csg_result = f'CSG tally mean {csg_result.mean.flatten()[0]} std dev {csg_result.std_dev}'
 
 # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
 dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
@@ -58,7 +58,7 @@ output_file_from_cad = dag_model.run()
 # extracting the tally result from the DAGMC simulation
 with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
     cad_result = sp_from_cad.get_tally(name="mat1_flux_tally")
-cad_result = f'CAD tally mean {cad_result.mean} std dev {cad_result.std_dev}'
+cad_result = f'CAD tally mean {cad_result.mean.flatten()[0]} std dev {cad_result.std_dev}'
 
 # printing both tally results
 print(csg_result)
