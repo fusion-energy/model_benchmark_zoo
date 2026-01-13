@@ -1,4 +1,4 @@
-name: circular torus - cad to dagmc
+name: cad to openmc
 
 on:
   pull_request:
@@ -39,11 +39,9 @@ jobs:
           sudo apt-get upgrade -y
           sudo apt-get install -y libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
           pip install --extra-index-url https://shimwell.github.io/wheels openmc moab
-          pip install cadquery-ocp
-          pip install cadquery
-          pip install cadquery-vtk
-          pip install cad_to_dagmc
+          pip install CAD_to_OpenMC
+          pip install vtk
           pip install openmc_data_downloader
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9 Al27
           pip install .[tests]
-          pytest tests/test_cad_to_dagmc
+          pytest tests/test_cad_to_openmc
