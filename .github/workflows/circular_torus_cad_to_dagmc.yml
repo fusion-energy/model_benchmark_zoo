@@ -10,14 +10,27 @@ on:
       - main
 
 jobs:
-  testing:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
     steps:
+      - name: Install system packages
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libgl1 libglx-mesa0 libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev libosmesa6 libosmesa6-dev libgles2-mesa-dev libarchive-dev libpangocairo-1.0-0
 
       - name: checkout actions
         uses: actions/checkout@v4
 
-      - shell: bash
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: install dependencies and test
         env:
           OPENMC_CROSS_SECTIONS: /home/runner/work/model_benchmark_zoo/model_benchmark_zoo/cross_sections.xml
         run: |
@@ -33,4 +46,4 @@ jobs:
           pip install openmc_data_downloader
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9 Al27
           pip install .[tests]
-          pytest tests/test_cad_to_dagmc/test_csg_cad_circulartorus.py
+          pytest tests/test_cad_to_dagmc
