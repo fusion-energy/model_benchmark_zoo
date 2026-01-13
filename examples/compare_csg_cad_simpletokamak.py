@@ -60,8 +60,8 @@ with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
     csg_result_mat_1 = sp_from_csg.get_tally(name="mat1_flux_tally")
     csg_result_mat_2 = sp_from_csg.get_tally(name="mat2_flux_tally")
 
-csg_result_mat_1_str = f'CSG tally mean {csg_result_mat_1.mean} std dev {csg_result_mat_1.std_dev}'
-csg_result_mat_2_str = f'CSG tally mean {csg_result_mat_2.mean} std dev {csg_result_mat_2.std_dev}'
+csg_result_mat_1_str = f'CSG tally mean {csg_result_mat_1.mean.flatten()[0]} std dev {csg_result_mat_1.std_dev}'
+csg_result_mat_2_str = f'CSG tally mean {csg_result_mat_2.mean.flatten()[0]} std dev {csg_result_mat_2.std_dev}'
 
 common_geometry_object.export_h5m_file_with_cad_to_dagmc(
     h5m_filename='simpletokamak.h5m',
@@ -83,8 +83,8 @@ with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
     cad_result_mat_1 = sp_from_cad.get_tally(name="mat1_flux_tally")
     cad_result_mat_2 = sp_from_cad.get_tally(name="mat2_flux_tally")
 
-cad_result_mat_1_str = f'CAD tally mean {cad_result_mat_1.mean} std dev {cad_result_mat_1.std_dev}'
-cad_result_mat_2_str = f'CAD tally mean {cad_result_mat_2.mean} std dev {cad_result_mat_2.std_dev}'
+cad_result_mat_1_str = f'CAD tally mean {cad_result_mat_1.mean.flatten()[0]} std dev {cad_result_mat_1.std_dev}'
+cad_result_mat_2_str = f'CAD tally mean {cad_result_mat_2.mean.flatten()[0]} std dev {cad_result_mat_2.std_dev}'
 
 # printing both tally results
 print(csg_result_mat_1_str)
@@ -92,5 +92,5 @@ print(cad_result_mat_1_str)
 print(csg_result_mat_2_str)
 print(cad_result_mat_2_str)
 
-assert math.isclose(cad_result_mat_1.mean, csg_result_mat_1.mean, rel_tol=0.01)
-assert math.isclose(cad_result_mat_2.mean, csg_result_mat_2.mean, rel_tol=0.01)
+assert math.isclose(cad_result_mat_1.mean.flatten()[0], csg_result_mat_1.mean.flatten()[0], rel_tol=0.01)
+assert math.isclose(cad_result_mat_2.mean.flatten()[0], csg_result_mat_2.mean.flatten()[0], rel_tol=0.01)

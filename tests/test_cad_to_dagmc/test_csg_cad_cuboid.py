@@ -63,5 +63,5 @@ def test_comparing():
     with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
         cad_result = sp_from_cad.get_tally(name="mat1_flux_tally")
 
-    assert math.isclose(cad_result.mean, csg_result.mean)
+    assert math.isclose(cad_result.mean.flatten()[0].flatten()[0], csg_result.mean.flatten()[0].flatten()[0])
 

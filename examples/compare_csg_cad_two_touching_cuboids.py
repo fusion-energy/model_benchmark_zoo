@@ -51,8 +51,8 @@ output_file_from_csg = csg_model.run()
 with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
     csg_result1 = sp_from_csg.get_tally(name="mat1_flux_tally")
     csg_result2 = sp_from_csg.get_tally(name="mat2_flux_tally")
-csg_result_1 = f'CSG tally mat 1 mean {csg_result1.mean} std dev {csg_result1.std_dev}'
-csg_result_2 = f'CSG tally mat 2 mean {csg_result2.mean} std dev {csg_result2.std_dev}'
+csg_result_1 = f'CSG tally mat 1 mean {csg_result1.mean.flatten()[0]} std dev {csg_result1.std_dev}'
+csg_result_2 = f'CSG tally mat 2 mean {csg_result2.mean.flatten()[0]} std dev {csg_result2.std_dev}'
 
 # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a TwoTouchingCuboids
 dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
@@ -65,8 +65,8 @@ output_file_from_cad = dag_model.run()
 with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
     cad_result1 = sp_from_cad.get_tally(name="mat1_flux_tally")
     cad_result2 = sp_from_cad.get_tally(name="mat2_flux_tally")
-cad_result_1 = f'CAD tally mat 1 mean {cad_result1.mean} std dev {cad_result1.std_dev}'
-cad_result_2 = f'CAD tally mat 2 mean {cad_result2.mean} std dev {cad_result2.std_dev}'
+cad_result_1 = f'CAD tally mat 1 mean {cad_result1.mean.flatten()[0]} std dev {cad_result1.std_dev}'
+cad_result_2 = f'CAD tally mat 2 mean {cad_result2.mean.flatten()[0]} std dev {cad_result2.std_dev}'
 
 dag_model2 = common_geometry_object.c2omc_model()
 dag_model2.materials = my_materials
@@ -78,8 +78,8 @@ output_file_from_c2omc = dag_model2.run()
 with openmc.StatePoint(output_file_from_c2omc) as sp_from_c2omc:
     c2omc_result1 = sp_from_c2omc.get_tally(name="mat1_flux_tally")
     c2omc_result2 = sp_from_c2omc.get_tally(name="mat2_flux_tally")
-c2omc_result_1 = f'C2O tally mat 1 mean {c2omc_result1.mean} std dev {c2omc_result1.std_dev}'
-c2omc_result_2 = f'C2O tally mat 2 mean {c2omc_result2.mean} std dev {c2omc_result2.std_dev}'
+c2omc_result_1 = f'C2O tally mat 1 mean {c2omc_result1.mean.flatten()[0]} std dev {c2omc_result1.std_dev}'
+c2omc_result_2 = f'C2O tally mat 2 mean {c2omc_result2.mean.flatten()[0]} std dev {c2omc_result2.std_dev}'
 
 
 # printing both tally results

@@ -1,23 +1,27 @@
+[![cad to dagmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cad_to_dagmc.yml)
+
+[![cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cad_to_openmc.yml)
 
 # A collection of parametric CAD and equivalent Constructive Solid Geometry
 
-models (CSG) for comparing neutronics simulations with both geometry types.
+Models available both in Constructive Solid Geomtry (CSG) and CAD format for comparing neutronics simulations with both geometry types.
 
-| Model | Testing Status |
+| Model | Description |
 |---|---|
-|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374951-5e711a8b-a3db-4476-8f56-03a620d74b93.png" width="100"></p>  |     [![cuboid](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/cuboid_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/cuboid_cad_to_dagmc.yml) <br> [![cuboid - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/cuboid_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/cuboid_cad_to_openmc.yml) |
-|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374950-ef8696dd-adbc-4fd8-bd44-c5304e1d0709.png" width="100"></p>  |     [![sphere](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/sphere_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/sphere_cad_to_dagmc.yml) <br> [![sphere - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/sphere_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/sphere_cad_to_openmc.yml) |
-|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374954-20dee8fb-5199-4fc2-86a7-00452b6bdc89.png" width="100"></p>  |     [![nested_sphere](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_sphere_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_sphere_cad_to_dagmc.yml) <br> [![nested sphere - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_sphere_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_sphere_cad_to_openmc.yml) |
-|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374945-aea2582b-1d5f-40b1-a77b-bef79dce50da.png" width="100"></p>  |     [![two_touching_cuboids](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_touching_cuboids_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_touching_cuboids_cad_to_dagmc.yml) <br> [![two touching cuboids - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_touching_cuboids_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_touching_cuboids_cad_to_openmc.yml) |
-|         <p align="center"><img src="https://user-images.githubusercontent.com/8583900/284880533-c18e3345-52ec-4253-baa8-e1dbe2a52944.png" width="100"></p>  |     [![cylinder](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/cylinder_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/cylinder_cad_to_dagmc.yml) <br> [![cylinder - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/cylinder_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/cylinder_cad_to_openmc.yml)|
-|         <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/nestedcylinder.png" width="100"></p>  |     [![nested_cylinder](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_cylinder_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_cylinder_cad_to_dagmc.yml) <br> [![nested cylinder - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_cylinder_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_cylinder_cad_to_openmc.yml) |
-|         <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/circulartorus.png" width="100"></p>  |     [![circular_torus](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/circular_torus_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/circular_torus_cad_to_dagmc.yml) <br> [![circular torus - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/circular_torus_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/circular_torus_cad_to_openmc.yml) |
-|         <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/ellipticaltorus.png" width="100"></p>  |     [![elliptical_torus](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/elliptical_torus_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/elliptical_torus_cad_to_dagmc.yml) <br> [![elliptical torus - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/elliptical_torus_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/elliptical_torus_cad_to_openmc.yml) |
-|         <p align="center"><img src="https://github.com/fusion-energy/model_benchmark_zoo/blob/580db0c0368cccba7638bf9abfbcb31a18fe15e6/examples/simpletokamak.png?raw=true" width="100"></p>  |     [![simple_tokamak](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/simple_tokamak_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/simple_tokamak_cad_to_dagmc.yml) <br> [![elliptical torus - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/simple_tokamak_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/simple_tokamak_cad_to_openmc.yml) |
-|         <p align="center"><img src="assets/oktavian.png" width="100"></p>  |     [![oktavian](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/oktavian_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/oktavian_cad_to_dagmc.yml) <br> [![oktavian - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/oktavian_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/oktavian_cad_to_openmc.yml) |
-|         <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/tetrahedral.png" width="100"></p>  |     [![tetrahedral](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/tetrahedral_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/tetrahedral_cad_to_dagmc.yml) <br> [![tetrahedral - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/tetrahedral_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/tetrahedral_cad_to_openmc.yml) |
-|         <p align="center"><img src="examples/two_tetrahedrons.png" alt="Two Tetrahedrons" width="100"></p>  |     [![two_tetrahedrons](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_tetrahedrons_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_tetrahedrons_cad_to_dagmc.yml) <br> [![two tetrahedrons - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_tetrahedrons_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/two_tetrahedrons_cad_to_openmc.yml) |
-|         <p align="center"><img src="examples/nestedtorus.png" alt="Nested Torus" width="100"></p>  |     [![nested_torus](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_torus_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_torus_cad_to_dagmc.yml) <br> [![two tetrahedrons - cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_torus_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/nested_torus_cad_to_openmc.yml) |
+| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374951-5e711a8b-a3db-4476-8f56-03a620d74b93.png" width="100"></p> | Cube |
+| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374950-ef8696dd-adbc-4fd8-bd44-c5304e1d0709.png" width="100"></p> | Sphere |
+| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374954-20dee8fb-5199-4fc2-86a7-00452b6bdc89.png" width="100"></p> | Nested sphere | 
+| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374945-aea2582b-1d5f-40b1-a77b-bef79dce50da.png" width="100"></p> | Boxes in contact|
+| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/284880533-c18e3345-52ec-4253-baa8-e1dbe2a52944.png" width="100"></p> | Cylinder|
+| <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/nestedcylinder.png" width="100"></p> | Nested cylinders |
+| <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/circulartorus.png" width="100"></p> | Torus |
+| <p align="center"><img src="examples/nestedtorus.png" alt="Nested Torus" width="100"></p> | Nested tori |
+| <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/ellipticaltorus.png" width="100"></p> | Elliptical torus |
+| <p align="center"><img src="https://github.com/fusion-energy/model_benchmark_zoo/blob/580db0c0368cccba7638bf9abfbcb31a18fe15e6/examples/simpletokamak.png?raw=true" width="100"></p> | Simplified tokamak |
+| <p align="center"><img src="assets/oktavian.png" width="100"></p> | Oktavian shere|
+| <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/tetrahedral.png" width="100"> | Tetrahedrons |  
+| <p align="center"><img src="examples/two_tetrahedrons.png" alt="Two Tetrahedrons" width="100"></p> | Tetrahedron  in contact |
+
 
 ## Installation prerequisite
 
@@ -47,19 +51,19 @@ mamba activate new_env
 Install the dependencies, if this fails to solve the environment you could also try [installing OpenMC from source](https://docs.openmc.org/en/stable/quickinstall.html) which might be preferred.
 
 ```bash
-mamba install -y -c conda-forge gmsh python-gmsh "openmc=0.14.0=dagmc*nompi*"
+mamba install -y -c conda-forge gmsh python-gmsh "openmc=dagmc*nompi*"
 ```
 
 CadQuery should then be installed, here is the mamba command and the pip command.
 
 ```bash
-mamba install -y -c conda-forge ocp=7.7.2 cadquery=2.4.0
+mamba install -y -c conda-forge ocp cadquery
 ```
 
 If the mamba command fails to solve the environment then try this pip command.
 
 ```bash
-python -m pip install cadquery-ocp==7.7.2 cadquery==2.4.0
+python -m pip install cadquery-ocp cadquery
 ```
 
 Then you can install whichever convertor you want to test. The cad_to_dagmc and the CAD_to_OpenMC packages can both be installed with ```pip``` or ```conda```. **Warning** these should be installed in separate environments as they require a different version of Open Cascade.
