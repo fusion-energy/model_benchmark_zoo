@@ -3,8 +3,8 @@ import openmc
 import math
 import pytest
 
-kwargs_options = [{'min_mesh_size': 0.05,
-        'max_mesh_size': 5},
+kwargs_options = [{'min_mesh_size': 0.01,
+        'max_mesh_size': 0.5},
         {'tolerance': 0.1,
         'angular_tolerance': 0.1,},]
 
