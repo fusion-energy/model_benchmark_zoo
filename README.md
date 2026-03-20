@@ -23,6 +23,7 @@ Models available both in Constructive Solid Geomtry (CSG) and CAD format for com
 | <p align="center"><img src="examples/two_tetrahedrons.png" alt="Two Tetrahedrons" width="100"></p> | Tetrahedron  in contact |
 | <p align="center"><img src="examples/sphere_with_cylindrical_hole.png" alt="Sphere with cylindrical hole" width="100"></p> | Sphere with cylindrical hole |
 | <p align="center"><img src="examples/box_with_spherical_cavity.png" alt="Box with spherical cavity" width="100"></p> | Box with spherical cavity |
+| <p align="center"><img src="examples/three_touching_cuboids.png" alt="Three touching cuboids" width="100"></p> | Three touching cuboids |
 
 
 ## Installation prerequisite
