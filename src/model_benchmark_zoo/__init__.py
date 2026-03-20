@@ -13,3 +13,4 @@ from .tetrahedral import *
 from .two_tetrahedrons import *
 from .nestedtorus import *
 from .sphere_with_cylindrical_hole import *
+from .box_with_spherical_cavity import *
