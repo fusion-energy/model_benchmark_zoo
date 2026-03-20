@@ -52,7 +52,7 @@ GEOMETRIES = {
     "Cylinder": (
         Cylinder,
         "cylinder.png",
-        {"position": (5, 15, 120), "dolly": 0.95},
+        {"position": (5, 15, 25), "dolly": 0.95},
     ),
     "NestedCylinder": (
         NestedCylinder,
