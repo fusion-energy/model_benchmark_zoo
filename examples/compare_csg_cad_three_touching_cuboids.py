@@ -11,7 +11,7 @@ mat2.add_nuclide('Be9', 1)
 mat2.set_density('g/cm3', 1)
 
 mat3 = openmc.Material(name='3')
-mat3.add_nuclide('Cu63', 1)
+mat3.add_nuclide('Al27', 1)
 mat3.set_density('g/cm3', 1)
 
 my_materials = openmc.Materials([mat1, mat2, mat3])

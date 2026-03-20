@@ -13,7 +13,7 @@ def test_compare():
     mat2.set_density('g/cm3', 1)
 
     mat3 = openmc.Material(name='3')
-    mat3.add_nuclide('Cu63', 1)
+    mat3.add_nuclide('Al27', 1)
     mat3.set_density('g/cm3', 1)
 
     # geometry used in both simulations
