@@ -29,6 +29,7 @@ from model_benchmark_zoo import (
     SphereWithCylindricalHole,
     BoxWithSphericalCavity,
     ThreeTouchingCuboids,
+    Hemisphere,
 )
 
 # Each entry: (class, output_filename, camera_kwargs)
@@ -113,6 +114,11 @@ GEOMETRIES = {
         ThreeTouchingCuboids,
         "three_touching_cuboids.png",
         {"position": (15, -12, 18), "dolly": 0.95},
+    ),
+    "Hemisphere": (
+        Hemisphere,
+        "hemisphere.png",
+        {"position": (15, 20, 8), "dolly": 0.95},
     ),
 }
 

@@ -15,3 +15,4 @@ from .nestedtorus import *
 from .sphere_with_cylindrical_hole import *
 from .box_with_spherical_cavity import *
 from .three_touching_cuboids import *
+from .hemisphere import *
