@@ -8,21 +8,21 @@ Models available both in Constructive Solid Geomtry (CSG) and CAD format for com
 
 | Model | Description |
 |---|---|
-| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374951-5e711a8b-a3db-4476-8f56-03a620d74b93.png" width="100"></p> | Cube |
-| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374950-ef8696dd-adbc-4fd8-bd44-c5304e1d0709.png" width="100"></p> | Sphere |
-| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374954-20dee8fb-5199-4fc2-86a7-00452b6bdc89.png" width="100"></p> | Nested sphere | 
-| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/262374945-aea2582b-1d5f-40b1-a77b-bef79dce50da.png" width="100"></p> | Boxes in contact|
-| <p align="center"><img src="https://user-images.githubusercontent.com/8583900/284880533-c18e3345-52ec-4253-baa8-e1dbe2a52944.png" width="100"></p> | Cylinder|
-| <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/nestedcylinder.png" width="100"></p> | Nested cylinders |
-| <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/circulartorus.png" width="100"></p> | Torus |
-| <p align="center"><img src="examples/nestedtorus.png" alt="Nested Torus" width="100"></p> | Nested tori |
-| <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/ellipticaltorus.png" width="100"></p> | Elliptical torus |
-| <p align="center"><img src="https://github.com/fusion-energy/model_benchmark_zoo/blob/580db0c0368cccba7638bf9abfbcb31a18fe15e6/examples/simpletokamak.png?raw=true" width="100"></p> | Simplified tokamak |
-| <p align="center"><img src="assets/oktavian.png" width="100"></p> | Oktavian shere|
-| <p align="center"><img src="https://raw.githubusercontent.com/fusion-energy/model_benchmark_zoo/main/examples/tetrahedral.png" width="100"> | Tetrahedrons |  
-| <p align="center"><img src="examples/two_tetrahedrons.png" alt="Two Tetrahedrons" width="100"></p> | Tetrahedron  in contact |
-| <p align="center"><img src="examples/sphere_with_cylindrical_hole.png" alt="Sphere with cylindrical hole" width="100"></p> | Sphere with cylindrical hole |
-| <p align="center"><img src="examples/box_with_spherical_cavity.png" alt="Box with spherical cavity" width="100"></p> | Box with spherical cavity |
+| <p align="center"><img src="examples/cuboid.png" width="100"></p> | Cuboid |
+| <p align="center"><img src="examples/sphere.png" width="100"></p> | Sphere |
+| <p align="center"><img src="examples/nestedsphere.png" width="100"></p> | Nested sphere |
+| <p align="center"><img src="examples/two_touching_cuboids.png" width="100"></p> | Two touching cuboids |
+| <p align="center"><img src="examples/cylinder.png" width="100"></p> | Cylinder |
+| <p align="center"><img src="examples/nestedcylinder.png" width="100"></p> | Nested cylinders |
+| <p align="center"><img src="examples/circulartorus.png" width="100"></p> | Circular torus |
+| <p align="center"><img src="examples/nestedtorus.png" width="100"></p> | Nested tori |
+| <p align="center"><img src="examples/ellipticaltorus.png" width="100"></p> | Elliptical torus |
+| <p align="center"><img src="examples/simpletokamak.png" width="100"></p> | Simplified tokamak |
+| <p align="center"><img src="examples/oktavian.png" width="100"></p> | Oktavian sphere |
+| <p align="center"><img src="examples/tetrahedral.png" width="100"></p> | Tetrahedron |
+| <p align="center"><img src="examples/two_tetrahedrons.png" width="100"></p> | Two tetrahedrons in contact |
+| <p align="center"><img src="examples/sphere_with_cylindrical_hole.png" width="100"></p> | Sphere with cylindrical hole |
+| <p align="center"><img src="examples/box_with_spherical_cavity.png" width="100"></p> | Box with spherical cavity |
 
 
 ## Installation prerequisite
