@@ -44,6 +44,8 @@ class TwoTouchingCuboids(BaseCommonGeometryObject):
         assembly = cq.Assembly(name="TwoTouchingCuboids")
         cuboid1 = cq.Workplane().box(self.width1, self.width1, self.width1)
         assembly.add(cuboid1)
-        cuboid2 = cq.Workplane().moveTo(0.5*self.width1+ 0.5*self.width2).box(self.width2, self.width2, self.width2)
+        cuboid2 = cq.Workplane().transformed(
+            offset=(0, 0.5 * self.width1 + 0.5 * self.width2, 0)
+        ).box(self.width1, self.width2, self.width1)
         assembly.add(cuboid2)
         return assembly
