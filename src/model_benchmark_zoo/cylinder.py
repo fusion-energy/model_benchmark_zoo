@@ -23,6 +23,6 @@ class Cylinder(BaseCommonGeometryObject):
         import cadquery as cq
 
         assembly = cq.Assembly(name="cylinder")
-        cylinder = cq.Workplane("XY", origin=(0, 0, 0)).circle(self.radius).extrude(self.height, both=True)
+        cylinder = cq.Workplane("XY").cylinder(self.height, self.radius)
         assembly.add(cylinder)
         return assembly
