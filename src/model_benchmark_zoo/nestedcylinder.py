@@ -14,20 +14,20 @@ class NestedCylinder(BaseCommonGeometryObject):
 
     def csg_model(self, materials):
         import openmc
-        
-        surface_1 = openmc.ZCylinder(x0=0.0, y0=0.0, r=self.radius1, boundary_type="vacuum")
-        surface_2 = openmc.ZPlane(z0=0.5*self.height1, boundary_type="vacuum")
-        surface_3 = openmc.ZPlane(z0=-0.5*self.height1, boundary_type="vacuum")
-    
-        surface_3 = openmc.ZCylinder(x0=0.0, y0=0.0, r=self.radius2, boundary_type="vacuum")
-        surface_4 = openmc.ZPlane(z0=0.5*self.height2, boundary_type="vacuum")
-        surface_5 = openmc.ZPlane(z0=-0.5*self.height2, boundary_type="vacuum")
-    
-        region_1 = -surface_1 & -surface_2 & +surface_3
-        region_2 = -surface_3 & -surface_4 & +surface_5
 
-        cell_1 = openmc.Cell(region=region_1 & ~ region_2, fill=materials[0])
-        cell_2 = openmc.Cell(region=region_2, fill=materials[1])
+        outer_cyl = openmc.ZCylinder(x0=0.0, y0=0.0, r=self.radius1, boundary_type="vacuum")
+        outer_top = openmc.ZPlane(z0=0.5*self.height1, boundary_type="vacuum")
+        outer_bot = openmc.ZPlane(z0=-0.5*self.height1, boundary_type="vacuum")
+
+        inner_cyl = openmc.ZCylinder(x0=0.0, y0=0.0, r=self.radius2)
+        inner_top = openmc.ZPlane(z0=0.5*self.height2)
+        inner_bot = openmc.ZPlane(z0=-0.5*self.height2)
+
+        region_inner = -inner_cyl & -inner_top & +inner_bot
+        region_outer = (-outer_cyl & -outer_top & +outer_bot) & ~region_inner
+
+        cell_1 = openmc.Cell(region=region_outer, fill=materials[0])
+        cell_2 = openmc.Cell(region=region_inner, fill=materials[1])
 
         geometry = openmc.Geometry([cell_1, cell_2])
         my_materials = openmc.Materials(materials)
@@ -38,8 +38,8 @@ class NestedCylinder(BaseCommonGeometryObject):
         import cadquery as cq
 
         assembly = cq.Assembly(name="cylinder")
-        cylinder2 = cq.Workplane("XY", origin=(0, 0, 0)).circle(self.radius2).extrude(self.height2, both=True)
-        cylinder1 = cq.Workplane("XY", origin=(0, 0, 0)).circle(self.radius1).extrude(self.height1, both=True).cut(cylinder2)
+        cylinder2 = cq.Workplane("XY").cylinder(self.height2, self.radius2)
+        cylinder1 = cq.Workplane("XY").cylinder(self.height1, self.radius1).cut(cylinder2)
         assembly.add(cylinder1)
         assembly.add(cylinder2)
         return assembly
