@@ -1,6 +1,6 @@
 from .utils import BaseCommonGeometryObject
 class Cylinder(BaseCommonGeometryObject):
-    def __init__(self, radius=1, height=100):
+    def __init__(self, radius=1, height=20):
         self.radius = radius
         self.height = height
 
