@@ -8,12 +8,15 @@ class Hemisphere(BaseCommonGeometryObject):
         import openmc
 
         sphere_surface = openmc.Sphere(r=self.radius, boundary_type="vacuum")
-        z_plane = openmc.ZPlane(z0=0, boundary_type="vacuum")
+        z_plane = openmc.ZPlane(z0=0)
 
-        region = -sphere_surface & +z_plane
-        cell = openmc.Cell(region=region, fill=materials[0])
+        hemisphere_region = -sphere_surface & +z_plane
+        hemisphere_cell = openmc.Cell(region=hemisphere_region, fill=materials[0])
 
-        geometry = openmc.Geometry([cell])
+        void_region = -sphere_surface & -z_plane
+        void_cell = openmc.Cell(region=void_region)
+
+        geometry = openmc.Geometry([hemisphere_cell, void_cell])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
