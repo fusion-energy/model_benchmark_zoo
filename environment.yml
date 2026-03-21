@@ -1,0 +1,14 @@
+name: model_benchmark_zoo
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - gmsh
+  - python-gmsh
+  - openmc=dagmc*nompi*
+  - ocp
+  - cadquery
+  - pip
+  - pip:
+    - cad_to_dagmc
+    - pytest
