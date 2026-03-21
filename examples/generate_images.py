@@ -31,6 +31,7 @@ from model_benchmark_zoo import (
     ThreeTouchingCuboids,
     Hemisphere,
     Pipe,
+    TruncatedCone,
 )
 
 # Each entry: (class, output_filename, camera_kwargs)
@@ -125,6 +126,11 @@ GEOMETRIES = {
         Pipe,
         "pipe.png",
         {"position": (8, 12, 20), "dolly": 0.95},
+    ),
+    "TruncatedCone": (
+        TruncatedCone,
+        "truncated_cone.png",
+        {"position": (10, 15, 8), "dolly": 0.95},
     ),
 }
 

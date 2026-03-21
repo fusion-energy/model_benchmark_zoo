@@ -17,3 +17,4 @@ from .box_with_spherical_cavity import *
 from .three_touching_cuboids import *
 from .hemisphere import *
 from .pipe import *
+from .truncated_cone import *

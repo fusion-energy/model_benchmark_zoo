@@ -26,17 +26,25 @@ Models available both in Constructive Solid Geomtry (CSG) and CAD format for com
 | <p align="center"><img src="examples/three_touching_cuboids.png" width="100"></p> | Three touching cuboids |
 | <p align="center"><img src="examples/hemisphere.png" alt="Hemisphere" width="100"></p> | Hemisphere |
 | <p align="center"><img src="examples/pipe.png" alt="Pipe" width="100"></p> | Pipe |
+| <p align="center"><img src="examples/truncated_cone.png" alt="Truncated cone" width="100"></p> | Truncated cone |
 
 
-## Installation prerequisite
+## Install using pip
+
+```bash
+pip install -r requirements.txt
+pip install .
+```
+
+This uses an [extra index](https://shimwell.github.io/wheels) for pre-built OpenMC wheels.
+
+## Install using Mamba and pip
 
 In principle, any Conda/Mamba distribution will work. A few Conda/Mamba options are:
 
 - [Miniforge](https://github.com/conda-forge/miniforge#miniforge-pypy3) (recommended as it includes mamba)
 - [Anaconda](https://www.anaconda.com/download)
 - [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-
-## Install using Mamba and pip
 
 This example assumes you have installed the MiniForge option or separately
 installed Mamba with ```conda install -c conda-forge mamba -y```

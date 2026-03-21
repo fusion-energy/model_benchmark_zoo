@@ -1,0 +1,8 @@
+--extra-index-url https://shimwell.github.io/wheels
+openmc
+cadquery
+cadquery-ocp
+cad_to_dagmc
+CAD_to_OpenMC
+gmsh
+pytest
