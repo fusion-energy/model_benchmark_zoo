@@ -8,7 +8,7 @@ mat1.set_density('g/cm3', 1)
 my_materials = openmc.Materials([mat1])
 
 # geometry used in both simulations
-common_geometry_object = Ellipsoid(a=10, b=7, c=5)
+common_geometry_object = Ellipsoid(equatorial_radius=10, polar_radius=5)
 # just writing a CAD step file for visulisation
 common_geometry_object.export_stp_file("ellipsoid.stp")
 

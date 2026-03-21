@@ -1,21 +1,25 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class Ellipsoid(BaseCommonGeometryObject):
-    def __init__(self, a=10, b=7, c=5):
-        self.a = a
-        self.b = b
-        self.c = c
+    def __init__(self, equatorial_radius=10, polar_radius=5):
+        self.equatorial_radius = equatorial_radius
+        self.polar_radius = polar_radius
 
     def csg_model(self, materials):
         import openmc
 
+        a = self.equatorial_radius
+        c = self.polar_radius
+
         surface = openmc.Quadric(
-            a=1 / self.a**2,
-            b=1 / self.b**2,
-            c=1 / self.c**2,
+            a=1 / a**2,
+            b=1 / a**2,
+            c=1 / c**2,
             k=-1,
         )
-        bounding_sphere = openmc.Sphere(r=max(self.a, self.b, self.c) + 1, boundary_type="vacuum")
+        bounding_sphere = openmc.Sphere(r=max(a, c) + 1, boundary_type="vacuum")
 
         region_material = -surface & -bounding_sphere
         region_void = +surface & -bounding_sphere
@@ -30,20 +34,26 @@ class Ellipsoid(BaseCommonGeometryObject):
 
     def cadquery_assembly(self):
         import cadquery as cq
-        from OCP.gp import gp_GTrsf, gp_Mat
-        from OCP.BRepBuilderAPI import BRepBuilderAPI_GTransform
 
-        sphere = cq.Solid.makeSphere(1.0)
+        a = self.equatorial_radius
+        c = self.polar_radius
 
-        # Non-uniform scale to create ellipsoid with radii (a, b, c)
-        gtrsf = gp_GTrsf()
-        gtrsf.SetVectorialPart(
-            gp_Mat(self.a, 0, 0, 0, self.b, 0, 0, 0, self.c)
+        # Create half-ellipse profile in XZ plane and revolve around Z
+        n = 100
+        points = []
+        for i in range(n + 1):
+            angle = math.pi * i / n
+            x = a * math.sin(angle)
+            z = c * math.cos(angle)
+            points.append((x, z))
+
+        solid = (
+            cq.Workplane("XZ")
+            .spline(points)
+            .close()
+            .revolve(360, (0, 0), (0, 1))
         )
-        builder = BRepBuilderAPI_GTransform(sphere.wrapped, gtrsf, True)
-        builder.Build()
-        ellipsoid_shape = cq.Shape(builder.Shape())
 
         assembly = cq.Assembly(name="ellipsoid")
-        assembly.add(ellipsoid_shape)
+        assembly.add(solid)
         return assembly
