@@ -55,7 +55,7 @@ class Paraboloid(BaseCommonGeometryObject):
             .spline(points)
             .lineTo(0, h)
             .close()
-            .revolve(360, (0, 0, 0), (0, 0, 1))
+            .revolve(360, (0, 0), (0, 1))
         )
 
         assembly = cq.Assembly(name="paraboloid")
