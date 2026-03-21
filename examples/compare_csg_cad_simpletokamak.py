@@ -64,7 +64,7 @@ csg_result_mat_1_str = f'CSG tally mean {csg_result_mat_1.mean.flatten()[0]} std
 csg_result_mat_2_str = f'CSG tally mean {csg_result_mat_2.mean.flatten()[0]} std dev {csg_result_mat_2.std_dev}'
 
 common_geometry_object.export_h5m_file_with_cad_to_dagmc(
-    h5m_filename='simpletokamak.h5m',
+    filename='simpletokamak.h5m',
     material_tags=['1', '2'],
     # the small mesh sizes make a large detailed mesh which is needed to get similar answers
     min_mesh_size=0.01,
