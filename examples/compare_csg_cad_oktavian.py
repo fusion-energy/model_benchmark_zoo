@@ -62,7 +62,7 @@ my_source.energy = openmc.stats.Discrete([14e6], [1])
 my_settings.source = my_source
 
 # making openmc.Model with CSG geometry
-csg_model = common_geometry_object.csg_model(materials=my_materials)
+csg_model = common_geometry_object.csg_model(materials=[mat1, mat2])
 csg_model.tallies = my_tallies
 csg_model.settings = my_settings
 
@@ -74,7 +74,7 @@ with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
 csg_result = f'CSG tally mean {csg_result.mean.flatten()[0]} std dev {csg_result.std_dev}'
 
 common_geometry_object.export_h5m_file_with_cad_to_dagmc(
-    h5m_filename='oktavian.h5m',
+    filename='oktavian.h5m',
     material_tags=['1', '2'],
     # the small mesh sizes make a large detailed mesh which is needed to get similar answers
     min_mesh_size=0.01,

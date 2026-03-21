@@ -12,7 +12,7 @@ my_materials = openmc.Materials([mat1])
 major_radius = 10
 minor_radius1 = 4
 minor_radius2 = 2
-common_geometry_object = Ellipticaltorus(materials = my_materials, major_radius=major_radius, minor_radius1=minor_radius1, minor_radius2 = minor_radius2)
+common_geometry_object = Ellipticaltorus(major_radius=major_radius, minor_radius1=minor_radius1, minor_radius2=minor_radius2)
 common_geometry_object.export_stp_file("ellipticaltorus.stp")
 
 mat_filter = openmc.MaterialFilter(mat1)
@@ -23,7 +23,7 @@ my_tallies = openmc.Tallies([tally])
 
 my_settings = openmc.Settings()
 my_settings.batches = 10
-my_settings.inactive = 0  
+my_settings.inactive = 0
 my_settings.particles = 500
 my_settings.run_mode = 'fixed source'
 
@@ -37,7 +37,7 @@ my_source.energy = openmc.stats.Discrete([14e6], [1])
 my_settings.source = my_source
 
 # making openmc.Model with CSG geometry
-csg_model = common_geometry_object.csg_model()
+csg_model = common_geometry_object.csg_model(materials=[mat1])
 csg_model.tallies = my_tallies
 csg_model.settings = my_settings
 
@@ -48,8 +48,17 @@ with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
     csg_result = sp_from_csg.get_tally(name="mat1_flux_tally")
 csg_result = f'CSG tally mean {csg_result.mean.flatten()[0]} std dev {csg_result.std_dev}'
 
-# making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
-dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
+# making openmc.Model with DAGMC geometry
+common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+    filename='ellipticaltorus.h5m',
+    material_tags=['1'],
+    min_mesh_size=0.01,
+    max_mesh_size=0.5
+)
+dag_model = common_geometry_object.dagmc_model(
+    h5m_filename='ellipticaltorus.h5m',
+    materials=[mat1]
+)
 dag_model.tallies = my_tallies
 dag_model.settings = my_settings
 
