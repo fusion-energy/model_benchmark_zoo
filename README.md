@@ -25,6 +25,7 @@ Models available both in Constructive Solid Geomtry (CSG) and CAD format for com
 | <p align="center"><img src="examples/box_with_spherical_cavity.png" width="100"></p> | Box with spherical cavity |
 | <p align="center"><img src="examples/three_touching_cuboids.png" width="100"></p> | Three touching cuboids |
 | <p align="center"><img src="examples/hemisphere.png" alt="Hemisphere" width="100"></p> | Hemisphere |
+| <p align="center"><img src="examples/pipe.png" alt="Pipe" width="100"></p> | Pipe |
 
 
 ## Installation prerequisite
