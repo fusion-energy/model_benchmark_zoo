@@ -17,13 +17,13 @@ class Paraboloid(BaseCommonGeometryObject):
 
         # Paraboloid surface: x² + y² - 2fz = 0
         # -quadric is where x² + y² - 2fz < 0, i.e. z > (x²+y²)/(2f) (above the surface)
-        quadric = openmc.Quadric(a=1, b=1, c=0, d=0, e=0, f=0, g=0, h=0, j=-2 * f, k=0)
+        quadric = openmc.Quadric(a=1, b=1, j=-2 * f)
 
         z_top = openmc.ZPlane(z0=h, boundary_type="vacuum")
-        z_bot = openmc.ZPlane(z0=0, boundary_type="vacuum")
+        z_bot = openmc.ZPlane(z0=-0.01, boundary_type="vacuum")
         outer_cyl = openmc.ZCylinder(r=rim_radius, boundary_type="vacuum")
 
-        # Material region: above the paraboloid surface and below the cap
+        # Material region: inside the paraboloid surface and below the cap
         region_material = -quadric & -z_top & +z_bot
         # Void region: outside the paraboloid but inside the bounding box
         region_void = +quadric & -z_top & +z_bot & -outer_cyl
