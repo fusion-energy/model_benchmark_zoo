@@ -11,8 +11,7 @@ mat2.set_density('g/cm3', 1)
 my_materials = openmc.Materials([mat1, mat2])
 
 # geometry used in both simulations
-common_geometry_object = TwoTouchingCuboids(
-    materials=my_materials, width1=10, width2=4)
+common_geometry_object = TwoTouchingCuboids(width1=10, width2=4)
 # just writing a CAD step file for visulisation
 common_geometry_object.export_stp_file("TwoTouchingCuboids.stp")
 
@@ -41,7 +40,7 @@ my_source.energy = openmc.stats.Discrete([14e6], [1])
 my_settings.source = my_source
 
 # making openmc.Model with CSG geometry
-csg_model = common_geometry_object.csg_model()
+csg_model = common_geometry_object.csg_model(materials=[mat1, mat2])
 csg_model.tallies = my_tallies
 csg_model.settings = my_settings
 
@@ -54,8 +53,17 @@ with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
 csg_result_1 = f'CSG tally mat 1 mean {csg_result1.mean.flatten()[0]} std dev {csg_result1.std_dev}'
 csg_result_2 = f'CSG tally mat 2 mean {csg_result2.mean.flatten()[0]} std dev {csg_result2.std_dev}'
 
-# making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a TwoTouchingCuboids
-dag_model = common_geometry_object.dagmc_model(min_mesh_size=0.01, max_mesh_size=0.5)
+# making openmc.Model with DAGMC geometry
+common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+    filename='TwoTouchingCuboids.h5m',
+    material_tags=['1', '2'],
+    min_mesh_size=0.01,
+    max_mesh_size=0.5
+)
+dag_model = common_geometry_object.dagmc_model(
+    h5m_filename='TwoTouchingCuboids.h5m',
+    materials=[mat1, mat2]
+)
 dag_model.tallies = my_tallies
 dag_model.settings = my_settings
 
@@ -68,24 +76,8 @@ with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
 cad_result_1 = f'CAD tally mat 1 mean {cad_result1.mean.flatten()[0]} std dev {cad_result1.std_dev}'
 cad_result_2 = f'CAD tally mat 2 mean {cad_result2.mean.flatten()[0]} std dev {cad_result2.std_dev}'
 
-dag_model2 = common_geometry_object.c2omc_model()
-dag_model2.materials = my_materials
-dag_model2.tallies = my_tallies
-dag_model2.settings = my_settings
-
-output_file_from_c2omc = dag_model2.run()
-
-with openmc.StatePoint(output_file_from_c2omc) as sp_from_c2omc:
-    c2omc_result1 = sp_from_c2omc.get_tally(name="mat1_flux_tally")
-    c2omc_result2 = sp_from_c2omc.get_tally(name="mat2_flux_tally")
-c2omc_result_1 = f'C2O tally mat 1 mean {c2omc_result1.mean.flatten()[0]} std dev {c2omc_result1.std_dev}'
-c2omc_result_2 = f'C2O tally mat 2 mean {c2omc_result2.mean.flatten()[0]} std dev {c2omc_result2.std_dev}'
-
-
 # printing both tally results
 print(csg_result_1)
 print(cad_result_1)
-print(c2omc_result_1)
 print(csg_result_2)
 print(cad_result_2)
-print(c2omc_result_2)
