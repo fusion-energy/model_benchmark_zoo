@@ -8,94 +8,60 @@ Models available both in Constructive Solid Geomtry (CSG) and CAD format for com
 
 | Model | Description |
 |---|---|
-| <p align="center"><img src="examples/cuboid.png" width="100"></p> | Cuboid |
-| <p align="center"><img src="examples/sphere.png" width="100"></p> | Sphere |
-| <p align="center"><img src="examples/nestedsphere.png" width="100"></p> | Nested sphere |
-| <p align="center"><img src="examples/two_touching_cuboids.png" width="100"></p> | Two touching cuboids |
-| <p align="center"><img src="examples/cylinder.png" width="100"></p> | Cylinder |
-| <p align="center"><img src="examples/nestedcylinder.png" width="100"></p> | Nested cylinders |
-| <p align="center"><img src="examples/circulartorus.png" width="100"></p> | Circular torus |
-| <p align="center"><img src="examples/nestedtorus.png" width="100"></p> | Nested tori |
-| <p align="center"><img src="examples/ellipticaltorus.png" width="100"></p> | Elliptical torus |
-| <p align="center"><img src="examples/simpletokamak.png" width="100"></p> | Simplified tokamak |
-| <p align="center"><img src="examples/oktavian.png" width="100"></p> | Oktavian sphere |
-| <p align="center"><img src="examples/tetrahedral.png" width="100"></p> | Tetrahedron |
-| <p align="center"><img src="examples/two_tetrahedrons.png" width="100"></p> | Two tetrahedrons in contact |
-| <p align="center"><img src="examples/sphere_with_cylindrical_hole.png" width="100"></p> | Sphere with cylindrical hole |
-| <p align="center"><img src="examples/box_with_spherical_cavity.png" width="100"></p> | Box with spherical cavity |
-| <p align="center"><img src="examples/three_touching_cuboids.png" width="100"></p> | Three touching cuboids |
-| <p align="center"><img src="examples/hemisphere.png" alt="Hemisphere" width="100"></p> | Hemisphere |
-| <p align="center"><img src="examples/pipe.png" alt="Pipe" width="100"></p> | Pipe |
-| <p align="center"><img src="examples/truncated_cone.png" alt="Truncated cone" width="100"></p> | Truncated cone |
+| <p align="center"><img src="images/cuboid.png" width="100"></p> | Cuboid |
+| <p align="center"><img src="images/sphere.png" width="100"></p> | Sphere |
+| <p align="center"><img src="images/nestedsphere.png" width="100"></p> | Nested sphere |
+| <p align="center"><img src="images/two_touching_cuboids.png" width="100"></p> | Two touching cuboids |
+| <p align="center"><img src="images/cylinder.png" width="100"></p> | Cylinder |
+| <p align="center"><img src="images/nestedcylinder.png" width="100"></p> | Nested cylinders |
+| <p align="center"><img src="images/circulartorus.png" width="100"></p> | Circular torus |
+| <p align="center"><img src="images/nestedtorus.png" width="100"></p> | Nested tori |
+| <p align="center"><img src="images/ellipticaltorus.png" width="100"></p> | Elliptical torus |
+| <p align="center"><img src="images/simpletokamak.png" width="100"></p> | Simplified tokamak |
+| <p align="center"><img src="images/oktavian.png" width="100"></p> | Oktavian sphere |
+| <p align="center"><img src="images/tetrahedral.png" width="100"></p> | Tetrahedron |
+| <p align="center"><img src="images/two_tetrahedrons.png" width="100"></p> | Two tetrahedrons in contact |
+| <p align="center"><img src="images/sphere_with_cylindrical_hole.png" width="100"></p> | Sphere with cylindrical hole |
+| <p align="center"><img src="images/box_with_spherical_cavity.png" width="100"></p> | Box with spherical cavity |
+| <p align="center"><img src="images/three_touching_cuboids.png" width="100"></p> | Three touching cuboids |
+| <p align="center"><img src="images/hemisphere.png" alt="Hemisphere" width="100"></p> | Hemisphere |
+| <p align="center"><img src="images/pipe.png" alt="Pipe" width="100"></p> | Pipe |
+| <p align="center"><img src="images/truncated_cone.png" alt="Truncated cone" width="100"></p> | Truncated cone |
 
+
+First clone the repository:
+
+```bash
+git clone https://github.com/fusion-energy/model_benchmark_zoo.git
+cd model_benchmark_zoo
+```
 
 ## Install using pip
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 pip install .
 ```
 
 This uses an [extra index](https://shimwell.github.io/wheels) for pre-built OpenMC wheels.
 
-## Install using Mamba and pip
+## Install using Mamba
 
-In principle, any Conda/Mamba distribution will work. A few Conda/Mamba options are:
+Requires a Conda/Mamba distribution:
 
 - [Miniforge](https://github.com/conda-forge/miniforge#miniforge-pypy3) (recommended as it includes mamba)
 - [Anaconda](https://www.anaconda.com/download)
 - [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 
-This example assumes you have installed the MiniForge option or separately
-installed Mamba with ```conda install -c conda-forge mamba -y```
-
-Create a new conda environment, I've chosen Python 3.10 here but newer versions should also work.
-
 ```bash
-mamba create --name new_env python=3.10 -y
+mamba env create -f environment.yml
+mamba activate model_benchmark_zoo
+pip install .
 ```
 
-Activate the environment
-
-```bash
-mamba activate new_env
-```
-
-Install the dependencies, if this fails to solve the environment you could also try [installing OpenMC from source](https://docs.openmc.org/en/stable/quickinstall.html) which might be preferred.
-
-```bash
-mamba install -y -c conda-forge gmsh python-gmsh "openmc=dagmc*nompi*"
-```
-
-CadQuery should then be installed, here is the mamba command and the pip command.
-
-```bash
-mamba install -y -c conda-forge ocp cadquery
-```
-
-If the mamba command fails to solve the environment then try this pip command.
-
-```bash
-python -m pip install cadquery-ocp cadquery
-```
-
-Then you can install whichever convertor you want to test. The cad_to_dagmc and the CAD_to_OpenMC packages can both be installed with ```pip``` or ```conda```. **Warning** these should be installed in separate environments as they require a different version of Open Cascade.
-
-```bash
-python -m pip install cad_to_dagmc
-```
-
-or
-
-```bash
-python -m pip install CAD_to_OpenMC
-```
-
-Then you can install the model benchmark zoo with ```pip```
-
-```bash
-python -m pip install git+git://github.com/fusion-energy/model_benchmark_zoo.git
-```
+If the environment solve fails, you can try [installing OpenMC from source](https://docs.openmc.org/en/stable/quickinstall.html) instead.
 
 ## Usage
 

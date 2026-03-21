@@ -268,7 +268,7 @@ def generate_image(name, geometry_cls, filename, camera_kwargs, output_dir):
 
 
 def main():
-    output_dir = os.path.join(os.path.dirname(__file__))
+    output_dir = os.path.join(os.path.dirname(__file__), '..', 'images')
 
     # If specific names given on CLI, only generate those
     requested = sys.argv[1:]
