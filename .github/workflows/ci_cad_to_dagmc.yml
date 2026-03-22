@@ -47,3 +47,7 @@ jobs:
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9 Al27
           pip install .[tests]
           pytest tests/test_cad_to_dagmc
+          for script in examples/compare_csg_cad_*.py; do
+            echo "Running $script"
+            python "$script"
+          done

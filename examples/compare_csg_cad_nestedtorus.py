@@ -63,7 +63,7 @@ csg_result_str = f'CSG tally mean {csg_result.mean.flatten()[0]} std dev {csg_re
 
 # making openmc.Model with DAGMC geometry
 common_geometry_object.export_h5m_file_with_cad_to_dagmc(
-    h5m_filename='nestedtorus.h5m',
+    filename='nestedtorus.h5m',
     material_tags=material_tags,
     min_mesh_size=0.1,
     max_mesh_size=0.5
