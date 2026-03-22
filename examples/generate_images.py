@@ -32,6 +32,10 @@ from model_benchmark_zoo import (
     Hemisphere,
     Pipe,
     TruncatedCone,
+    Ellipsoid,
+    Hyperboloid,
+    Paraboloid,
+    EllipticCylinder,
 )
 
 # Each entry: (class, output_filename, camera_kwargs)
@@ -70,7 +74,7 @@ GEOMETRIES = {
     "Circulartorus": (
         Circulartorus,
         "circulartorus.png",
-        {"position": (15, 20, 12), "dolly": 0.95},
+        {"position": (15, 20, 12), "dolly": 1.3},
     ),
     "Nestedtorus": (
         Nestedtorus,
@@ -80,7 +84,7 @@ GEOMETRIES = {
     "Ellipticaltorus": (
         Ellipticaltorus,
         "ellipticaltorus.png",
-        {"position": (15, 20, 12), "dolly": 0.95},
+        {"position": (15, 20, 12), "dolly": 1.3},
     ),
     "SimpleTokamak": (
         SimpleTokamak,
@@ -131,6 +135,26 @@ GEOMETRIES = {
         TruncatedCone,
         "truncated_cone.png",
         {"position": (10, 15, 8), "dolly": 0.95},
+    ),
+    "Ellipsoid": (
+        Ellipsoid,
+        "ellipsoid.png",
+        {"position": (15, 20, 8), "dolly": 0.95},
+    ),
+    "Hyperboloid": (
+        Hyperboloid,
+        "hyperboloid.png",
+        {"position": (10, 15, 8), "dolly": 0.95},
+    ),
+    "Paraboloid": (
+        Paraboloid,
+        "paraboloid.png",
+        {"position": (15, 15, 12), "dolly": 0.95},
+    ),
+    "EllipticCylinder": (
+        EllipticCylinder,
+        "elliptic_cylinder.png",
+        {"position": (12, 18, 15), "dolly": 0.95},
     ),
 }
 
