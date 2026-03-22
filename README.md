@@ -20,7 +20,7 @@ This benchmark is unique and invaluable if you want to test that a particle tran
 
 I originally made this repository as there was no other comparison of CSG geometry with DAGMC geometry available and I wanted to verify the level of surface discretisation that was needed to provide accurate results.
 
-The repository then grew into a way to test my DAGMC geometry making package [cad-to-dagmc](https://github.com/fusion-energy/cad_to_dagmc).
+The repository then grew into a way to test my DAGMC geometry making package [cad-to-dagmc](https://github.com/fusion-energy/cad_to_dagmc). Later on tests for [cad-to-openmc](https://github.com/openmsr/CAD_to_OpenMC) which is another geometry making package were also added.  
 
 
 
