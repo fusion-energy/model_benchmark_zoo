@@ -60,11 +60,12 @@ class Hyperboloid(BaseCommonGeometryObject):
             points.append((r, z))
 
         # Create profile: line to hyperbola start, spline along curve, line back to axis, close
+        # Include points[0] in the spline so it starts exactly at the lineTo endpoint
         profile = (
             cq.Workplane("XZ")
             .moveTo(0, points[0][1])
             .lineTo(points[0][0], points[0][1])
-            .spline(points[1:])
+            .spline(points)
             .lineTo(0, points[-1][1])
             .close()
         )
