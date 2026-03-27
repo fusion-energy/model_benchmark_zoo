@@ -59,24 +59,19 @@ class LShaped(BaseCommonGeometryObject):
         ox = -w / 2
         oy = -l / 2
 
-        # L-shaped profile
-        pts = [
-            (ox, oy),
-            (ox + w, oy),
-            (ox + w, oy + t),
-            (ox + t, oy + t),
-            (ox + t, oy + l),
-            (ox, oy + l),
-        ]
-
         assembly = cq.Assembly(name="l_shaped")
-        l_shape = (
-            cq.Workplane("XY")
-            .transformed(offset=(0, 0, -h / 2))
-            .moveTo(*pts[0])
-            .polyline(pts[1:])
-            .close()
-            .extrude(h)
-        )
+
+        # Build L from two boxes fused together
+        # Horizontal leg: full width, thickness t, at bottom
+        horiz = cq.Workplane("XY").transformed(
+            offset=((ox + w / 2), (oy + t / 2), 0)
+        ).box(w, t, h)
+
+        # Vertical leg: thickness t, extends upward from top of horiz leg
+        vert = cq.Workplane("XY").transformed(
+            offset=((ox + t / 2), (oy + t + (l - t) / 2), 0)
+        ).box(t, l - t, h)
+
+        l_shape = horiz.union(vert)
         assembly.add(l_shape)
         return assembly
