@@ -43,6 +43,9 @@ from model_benchmark_zoo import (
     ConcentricCylinders,
     TJunction,
     LShaped,
+    CylinderInBox,
+    SphereInBox,
+    ChamferedBox,
 )
 
 # Each entry: (class, output_filename, camera_kwargs)
@@ -197,6 +200,21 @@ GEOMETRIES = {
         LShaped,
         "l_shaped.png",
         {"position": (15, -12, 18), "dolly": 0.95},
+    ),
+    "CylinderInBox": (
+        CylinderInBox,
+        "cylinder_in_box.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "SphereInBox": (
+        SphereInBox,
+        "sphere_in_box.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "ChamferedBox": (
+        ChamferedBox,
+        "chamfered_box.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
     ),
 }
 

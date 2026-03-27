@@ -56,6 +56,9 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 | <p align="center"><img src="images/concentric_cylinders.png" alt="Concentric cylinders" width="100"></p> | Concentric cylinders | 3 | Three nested cylindrical shells; multi-region imprint and merge on curved interfaces |
 | <p align="center"><img src="images/t_junction.png" alt="T-junction" width="100"></p> | T-junction | 2 | Right-angle body contact; non-coincident face imprinting at a partial shared surface |
 | <p align="center"><img src="images/l_shaped.png" alt="L-shaped solid" width="100"></p> | L-shaped solid | 1 | Non-convex body with a sharp 90-degree re-entrant corner |
+| <p align="center"><img src="images/cylinder_in_box.png" alt="Cylinder in box" width="100"></p> | Cylinder in box | 2 | Curved surface tangent to flat faces; cylindrical-to-planar imprinting along tangent lines |
+| <p align="center"><img src="images/sphere_in_box.png" alt="Sphere in box" width="100"></p> | Sphere in box | 2 | Curved surface enclosed in rectilinear body; pebble-in-moderator case |
+| <p align="center"><img src="images/chamfered_box.png" alt="Chamfered box" width="100"></p> | Chamfered box | 1 | Angled planar chamfer faces at non-90-degree edge intersections |
 
 
 First clone the repository:
