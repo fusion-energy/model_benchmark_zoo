@@ -38,19 +38,21 @@ class OverlappingSpheres(BaseCommonGeometryObject):
 
     def cadquery_assembly(self):
         import cadquery as cq
+        from OCP.BRepPrimAPI import BRepPrimAPI_MakeSphere
+        from OCP.BRepAlgoAPI import BRepAlgoAPI_Cut
+        from OCP.gp import gp_Pnt
 
         d = self.separation / 2
         r = self.radius
 
         assembly = cq.Assembly(name="overlapping_spheres")
 
-        z_dir = cq.Vector(0, 0, 1)
-        solid1 = cq.Solid.makeSphere(r, cq.Vector(-d, 0, 0), z_dir, -90, 90)
-        assembly.add(cq.Workplane().add(solid1))
+        sphere1_shape = BRepPrimAPI_MakeSphere(gp_Pnt(-d, 0, 0), r).Shape()
+        sphere2_shape = BRepPrimAPI_MakeSphere(gp_Pnt(d, 0, 0), r).Shape()
 
-        solid2 = cq.Solid.makeSphere(r, cq.Vector(d, 0, 0), z_dir, -90, 90)
-        solid1_for_cut = cq.Solid.makeSphere(r, cq.Vector(-d, 0, 0), z_dir, -90, 90)
-        crescent = cq.Workplane().add(solid2).cut(cq.Workplane().add(solid1_for_cut))
-        assembly.add(crescent)
+        assembly.add(cq.Workplane().add(cq.Solid(sphere1_shape)))
+
+        crescent_shape = BRepAlgoAPI_Cut(sphere2_shape, sphere1_shape).Shape()
+        assembly.add(cq.Workplane().add(cq.Solid(crescent_shape)))
 
         return assembly
