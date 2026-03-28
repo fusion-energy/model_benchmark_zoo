@@ -44,12 +44,12 @@ class OverlappingSpheres(BaseCommonGeometryObject):
 
         assembly = cq.Assembly(name="overlapping_spheres")
 
-        sphere1 = cq.Workplane().transformed(offset=(-d, 0, 0)).sphere(r)
-        assembly.add(sphere1)
+        solid1 = cq.Solid.makeSphere(r, cq.Vector(-d, 0, 0))
+        assembly.add(cq.Workplane().add(solid1))
 
-        sphere2_full = cq.Workplane().transformed(offset=(d, 0, 0)).sphere(r)
-        sphere1_for_cut = cq.Workplane().transformed(offset=(-d, 0, 0)).sphere(r)
-        sphere2 = sphere2_full.cut(sphere1_for_cut)
-        assembly.add(sphere2)
+        solid2 = cq.Solid.makeSphere(r, cq.Vector(d, 0, 0))
+        solid1_for_cut = cq.Solid.makeSphere(r, cq.Vector(-d, 0, 0))
+        crescent = cq.Workplane().add(solid2).cut(cq.Workplane().add(solid1_for_cut))
+        assembly.add(crescent)
 
         return assembly
