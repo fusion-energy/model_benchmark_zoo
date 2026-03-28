@@ -52,13 +52,22 @@ class ToroidalSector(BaseCommonGeometryObject):
 
         R = self.major_radius
         r = self.minor_radius
+        angle = self.angle
+        big = R + r + 1
+
+        # Create full torus then cut to sector
+        full_torus = cq.Solid.makeTorus(R, r)
+        wp = cq.Workplane().add(full_torus)
+
+        # Cut away y < 0 (below the starting plane)
+        neg_y = cq.Workplane().transformed(offset=(0, -big, 0)).box(4 * big, 2 * big, 4 * big)
+        result = wp.cut(neg_y)
+
+        # Cut away the region beyond the specified angle
+        pos_y = cq.Workplane().transformed(offset=(0, big, 0)).box(4 * big, 2 * big, 4 * big)
+        pos_y_rotated = pos_y.rotate((0, 0, 0), (0, 0, 1), angle)
+        result = result.cut(pos_y_rotated)
 
         assembly = cq.Assembly(name="toroidal_sector")
-        solid = (
-            cq.Workplane("XZ")
-            .center(R, 0)
-            .circle(r)
-            .revolve(self.angle, (0, 0, 0), (0, 0, 1))
-        )
-        assembly.add(solid)
+        assembly.add(result)
         return assembly

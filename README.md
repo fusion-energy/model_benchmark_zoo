@@ -1,12 +1,13 @@
 [![cad to dagmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cad_to_dagmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cad_to_dagmc.yml)
-
 [![cad to openmc](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cad_to_openmc.yml/badge.svg)](https://github.com/fusion-energy/model_benchmark_zoo/actions/workflows/ci_cad_to_openmc.yml)
 
-# A collection of CAD and equivalent Constructive Solid Geometry
+# A collection of CAD and equivalent Constructive Solid Geometry (CSG) geometries
 
-Matching geometries in CAD format and Constructive Solid Geometry (CSG) for computational benchmarks. This provides particle transport codes an opportunity to verify particle transport with both geometry types.
+This is a unique set of CAD geometries with corresponding Constructive Solid Geometry (CSG).
+The intended use is for particle transport computational benchmarks.
+The collection of geometries provides particle transport codes an opportunity to verify particle transport is the same with both geometry types.
 
-This benchmark is unique and invaluable if you want to test that a particle transport code gets the same results in CSG and CAD geometry transport as it provides geometries that:
+This benchmark is invaluable if you want to test that a particle transport code gets the same results in CSG and CAD geometry transport as it provides geometries that:
 - cover all standard CSG surface types
     - planes
     - spheres
@@ -18,11 +19,13 @@ This benchmark is unique and invaluable if you want to test that a particle tran
 - cover single and multibody geometries
 - models are parametric so can easily be changed for parameter studies
 
-I originally made this repository as there was no other comparison of CSG geometry with DAGMC geometry available and I wanted to verify the level of surface discretisation that was needed to provide accurate results.
+I originally made this repository as there was no other comparison of CSG geometry with [DAGMC](https://github.com/svalinn/DAGMC/) geometry available and I wanted to verify the level of surface discretisation that was needed to provide accurate results.
 
-The repository then grew into a way to test my DAGMC geometry making package [cad-to-dagmc](https://github.com/fusion-energy/cad_to_dagmc). Later on tests for [cad-to-openmc](https://github.com/openmsr/CAD_to_OpenMC) which is another geometry making package were also added.  
+The repository then grew into a way to test my DAGMC geometry making package [cad-to-dagmc](https://github.com/fusion-energy/cad_to_dagmc). Later on tests for [cad-to-openmc](https://github.com/openmsr/CAD_to_OpenMC) which is another geometry making package were also added.
 
+## Models
 
+The table below lists all 44 models, ordered from the most challenging meshing cases at the top to the simplest at the bottom.
 
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -71,6 +74,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 | <p align="center"><img src="images/tetrahedral.png" width="100"></p> | Tetrahedron | 1 | Acute edges and vertices; mesh quality at sharp corners of a simplex |
 | <p align="center"><img src="images/cuboid.png" width="100"></p> | Cuboid | 1 | All-planar baseline; tests basic flat-face meshing and 90-degree edges |
 
+## Installation
 
 First clone the repository:
 
@@ -79,7 +83,7 @@ git clone https://github.com/fusion-energy/model_benchmark_zoo.git
 cd model_benchmark_zoo
 ```
 
-## Install using pip
+### Install using pip
 
 ```bash
 python -m venv .venv
@@ -90,7 +94,7 @@ pip install .
 
 This uses an [extra index](https://shimwell.github.io/wheels) for pre-built OpenMC wheels.
 
-## Install using Mamba
+### Install using Mamba
 
 Requires a Conda/Mamba distribution:
 
@@ -108,4 +112,4 @@ If the environment solve fails, you can try [installing OpenMC from source](http
 
 ## Usage
 
-Example scripts that make CSG and DAGMC geometry can be found in [the examples folder](https://github.com/fusion-energy/model_benchmark_zoo/tree/main/examples)
+Each model provides both a CSG definition and a CadQuery CAD assembly. Example scripts that compare CSG and DAGMC simulation results can be found in [the examples folder](https://github.com/fusion-energy/model_benchmark_zoo/tree/main/examples).
