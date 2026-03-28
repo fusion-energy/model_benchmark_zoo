@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 44 models, ordered from the most challenging meshing cases at the top to the simplest at the bottom.
+The table below lists all 45 models, ordered from the most challenging meshing cases at the top to the simplest at the bottom.
 
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
