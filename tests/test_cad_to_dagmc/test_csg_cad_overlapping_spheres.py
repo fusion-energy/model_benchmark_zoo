@@ -4,9 +4,9 @@ import math
 import pytest
 
 kwargs_options = [{'min_mesh_size': 0.001,
-        'max_mesh_size': 0.3},
-        {'tolerance': 0.05,
-        'angular_tolerance': 0.05,},]
+        'max_mesh_size': 0.1},
+        {'tolerance': 0.01,
+        'angular_tolerance': 0.01,},]
 
 @pytest.mark.parametrize('kwargs', kwargs_options)
 def test_compare(kwargs):
@@ -65,14 +65,7 @@ def test_compare(kwargs):
         materials=[mat1, mat2]
     )
     dag_model.tallies = my_tallies
-    dag_settings = openmc.Settings()
-    dag_settings.batches = 10
-    dag_settings.inactive = 0
-    dag_settings.particles = 500
-    dag_settings.run_mode = 'fixed source'
-    dag_settings.source = my_source
-    dag_settings.max_lost_particles = 100
-    dag_model.settings = dag_settings
+    dag_model.settings = my_settings
 
     output_file_from_cad = dag_model.run()
 
