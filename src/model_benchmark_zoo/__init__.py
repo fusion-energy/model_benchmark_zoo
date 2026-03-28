@@ -32,3 +32,14 @@ from .l_shaped import *
 from .cylinder_in_box import *
 from .sphere_in_box import *
 from .chamfered_box import *
+from .hexagonal_prism import *
+from .pyramid import *
+from .stepped_cylinder import *
+from .thin_walled_cylinder import *
+from .sphere_with_multiple_holes import *
+from .overlapping_spheres import *
+from .eccentric_nested_cylinders import *
+from .cross_junction import *
+from .toroidal_sector import *
+from .pipe_elbow import *
+from .pebble_bed_cell import *
