@@ -22,3 +22,13 @@ from .ellipsoid import *
 from .hyperboloid import *
 from .paraboloid import *
 from .elliptic_cylinder import *
+from .thin_plate import *
+from .thin_walled_sphere import *
+from .wedge import *
+from .cone import *
+from .concentric_cylinders import *
+from .t_junction import *
+from .l_shaped import *
+from .cylinder_in_box import *
+from .sphere_in_box import *
+from .chamfered_box import *

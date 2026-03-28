@@ -36,6 +36,16 @@ from model_benchmark_zoo import (
     Hyperboloid,
     Paraboloid,
     EllipticCylinder,
+    ThinPlate,
+    ThinWalledSphere,
+    Wedge,
+    Cone,
+    ConcentricCylinders,
+    TJunction,
+    LShaped,
+    CylinderInBox,
+    SphereInBox,
+    ChamferedBox,
 )
 
 # Each entry: (class, output_filename, camera_kwargs)
@@ -155,6 +165,56 @@ GEOMETRIES = {
         EllipticCylinder,
         "elliptic_cylinder.png",
         {"position": (12, 18, 15), "dolly": 0.95},
+    ),
+    "ThinPlate": (
+        ThinPlate,
+        "thin_plate.png",
+        {"position": (15, 20, 8), "dolly": 0.95},
+    ),
+    "ThinWalledSphere": (
+        ThinWalledSphere,
+        "thin_walled_sphere.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "Wedge": (
+        Wedge,
+        "wedge.png",
+        {"position": (10, 15, 12), "dolly": 0.95},
+    ),
+    "Cone": (
+        Cone,
+        "cone.png",
+        {"position": (10, 15, 8), "dolly": 0.95},
+    ),
+    "ConcentricCylinders": (
+        ConcentricCylinders,
+        "concentric_cylinders.png",
+        {"position": (15, 20, 18), "dolly": 0.95},
+    ),
+    "TJunction": (
+        TJunction,
+        "t_junction.png",
+        {"position": (20, 25, 15), "dolly": 0.95},
+    ),
+    "LShaped": (
+        LShaped,
+        "l_shaped.png",
+        {"position": (15, -12, 18), "dolly": 0.95},
+    ),
+    "CylinderInBox": (
+        CylinderInBox,
+        "cylinder_in_box.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "SphereInBox": (
+        SphereInBox,
+        "sphere_in_box.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "ChamferedBox": (
+        ChamferedBox,
+        "chamfered_box.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
     ),
 }
 
