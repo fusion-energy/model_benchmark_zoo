@@ -65,9 +65,13 @@ class CrossJunction(BaseCommonGeometryObject):
         h_bar = cq.Workplane("XY").box(2 * al, aw, d)
         assembly.add(h_bar)
 
-        v_bar_full = cq.Workplane("XY").box(aw, 2 * al, d)
-        h_bar_for_cut = cq.Workplane("XY").box(2 * al, aw, d)
-        v_bar = v_bar_full.cut(h_bar_for_cut)
-        assembly.add(v_bar)
+        # Build each vertical arm explicitly to avoid .cut() producing
+        # two disconnected solids in a single Workplane object.
+        arm_len = al - aw / 2
+        v_top = cq.Workplane("XY").transformed(offset=(0, (al + aw / 2) / 2, 0)).box(aw, arm_len, d)
+        assembly.add(v_top)
+
+        v_bot = cq.Workplane("XY").transformed(offset=(0, -(al + aw / 2) / 2, 0)).box(aw, arm_len, d)
+        assembly.add(v_bot)
 
         return assembly

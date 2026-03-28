@@ -16,7 +16,7 @@ def test_compare():
     mat3.set_density('g/cm3', 1)
 
     mat4 = openmc.Material(name='4')
-    mat4.add_nuclide('Cu63', 1)
+    mat4.add_nuclide('Fe56', 1)
     mat4.set_density('g/cm3', 1)
 
     common_geometry_object = PebbleBedCell(box_width=20, sphere_radius=3)

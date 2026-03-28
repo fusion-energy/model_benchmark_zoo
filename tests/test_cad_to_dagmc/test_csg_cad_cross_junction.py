@@ -57,7 +57,7 @@ def test_compare(kwargs):
 
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
         filename='cross_junction.h5m',
-        material_tags=['1', '2'],
+        material_tags=['1', '2', '2'],
         **kwargs
     )
     dag_model = common_geometry_object.dagmc_model(

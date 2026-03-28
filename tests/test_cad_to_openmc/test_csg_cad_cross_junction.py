@@ -50,7 +50,7 @@ def test_compare():
 
     common_geometry_object.export_h5m_file_with_cad_to_openmc(
         h5m_filename='cross_junction.h5m',
-        material_tags=['1', '2'],
+        material_tags=['1', '2', '2'],
     )
     dag_model = common_geometry_object.dagmc_model(
         h5m_filename='cross_junction.h5m',
