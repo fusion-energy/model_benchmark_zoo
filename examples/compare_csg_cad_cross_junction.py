@@ -59,7 +59,7 @@ csg_result_mat_2_str = f'CSG tally mean {csg_result_mat_2.mean.flatten()[0]} std
 # making openmc.Model with DAGMC geometry
 common_geometry_object.export_h5m_file_with_cad_to_dagmc(
     filename='cross_junction.h5m',
-    material_tags=['1', '2'],
+    material_tags=['1', '2', '2'],
     min_mesh_size=0.01,
     max_mesh_size=0.5
 )
