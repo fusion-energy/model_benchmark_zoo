@@ -15,7 +15,7 @@ mat3.add_nuclide('Al27', 1)
 mat3.set_density('g/cm3', 1)
 
 mat4 = openmc.Material(name='4')
-mat4.add_nuclide('Cu63', 1)
+mat4.add_nuclide('Fe56', 1)
 mat4.set_density('g/cm3', 1)
 
 my_materials = openmc.Materials([mat1, mat2, mat3, mat4])
