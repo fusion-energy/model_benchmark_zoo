@@ -25,8 +25,8 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 56 models, ordered from the most challenging meshing cases at the top to the simplest at the bottom.
-
+The table below lists all 56 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+  
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
 | <p align="center"><img src="images/blanket_module.png" alt="Blanket module" width="100"></p> | Blanket module | 3 | Nested box shells with cylindrical coolant channel; multi-body imprint of curved and planar regions |
