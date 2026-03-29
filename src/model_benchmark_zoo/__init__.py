@@ -43,3 +43,14 @@ from .cross_junction import *
 from .toroidal_sector import *
 from .pipe_elbow import *
 from .pebble_bed_cell import *
+from .capsule import *
+from .ogive import *
+from .annular_sector import *
+from .hexagonal_lattice_cell import *
+from .fuel_pin_cell import *
+from .cladded_plate import *
+from .thin_gap import *
+from .cylindrical_intersection import *
+from .cubic_lattice import *
+from .divertor_monoblock import *
+from .blanket_module import *
