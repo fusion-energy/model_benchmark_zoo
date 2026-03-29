@@ -46,6 +46,17 @@ from model_benchmark_zoo import (
     CylinderInBox,
     SphereInBox,
     ChamferedBox,
+    HexagonalPrism,
+    Pyramid,
+    SteppedCylinder,
+    ThinWalledCylinder,
+    SphereWithMultipleHoles,
+    OverlappingSpheres,
+    EccentricNestedCylinders,
+    CrossJunction,
+    ToroidalSector,
+    PipeElbow,
+    PebbleBedCell,
 )
 
 # Each entry: (class, output_filename, camera_kwargs)
@@ -215,6 +226,61 @@ GEOMETRIES = {
         ChamferedBox,
         "chamfered_box.png",
         {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "HexagonalPrism": (
+        HexagonalPrism,
+        "hexagonal_prism.png",
+        {"position": (10, 15, 12), "dolly": 0.95},
+    ),
+    "Pyramid": (
+        Pyramid,
+        "pyramid.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "SteppedCylinder": (
+        SteppedCylinder,
+        "stepped_cylinder.png",
+        {"position": (12, 18, 20), "dolly": 0.95},
+    ),
+    "ThinWalledCylinder": (
+        ThinWalledCylinder,
+        "thin_walled_cylinder.png",
+        {"position": (8, 12, 20), "dolly": 0.95},
+    ),
+    "SphereWithMultipleHoles": (
+        SphereWithMultipleHoles,
+        "sphere_with_multiple_holes.png",
+        {"position": (5, 15, 25), "dolly": 0.95},
+    ),
+    "OverlappingSpheres": (
+        OverlappingSpheres,
+        "overlapping_spheres.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "EccentricNestedCylinders": (
+        EccentricNestedCylinders,
+        "eccentric_nested_cylinders.png",
+        {"position": (15, 20, 18), "dolly": 0.95},
+    ),
+    "CrossJunction": (
+        CrossJunction,
+        "cross_junction.png",
+        {"position": (15, -12, 18), "dolly": 0.95},
+    ),
+    "ToroidalSector": (
+        ToroidalSector,
+        "toroidal_sector.png",
+        {"position": (15, 20, 12), "dolly": 1.3},
+    ),
+    "PipeElbow": (
+        PipeElbow,
+        "pipe_elbow.png",
+        {"position": (15, 20, 12), "dolly": 1.3},
+    ),
+    "PebbleBedCell": (
+        PebbleBedCell,
+        "pebble_bed_cell.png",
+        {"position": (25, 30, 20), "dolly": 0.95},
     ),
 }
 
