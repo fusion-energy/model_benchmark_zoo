@@ -29,25 +29,25 @@ The table below lists all 56 models, ordered from the most challenging meshing c
 
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
-| Blanket module | 3 | Nested box shells with cylindrical coolant channel; multi-body imprint of curved and planar regions |
+| <p align="center"><img src="images/blanket_module.png" alt="Blanket module" width="100"></p> | Blanket module | 3 | Nested box shells with cylindrical coolant channel; multi-body imprint of curved and planar regions |
 | <p align="center"><img src="images/simpletokamak.png" width="100"></p> | Simplified tokamak | 2 | Multi-body with nested curved shells and cylindrical penetration |
 | <p align="center"><img src="images/nestedtorus.png" width="100"></p> | Nested tori | 4 | Double curvature with concentric toroidal shells requiring imprint and merge |
-| Cubic lattice | 2 | Eight-sphere 2×2×2 array in a cube; multi-body curved-to-planar imprinting at 8 locations |
+| <p align="center"><img src="images/cubic_lattice.png" alt="Cubic lattice" width="100"></p> | Cubic lattice | 2 | Eight-sphere 2×2×2 array in a cube; multi-body curved-to-planar imprinting at 8 locations |
 | <p align="center"><img src="images/pebble_bed_cell.png" alt="Pebble bed cell" width="100"></p> | Pebble bed cell | 4 | Multiple spheres inside a box; multi-body curved-to-planar imprinting with N pebbles |
 | <p align="center"><img src="images/oktavian.png" width="100"></p> | Oktavian sphere | 2 | Nested spherical and cylindrical regions with complex boolean intersections |
-| Fuel pin cell | 3 | Concentric fuel/clad cylinders in a square cell; curved-to-planar imprinting at cylinder-box interface |
+| <p align="center"><img src="images/fuel_pin_cell.png" alt="Fuel pin cell" width="100"></p> | Fuel pin cell | 3 | Concentric fuel/clad cylinders in a square cell; curved-to-planar imprinting at cylinder-box interface |
 | <p align="center"><img src="images/concentric_cylinders.png" alt="Concentric cylinders" width="100"></p> | Concentric cylinders | 3 | Three nested cylindrical shells; multi-region imprint and merge on curved interfaces |
 | <p align="center"><img src="images/pipe_elbow.png" alt="Pipe elbow" width="100"></p> | Pipe elbow | 1 | Hollow toroidal section; double curvature with thin annular wall and cut-plane end faces |
-| Divertor monoblock | 2 | Rectangular block with annular pipe bore; curved-to-planar boolean and thin-walled annulus |
-| Cylindrical intersection | 1 | Two perpendicular fused cylinders; curved-to-curved boolean with saddle-shaped intersection seam |
+| <p align="center"><img src="images/divertor_monoblock.png" alt="Divertor monoblock" width="100"></p> | Divertor monoblock | 2 | Rectangular block with annular pipe bore; curved-to-planar boolean and thin-walled annulus |
+| <p align="center"><img src="images/cylindrical_intersection.png" alt="Cylindrical intersection" width="100"></p> | Cylindrical intersection | 1 | Two perpendicular fused cylinders; curved-to-curved boolean with saddle-shaped intersection seam |
 | <p align="center"><img src="images/sphere_with_multiple_holes.png" alt="Sphere with multiple holes" width="100"></p> | Sphere with multiple holes | 1 | Three orthogonal cylindrical booleans on a sphere; intersecting seam edges at hole crossings |
 | <p align="center"><img src="images/ellipticaltorus.png" width="100"></p> | Elliptical torus | 1 | Non-uniform curvature from elliptical cross-section on a toroidal path |
 | <p align="center"><img src="images/circulartorus.png" width="100"></p> | Circular torus | 1 | Genus-1 topology with double curvature and saddle-point regions |
 | <p align="center"><img src="images/toroidal_sector.png" alt="Toroidal sector" width="100"></p> | Toroidal sector | 1 | Partial torus arc with open cut faces; double curvature meeting flat end planes |
 | <p align="center"><img src="images/overlapping_spheres.png" alt="Overlapping spheres" width="100"></p> | Overlapping spheres | 2 | Lens-shaped curved intersection seam between two partially overlapping spheres |
-| Hexagonal lattice cell | 2 | Cylindrical pin inside hexagonal prism; curved-to-planar imprint at 120-degree face junctions |
-| Capsule | 1 | Cylinder with hemispherical end caps; curved-to-curved tangent join at cap-barrel seam |
-| Ogive | 1 | Nose cone (spherical section); curved surface meeting a flat base plane at the perimeter |
+| <p align="center"><img src="images/hexagonal_lattice_cell.png" alt="Hexagonal lattice cell" width="100"></p> | Hexagonal lattice cell | 2 | Cylindrical pin inside hexagonal prism; curved-to-planar imprint at 120-degree face junctions |
+| <p align="center"><img src="images/capsule.png" alt="Capsule" width="100"></p> | Capsule | 1 | Cylinder with hemispherical end caps; curved-to-curved tangent join at cap-barrel seam |
+| <p align="center"><img src="images/ogive.png" alt="Ogive" width="100"></p> | Ogive | 1 | Nose cone (spherical section); curved surface meeting a flat base plane at the perimeter |
 | <p align="center"><img src="images/sphere_with_cylindrical_hole.png" width="100"></p> | Sphere with cylindrical hole | 1 | Curved-to-curved boolean intersection producing saddle-shaped seam edges |
 | <p align="center"><img src="images/box_with_spherical_cavity.png" width="100"></p> | Box with spherical cavity | 1 | Flat-to-curved boolean intersection; sharp curvature transition at cavity edge |
 | <p align="center"><img src="images/eccentric_nested_cylinders.png" alt="Eccentric nested cylinders" width="100"></p> | Eccentric nested cylinders | 2 | Non-concentric annular gap; varying thin-wall thickness around the circumference |
@@ -63,7 +63,7 @@ The table below lists all 56 models, ordered from the most challenging meshing c
 | <p align="center"><img src="images/ellipsoid.png" alt="Ellipsoid" width="100"></p> | Ellipsoid | 1 | Non-uniform curvature with poles where mesh elements tend to collapse |
 | <p align="center"><img src="images/three_touching_cuboids.png" width="100"></p> | Three touching cuboids | 3 | Multi-body imprinting at T-shaped shared faces; triple-edge junction |
 | <p align="center"><img src="images/nestedcylinder.png" width="100"></p> | Nested cylinders | 2 | Concentric cylindrical shells; conformal meshing at shared curved interfaces |
-| Annular sector | 1 | Wedge slice of a cylindrical shell; curved surfaces meeting angled cut planes |
+| <p align="center"><img src="images/annular_sector.png" alt="Annular sector" width="100"></p> | Annular sector | 1 | Wedge slice of a cylindrical shell; curved surfaces meeting angled cut planes |
 | <p align="center"><img src="images/stepped_cylinder.png" alt="Stepped cylinder" width="100"></p> | Stepped cylinder | 1 | Abrupt radius change at step; mesh grading at cylindrical-to-planar transition |
 | <p align="center"><img src="images/cone.png" alt="Cone" width="100"></p> | Cone | 1 | Degenerate apex where surface converges to a point; element collapse at tip |
 | <p align="center"><img src="images/pyramid.png" alt="Pyramid" width="100"></p> | Pyramid | 1 | Four flat faces converging to a degenerate apex point; element collapse at tip on planar faces |
@@ -79,8 +79,8 @@ The table below lists all 56 models, ordered from the most challenging meshing c
 | <p align="center"><img src="images/hexagonal_prism.png" alt="Hexagonal prism" width="100"></p> | Hexagonal prism | 1 | Non-90-degree planar edge angles; 120-degree junctions between flat faces |
 | <p align="center"><img src="images/chamfered_box.png" alt="Chamfered box" width="100"></p> | Chamfered box | 1 | Angled planar chamfer faces at non-90-degree edge intersections |
 | <p align="center"><img src="images/cylinder.png" width="100"></p> | Cylinder | 1 | Single curvature surface; baseline for cylindrical faceting accuracy |
-| Cladded plate | 3 | Three-layer planar sandwich; multi-body conformal meshing at shared flat interfaces |
-| Thin gap | 2 | Two cuboids separated by narrow void gap; thin-slit meshing and streaming path fidelity |
+| <p align="center"><img src="images/cladded_plate.png" alt="Cladded plate" width="100"></p> | Cladded plate | 3 | Three-layer planar sandwich; multi-body conformal meshing at shared flat interfaces |
+| <p align="center"><img src="images/thin_gap.png" alt="Thin gap" width="100"></p> | Thin gap | 2 | Two cuboids separated by narrow void gap; thin-slit meshing and streaming path fidelity |
 | <p align="center"><img src="images/thin_plate.png" alt="Thin plate" width="100"></p> | Thin plate | 1 | High aspect ratio (20:1); thin-wall volume meshing with very few layers through thickness |
 | <p align="center"><img src="images/tetrahedral.png" width="100"></p> | Tetrahedron | 1 | Acute edges and vertices; mesh quality at sharp corners of a simplex |
 | <p align="center"><img src="images/cuboid.png" width="100"></p> | Cuboid | 1 | All-planar baseline; tests basic flat-face meshing and 90-degree edges |

@@ -57,6 +57,17 @@ from model_benchmark_zoo import (
     ToroidalSector,
     PipeElbow,
     PebbleBedCell,
+    Capsule,
+    Ogive,
+    AnnularSector,
+    HexagonalLatticeCell,
+    FuelPinCell,
+    CubicLattice,
+    CladdedPlate,
+    DivertorMonoblock,
+    BlanketModule,
+    ThinGap,
+    CylindricalIntersection,
 )
 
 # Each entry: (class, output_filename, camera_kwargs)
@@ -281,6 +292,61 @@ GEOMETRIES = {
         PebbleBedCell,
         "pebble_bed_cell.png",
         {"position": (25, 30, 20), "dolly": 0.95},
+    ),
+    "Capsule": (
+        Capsule,
+        "capsule.png",
+        {"position": (10, 15, 20), "dolly": 0.95},
+    ),
+    "Ogive": (
+        Ogive,
+        "ogive.png",
+        {"position": (10, 15, 12), "dolly": 0.95},
+    ),
+    "AnnularSector": (
+        AnnularSector,
+        "annular_sector.png",
+        {"position": (10, 10, 12), "dolly": 0.95},
+    ),
+    "HexagonalLatticeCell": (
+        HexagonalLatticeCell,
+        "hexagonal_lattice_cell.png",
+        {"position": (10, 15, 12), "dolly": 0.95},
+    ),
+    "FuelPinCell": (
+        FuelPinCell,
+        "fuel_pin_cell.png",
+        {"position": (5, 8, 12), "dolly": 0.95},
+    ),
+    "CubicLattice": (
+        CubicLattice,
+        "cubic_lattice.png",
+        {"position": (25, 30, 20), "dolly": 0.95},
+    ),
+    "CladdedPlate": (
+        CladdedPlate,
+        "cladded_plate.png",
+        {"position": (25, 30, 12), "dolly": 0.95},
+    ),
+    "DivertorMonoblock": (
+        DivertorMonoblock,
+        "divertor_monoblock.png",
+        {"position": (25, 20, 30), "dolly": 0.95},
+    ),
+    "BlanketModule": (
+        BlanketModule,
+        "blanket_module.png",
+        {"position": (40, 30, 35), "dolly": 0.95},
+    ),
+    "ThinGap": (
+        ThinGap,
+        "thin_gap.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "CylindricalIntersection": (
+        CylindricalIntersection,
+        "cylindrical_intersection.png",
+        {"position": (15, 20, 15), "dolly": 0.95},
     ),
 }
 
