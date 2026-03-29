@@ -32,6 +32,9 @@ class Ogive(BaseCommonGeometryObject):
 
     def cadquery_assembly(self):
         import cadquery as cq
+        from OCP.BRepPrimAPI import BRepPrimAPI_MakeSphere, BRepPrimAPI_MakeBox
+        from OCP.BRepAlgoAPI import BRepAlgoAPI_Cut
+        from OCP.gp import gp_Pnt
 
         R = self.base_radius
         L = self.length
@@ -39,13 +42,13 @@ class Ogive(BaseCommonGeometryObject):
         rho = (R**2 + L**2) / (2 * L)
         z_c = L - rho
 
-        # Create sphere at the generating center
-        sphere = cq.Workplane("XY").transformed(offset=(0, 0, z_c)).sphere(rho)
-        # Cut everything below z=0
+        sphere = BRepPrimAPI_MakeSphere(gp_Pnt(0, 0, z_c), rho).Shape()
         big = 2 * rho + 2
-        cut_below = cq.Workplane("XY").transformed(offset=(0, 0, -big / 2)).box(2 * big, 2 * big, big)
-        ogive = sphere.cut(cut_below)
+        cut_box = BRepPrimAPI_MakeBox(
+            gp_Pnt(-big, -big, -big), gp_Pnt(big, big, 0)
+        ).Shape()
+        ogive_shape = BRepAlgoAPI_Cut(sphere, cut_box).Shape()
 
         assembly = cq.Assembly(name="ogive")
-        assembly.add(ogive)
+        assembly.add(cq.Workplane().add(cq.Solid(ogive_shape)))
         return assembly

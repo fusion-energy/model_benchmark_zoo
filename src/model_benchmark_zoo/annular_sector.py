@@ -40,18 +40,16 @@ class AnnularSector(BaseCommonGeometryObject):
         ri = self.inner_radius
         ro = self.outer_radius
         h = self.height
-        angle = self.angle
 
-        # Create rectangular cross-section in XZ plane and revolve
-        profile = (
-            cq.Workplane("XZ")
-            .moveTo(ri, -h / 2)
-            .lineTo(ro, -h / 2)
-            .lineTo(ro, h / 2)
-            .lineTo(ri, h / 2)
-            .close()
-        )
-        sector = profile.revolve(angle, (0, 0, 0), (0, 0, 1))
+        # Build full hollow cylinder then cut to the first quadrant
+        outer = cq.Workplane("XY").cylinder(h, ro)
+        inner = cq.Workplane("XY").cylinder(h, ri)
+        hollow = outer.cut(inner)
+
+        big = ro + 1
+        cut_neg_x = cq.Workplane("XY").transformed(offset=(-big / 2, 0, 0)).box(big, 2 * big, h + 2)
+        cut_neg_y = cq.Workplane("XY").transformed(offset=(0, -big / 2, 0)).box(2 * big, big, h + 2)
+        sector = hollow.cut(cut_neg_x).cut(cut_neg_y)
 
         assembly = cq.Assembly(name="annular_sector")
         assembly.add(sector)
