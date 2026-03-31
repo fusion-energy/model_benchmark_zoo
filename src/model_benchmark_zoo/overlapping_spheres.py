@@ -50,7 +50,7 @@ class OverlappingSpheres(BaseCommonGeometryObject):
 
         solid2 = cq.Solid.makeSphere(r, cq.Vector(d, 0, 0), z_dir, -90, 90)
         solid1_for_cut = cq.Solid.makeSphere(r, cq.Vector(-d, 0, 0), z_dir, -90, 90)
-        crescent = cq.Workplane().add(solid2).cut(cq.Workplane().add(solid1_for_cut), clean=False)
+        crescent = cq.Workplane().add(solid2).cut(cq.Workplane().add(solid1_for_cut), clean=True)
         assembly.add(crescent)
 
         return assembly
