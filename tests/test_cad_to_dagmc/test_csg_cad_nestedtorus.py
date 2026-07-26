@@ -1,6 +1,6 @@
 from model_benchmark_zoo import Nestedtorus
+from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
 import openmc
-import math
 import numpy as np
 import pytest
 
@@ -66,7 +66,7 @@ def test_compare(kwargs):
 
     # extracting the tally result from the CSG simulation
     with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
-        csg_result = sp_from_csg.get_tally(name="flux_tally")
+        csg_result = read_tally(sp_from_csg, "flux_tally")
 
     # making openmc.Model with DAGMC geometry
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
@@ -85,6 +85,6 @@ def test_compare(kwargs):
 
     # extracting the tally result from the DAGMC simulation
     with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
-        cad_result = sp_from_cad.get_tally(name="flux_tally")
+        cad_result = read_tally(sp_from_cad, "flux_tally")
     
-    assert math.isclose(cad_result.mean.flatten()[0].flatten()[0], csg_result.mean.flatten()[0].flatten()[0], rel_tol=0.05)
+    assert_tally_agreement(cad_result, csg_result, relative_tolerance=0.05)

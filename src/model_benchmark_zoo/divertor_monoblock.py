@@ -48,15 +48,18 @@ class DivertorMonoblock(BaseCommonGeometryObject):
         ro = self.pipe_outer_radius
         ri = self.pipe_inner_radius
 
-        # Pipe wall (annular, along Y axis)
-        outer_pipe = cq.Workplane("XZ").cylinder(d, ro)
-        inner_pipe = cq.Workplane("XZ").cylinder(d, ri)
-        pipe_wall = outer_pipe.cut(inner_pipe)
-        assembly.add(pipe_wall)
+        # Solids are added in the same order as the materials in csg_model, as
+        # cad_to_dagmc assigns material_tags[i] to the i-th solid of the assembly.
 
         # Block minus outer pipe
         block = cq.Workplane("XY").box(w, d, h)
         block_with_hole = block.cut(cq.Workplane("XZ").cylinder(d, ro))
         assembly.add(block_with_hole)
+
+        # Pipe wall (annular, along Y axis)
+        outer_pipe = cq.Workplane("XZ").cylinder(d, ro)
+        inner_pipe = cq.Workplane("XZ").cylinder(d, ri)
+        pipe_wall = outer_pipe.cut(inner_pipe)
+        assembly.add(pipe_wall)
 
         return assembly
