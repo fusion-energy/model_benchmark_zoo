@@ -56,16 +56,17 @@ class Nestedtorus(BaseCommonGeometryObject):
         """
         assembly = cq.Assembly(name="nestedtorus")
 
-        # Create the shells and the core
-        for i in range(len(self.minor_radii)):
-            if i == len(self.minor_radii) - 1:
-                # This is the core
-                core_torus = cq.Solid.makeTorus(self.major_radius, self.minor_radii[i])
-                assembly.add(core_torus, name=f"torus_core")
-            else:
-                outer_torus = cq.Solid.makeTorus(self.major_radius, self.minor_radii[i])
-                inner_torus = cq.Solid.makeTorus(self.major_radius, self.minor_radii[i+1])
-                shell = outer_torus.cut(inner_torus)
-                assembly.add(shell, name=f"torus_shell_{i}")
-        
+        # Solids are added in the same order as the materials in csg_model, as
+        # cad_to_dagmc assigns material_tags[i] to the i-th solid of the assembly.
+        # csg_model reverses its regions so they run from the inside out, so the
+        # core is added first and then each shell working outwards.
+        core_torus = cq.Solid.makeTorus(self.major_radius, self.minor_radii[-1])
+        assembly.add(core_torus, name=f"torus_core")
+
+        for i in range(len(self.minor_radii) - 2, -1, -1):
+            outer_torus = cq.Solid.makeTorus(self.major_radius, self.minor_radii[i])
+            inner_torus = cq.Solid.makeTorus(self.major_radius, self.minor_radii[i+1])
+            shell = outer_torus.cut(inner_torus)
+            assembly.add(shell, name=f"torus_shell_{i}")
+
         return assembly
