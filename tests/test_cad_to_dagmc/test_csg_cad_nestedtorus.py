@@ -37,10 +37,17 @@ def test_compare(kwargs):
     common_geometry_object = Nestedtorus(major_radius=major_radius, minor_radii=minor_radii)
     common_geometry_object.export_stp_file("nestedtorus.stp")
 
-    # tallies used in both simulations
-    tally = openmc.Tally(name='flux_tally')
-    tally.scores = ['flux']
-    my_tallies = openmc.Tallies([tally])
+    # tallies used in both simulations, one per material. Filtering by material
+    # keeps the comparison to the geometry itself. An unfiltered tally also scores
+    # the void that bounded_universe leaves around the CAD geometry, which the CSG
+    # model does not have, so the two sides would not be measuring the same thing.
+    tallies = []
+    for i, material in enumerate(materials):
+        tally = openmc.Tally(name=f'mat{i + 1}_flux_tally')
+        tally.filters = [openmc.MaterialFilter(material)]
+        tally.scores = ['flux']
+        tallies.append(tally)
+    my_tallies = openmc.Tallies(tallies)
 
     my_settings = openmc.Settings()
     my_settings.batches = 10
@@ -66,7 +73,10 @@ def test_compare(kwargs):
 
     # extracting the tally result from the CSG simulation
     with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
-        csg_result = read_tally(sp_from_csg, "flux_tally")
+        csg_results = [
+            read_tally(sp_from_csg, f"mat{i + 1}_flux_tally")
+            for i in range(len(materials))
+        ]
 
     # making openmc.Model with DAGMC geometry
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
@@ -85,6 +95,10 @@ def test_compare(kwargs):
 
     # extracting the tally result from the DAGMC simulation
     with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
-        cad_result = read_tally(sp_from_cad, "flux_tally")
+        cad_results = [
+            read_tally(sp_from_cad, f"mat{i + 1}_flux_tally")
+            for i in range(len(materials))
+        ]
     
-    assert_tally_agreement(cad_result, csg_result, relative_tolerance=0.05)
+    for cad_result, csg_result in zip(cad_results, csg_results):
+        assert_tally_agreement(cad_result, csg_result, relative_tolerance=0.05)
