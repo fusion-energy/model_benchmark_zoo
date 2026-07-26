@@ -60,6 +60,8 @@ from model_benchmark_zoo import (
     Capsule,
     Ogive,
     AnnularSector,
+    TwoAnnularSectors,
+    TwoAnnularSectorsPartialArc,
     HexagonalLatticeCell,
     FuelPinCell,
     CubicLattice,
@@ -307,6 +309,16 @@ GEOMETRIES = {
         AnnularSector,
         "annular_sector.png",
         {"position": (10, 10, 12), "dolly": 0.95},
+    ),
+    "TwoAnnularSectors": (
+        TwoAnnularSectors,
+        "two_annular_sectors.png",
+        {"position": (24, 20, 16), "dolly": 0.85},
+    ),
+    "TwoAnnularSectorsPartialArc": (
+        TwoAnnularSectorsPartialArc,
+        "two_annular_sectors_partial_arc.png",
+        {"position": (24, 20, 16), "dolly": 0.85},
     ),
     "HexagonalLatticeCell": (
         HexagonalLatticeCell,

@@ -54,3 +54,4 @@ from .cylindrical_intersection import *
 from .cubic_lattice import *
 from .divertor_monoblock import *
 from .blanket_module import *
+from .two_annular_sectors import *
