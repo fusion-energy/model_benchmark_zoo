@@ -1,0 +1,71 @@
+from model_benchmark_zoo import TwoAnnularSectors
+from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
+import openmc
+
+def test_compare():
+    mat1 = openmc.Material(name='1')
+    mat1.add_nuclide('Fe56', 1)
+    mat1.set_density('g/cm3', 1)
+
+    mat2 = openmc.Material(name='2')
+    mat2.add_nuclide('Be9', 1)
+    mat2.set_density('g/cm3', 1)
+
+    common_geometry_object = TwoAnnularSectors(
+        inner_radius=3, mid_radius=6, outer_radius=9, height=10, second_height=5, angle=90
+    )
+
+    mat1_filter = openmc.MaterialFilter(mat1)
+    tally1 = openmc.Tally(name='mat1_flux_tally')
+    tally1.filters = [mat1_filter]
+    tally1.scores = ['flux']
+
+    mat2_filter = openmc.MaterialFilter(mat2)
+    tally2 = openmc.Tally(name='mat2_flux_tally')
+    tally2.filters = [mat2_filter]
+    tally2.scores = ['flux']
+
+    my_tallies = openmc.Tallies([tally1, tally2])
+
+    my_settings = openmc.Settings()
+    my_settings.batches = 10
+    my_settings.inactive = 0
+    my_settings.particles = 500
+    my_settings.run_mode = 'fixed source'
+
+    # source sits inside the first sector, at mid radius and mid angle
+    my_source = openmc.IndependentSource()
+    my_source.space = openmc.stats.Point((3.182, 3.182, 0))
+    my_source.angle = openmc.stats.Isotropic()
+    my_source.energy = openmc.stats.Discrete([14e6], [1])
+    my_settings.source = my_source
+
+    csg_model = common_geometry_object.csg_model(materials=[mat1, mat2])
+    csg_model.tallies = my_tallies
+    csg_model.settings = my_settings
+
+    output_file_from_csg = csg_model.run()
+
+    with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
+        csg_result_mat_1 = read_tally(sp_from_csg, "mat1_flux_tally")
+        csg_result_mat_2 = read_tally(sp_from_csg, "mat2_flux_tally")
+
+    common_geometry_object.export_h5m_file_with_cad_to_openmc(
+        h5m_filename='two_annular_sectors.h5m',
+        material_tags=['1', '2'],
+    )
+    dag_model = common_geometry_object.dagmc_model(
+        h5m_filename='two_annular_sectors.h5m',
+        materials=[mat1, mat2]
+    )
+    dag_model.tallies = my_tallies
+    dag_model.settings = my_settings
+
+    output_file_from_cad = dag_model.run()
+
+    with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
+        cad_result_mat_1 = read_tally(sp_from_cad, "mat1_flux_tally")
+        cad_result_mat_2 = read_tally(sp_from_cad, "mat2_flux_tally")
+
+    assert_tally_agreement(cad_result_mat_1, csg_result_mat_1)
+    assert_tally_agreement(cad_result_mat_2, csg_result_mat_2)

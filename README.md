@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 55 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+The table below lists all 57 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
   
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -64,6 +64,8 @@ The table below lists all 55 models with details of each model. The combined col
 | <p align="center"><img src="images/three_touching_cuboids.png" width="100"></p> | Three touching cuboids | 3 | Multi-body imprinting at T-shaped shared faces; triple-edge junction |
 | <p align="center"><img src="images/nestedcylinder.png" width="100"></p> | Nested cylinders | 2 | Concentric cylindrical shells; conformal meshing at shared curved interfaces |
 | <p align="center"><img src="images/annular_sector.png" alt="Annular sector" width="100"></p> | Annular sector | 1 | Wedge slice of a cylindrical shell; curved surfaces meeting angled cut planes |
+| <p align="center"><img src="images/two_annular_sectors.png" alt="Two annular sectors" width="100"></p> | Two annular sectors | 2 | Partial contact on a curved surface; the shorter outer sector spans the full arc so the imprint edges reach the face boundary |
+| <p align="center"><img src="images/two_annular_sectors_partial_arc.png" alt="Two annular sectors with a partial arc" width="100"></p> | Two annular sectors, partial arc | 2 | Partial contact on a curved surface where the patch is strictly interior to the larger face in both the axial and angular directions |
 | <p align="center"><img src="images/stepped_cylinder.png" alt="Stepped cylinder" width="100"></p> | Stepped cylinder | 2 | Abrupt radius change at step; imprinting of a contact patch strictly interior to the larger face |
 | <p align="center"><img src="images/cone.png" alt="Cone" width="100"></p> | Cone | 1 | Degenerate apex where surface converges to a point; element collapse at tip |
 | <p align="center"><img src="images/pyramid.png" alt="Pyramid" width="100"></p> | Pyramid | 1 | Four flat faces converging to a degenerate apex point; element collapse at tip on planar faces |
