@@ -4,9 +4,11 @@ import openmc
 import numpy as np
 import pytest
 
-kwargs_options = [{'min_mesh_size': 0.01,
+kwargs_options = [{'meshing_backend': 'gmsh',
+        'min_mesh_size': 0.01,
         'max_mesh_size': 0.5},
-        {'tolerance': 0.1,
+        {'meshing_backend': 'cadquery',
+        'tolerance': 0.1,
         'angular_tolerance': 0.1,},
         {'meshing_backend': 'cad-to-dagmc-mesher',
         'tolerance': 0.01,
