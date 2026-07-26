@@ -51,8 +51,13 @@ class SteppedCylinder(BaseCommonGeometryObject):
         upper = cq.Solid.makeCylinder(
             rs, h / 2, pnt=cq.Vector(0, 0, 0), dir=cq.Vector(0, 0, 1)
         )
-        result = cq.Workplane().add(lower).add(upper).combine()
 
+        # Kept as two separate solids rather than fused with combine(), so that
+        # the step exercises imprinting of a contact patch that is strictly
+        # interior to the larger face: the r=small_radius disc lands inside the
+        # r=large_radius disc with no shared boundary edge. Fusing the two
+        # cylinders would remove that interface entirely.
         assembly = cq.Assembly(name="stepped_cylinder")
-        assembly.add(result)
+        assembly.add(cq.Workplane().add(lower))
+        assembly.add(cq.Workplane().add(upper))
         return assembly

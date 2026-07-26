@@ -58,18 +58,21 @@ class BlanketModule(BaseCommonGeometryObject):
         ih = oh - 2 * wt
         id_ = od - 2 * wt
 
-        # Channel cylinder (along Y axis)
-        channel = cq.Workplane("XZ").cylinder(id_, cr)
-        assembly.add(channel)
+        # Solids are added in the same order as the materials in csg_model, as
+        # cad_to_dagmc assigns material_tags[i] to the i-th solid of the assembly.
+
+        # Wall: outer box minus inner box
+        outer_box = cq.Workplane("XY").box(ow, od, oh)
+        wall = outer_box.cut(cq.Workplane("XY").box(iw, id_, ih))
+        assembly.add(wall)
 
         # Breeder: inner box minus channel
         inner_box = cq.Workplane("XY").box(iw, id_, ih)
         breeder = inner_box.cut(cq.Workplane("XZ").cylinder(id_, cr))
         assembly.add(breeder)
 
-        # Wall: outer box minus inner box
-        outer_box = cq.Workplane("XY").box(ow, od, oh)
-        wall = outer_box.cut(cq.Workplane("XY").box(iw, id_, ih))
-        assembly.add(wall)
+        # Channel cylinder (along Y axis)
+        channel = cq.Workplane("XZ").cylinder(id_, cr)
+        assembly.add(channel)
 
         return assembly

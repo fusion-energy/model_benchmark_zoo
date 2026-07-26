@@ -1,6 +1,6 @@
 from model_benchmark_zoo import ThinPlate
+from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
 import openmc
-import math
 
 def test_compare():
     mat1 = openmc.Material(name='1')
@@ -35,7 +35,7 @@ def test_compare():
     output_file_from_csg = csg_model.run()
 
     with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
-        csg_result = sp_from_csg.get_tally(name="mat1_flux_tally")
+        csg_result = read_tally(sp_from_csg, "mat1_flux_tally")
 
     common_geometry_object.export_h5m_file_with_cad_to_openmc(
         h5m_filename='thin_plate.h5m',
@@ -51,6 +51,6 @@ def test_compare():
     output_file_from_cad = dag_model.run()
 
     with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
-        cad_result = sp_from_cad.get_tally(name="mat1_flux_tally")
+        cad_result = read_tally(sp_from_cad, "mat1_flux_tally")
 
-    assert math.isclose(cad_result.mean.flatten()[0], csg_result.mean.flatten()[0])
+    assert_tally_agreement(cad_result, csg_result)

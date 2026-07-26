@@ -1,6 +1,6 @@
 from model_benchmark_zoo import Oktavian
+from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
 import openmc
-import math
 import pytest
 
 kwargs_options = [{'min_mesh_size': 0.01,
@@ -56,7 +56,7 @@ def test_compare(kwargs):
 
     # extracting the tally result from the CSG simulation
     with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
-        csg_result_mat_1 = sp_from_csg.get_tally(name="mat1_flux_tally")
+        csg_result_mat_1 = read_tally(sp_from_csg, "mat1_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a sphere
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
@@ -75,6 +75,6 @@ def test_compare(kwargs):
 
     # extracting the tally result from the DAGMC simulation
     with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
-        cad_result_mat_1 = sp_from_cad.get_tally(name="mat1_flux_tally")
+        cad_result_mat_1 = read_tally(sp_from_cad, "mat1_flux_tally")
         
-    assert math.isclose(float(cad_result_mat_1.mean.flatten()[0].flatten()[0]), float(csg_result_mat_1.mean.flatten()[0].flatten()[0]), rel_tol=0.01)
+    assert_tally_agreement(cad_result_mat_1, csg_result_mat_1, relative_tolerance=0.01)

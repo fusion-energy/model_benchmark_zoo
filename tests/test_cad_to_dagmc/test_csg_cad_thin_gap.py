@@ -1,6 +1,6 @@
 from model_benchmark_zoo import ThinGap
+from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
 import openmc
-import math
 import pytest
 
 kwargs_options = [{'min_mesh_size': 0.01,
@@ -56,8 +56,8 @@ def test_compare(kwargs):
 
     # extracting the tally result from the CSG simulation
     with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
-        csg_result1 = sp_from_csg.get_tally(name="mat1_flux_tally")
-        csg_result2 = sp_from_csg.get_tally(name="mat2_flux_tally")
+        csg_result1 = read_tally(sp_from_csg, "mat1_flux_tally")
+        csg_result2 = read_tally(sp_from_csg, "mat2_flux_tally")
 
     # making openmc.Model with DAGMC geometry and specifying mesh sizes to get a good representation of a ThinGap
     common_geometry_object.export_h5m_file_with_cad_to_dagmc(
@@ -76,8 +76,8 @@ def test_compare(kwargs):
 
     # extracting the tally result from the DAGMC simulation
     with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
-        cad_result1 = sp_from_cad.get_tally(name="mat1_flux_tally")
-        cad_result2 = sp_from_cad.get_tally(name="mat2_flux_tally")
+        cad_result1 = read_tally(sp_from_cad, "mat1_flux_tally")
+        cad_result2 = read_tally(sp_from_cad, "mat2_flux_tally")
 
-    assert math.isclose(cad_result1.mean.flatten()[0].flatten()[0], csg_result1.mean.flatten()[0].flatten()[0])
-    assert math.isclose(cad_result2.mean.flatten()[0].flatten()[0], csg_result2.mean.flatten()[0].flatten()[0])
+    assert_tally_agreement(cad_result1, csg_result1)
+    assert_tally_agreement(cad_result2, csg_result2)
