@@ -36,17 +36,10 @@ class TJunction(BaseCommonGeometryObject):
         # Branch: narrow, above interface
         region_branch = +x_branch_left & -x_branch_right & +y_interface & -y_top & +z_bot & -z_top
 
-        # Void: above interface, to the left of branch
-        region_void_left = +x_left & -x_branch_left & +y_interface & -y_top & +z_bot & -z_top
-        # Void: above interface, to the right of branch
-        region_void_right = +x_branch_right & -x_right & +y_interface & -y_top & +z_bot & -z_top
-
         cell1 = openmc.Cell(region=region_main, fill=materials[0])
         cell2 = openmc.Cell(region=region_branch, fill=materials[1])
-        cell3 = openmc.Cell(region=region_void_left)
-        cell4 = openmc.Cell(region=region_void_right)
 
-        geometry = openmc.Geometry([cell1, cell2, cell3, cell4])
+        geometry = openmc.Geometry([cell1, cell2])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

@@ -16,12 +16,10 @@ class SphereWithCylindricalHole(BaseCommonGeometryObject):
         cylinder_surface = openmc.ZCylinder(r=self.cylinder_radius)
 
         region_material = -sphere_surface & +cylinder_surface
-        region_hole = -sphere_surface & -cylinder_surface
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_hole)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

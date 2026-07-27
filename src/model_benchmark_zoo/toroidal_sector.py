@@ -2,7 +2,6 @@ import math
 
 from .utils import BaseCommonGeometryObject
 
-
 class ToroidalSector(BaseCommonGeometryObject):
     def __init__(self, major_radius=10, minor_radius=2, angle=90):
         self.major_radius = major_radius
@@ -28,21 +27,11 @@ class ToroidalSector(BaseCommonGeometryObject):
             a=math.sin(theta), b=-math.cos(theta), c=0, d=0
         )
 
-        # Bounding cylinder
-        outer_cyl = openmc.ZCylinder(r=R + r + 1, boundary_type="vacuum")
-        z_top = openmc.ZPlane(z0=r + 1, boundary_type="vacuum")
-        z_bot = openmc.ZPlane(z0=-(r + 1), boundary_type="vacuum")
-
         region_material = -torus & +y_plane & +upper_plane
-        region_void = (
-            -outer_cyl & +z_bot & -z_top
-            & (+torus | -y_plane | -upper_plane)
-        )
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

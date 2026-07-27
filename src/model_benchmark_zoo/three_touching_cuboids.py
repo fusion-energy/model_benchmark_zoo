@@ -33,14 +33,12 @@ class ThreeTouchingCuboids(BaseCommonGeometryObject):
         # mat3: bottom-left
         region3 = +x_left & -x_mid & +y_bot & -y_mid & +z_bot & -z_top
         # void: bottom-right (source location)
-        region4 = +x_mid & -x_right & +y_bot & -y_mid & +z_bot & -z_top
 
         cell1 = openmc.Cell(region=region1, fill=materials[0])
         cell2 = openmc.Cell(region=region2, fill=materials[1])
         cell3 = openmc.Cell(region=region3, fill=materials[2])
-        cell4 = openmc.Cell(region=region4)
 
-        geometry = openmc.Geometry([cell1, cell2, cell3, cell4])
+        geometry = openmc.Geometry([cell1, cell2, cell3])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

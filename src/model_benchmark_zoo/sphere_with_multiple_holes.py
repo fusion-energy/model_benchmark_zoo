@@ -1,6 +1,5 @@
 from .utils import BaseCommonGeometryObject
 
-
 class SphereWithMultipleHoles(BaseCommonGeometryObject):
     def __init__(self, sphere_radius=10, cylinder_radius=2):
 
@@ -22,12 +21,10 @@ class SphereWithMultipleHoles(BaseCommonGeometryObject):
         z_cyl = openmc.ZCylinder(r=cr)
 
         region_material = -sphere & +x_cyl & +y_cyl & +z_cyl
-        region_holes = -sphere & (-x_cyl | -y_cyl | -z_cyl)
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_holes)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

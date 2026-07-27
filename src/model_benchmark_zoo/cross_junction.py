@@ -1,6 +1,5 @@
 from .utils import BaseCommonGeometryObject
 
-
 class CrossJunction(BaseCommonGeometryObject):
     def __init__(self, arm_length=10, arm_width=4, depth=4):
         self.arm_length = arm_length
@@ -37,18 +36,11 @@ class CrossJunction(BaseCommonGeometryObject):
         region_v_bot = +x_bar_min & -x_bar_max & +y_min & -y_bar_min & +z_bot & -z_top
 
         # Four corner void regions
-        region_void_1 = +x_bar_max & -x_max & +y_bar_max & -y_max & +z_bot & -z_top
-        region_void_2 = +x_min & -x_bar_min & +y_bar_max & -y_max & +z_bot & -z_top
-        region_void_3 = +x_min & -x_bar_min & +y_min & -y_bar_min & +z_bot & -z_top
-        region_void_4 = +x_bar_max & -x_max & +y_min & -y_bar_min & +z_bot & -z_top
 
         cell1 = openmc.Cell(region=region_h, fill=materials[0])
         cell2 = openmc.Cell(region=region_v_top | region_v_bot, fill=materials[1])
-        cell3 = openmc.Cell(
-            region=region_void_1 | region_void_2 | region_void_3 | region_void_4
-        )
 
-        geometry = openmc.Geometry([cell1, cell2, cell3])
+        geometry = openmc.Geometry([cell1, cell2])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

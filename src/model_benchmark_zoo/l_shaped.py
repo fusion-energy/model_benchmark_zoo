@@ -40,10 +40,8 @@ class LShaped(BaseCommonGeometryObject):
         cell = openmc.Cell(region=region, fill=materials[0])
 
         # Void region: the notch area
-        region_notch = +x_v_right & -x_h_right & +y_h_top & -y_v_top & +z_bot & -z_top
-        cell_void = openmc.Cell(region=region_notch)
 
-        geometry = openmc.Geometry([cell, cell_void])
+        geometry = openmc.Geometry([cell])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

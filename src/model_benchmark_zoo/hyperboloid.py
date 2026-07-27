@@ -32,15 +32,12 @@ class Hyperboloid(BaseCommonGeometryObject):
 
         z_top = openmc.ZPlane(z0=0.5 * self.height, boundary_type="vacuum")
         z_bot = openmc.ZPlane(z0=-0.5 * self.height, boundary_type="vacuum")
-        outer_cyl = openmc.ZCylinder(r=self.top_radius, boundary_type="vacuum")
 
         region_material = -quadric & +z_bot & -z_top
-        region_void = +quadric & -outer_cyl & +z_bot & -z_top
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

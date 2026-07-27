@@ -24,12 +24,10 @@ class AnnularSector(BaseCommonGeometryObject):
         y_plane = openmc.YPlane(y0=0, boundary_type="vacuum")
 
         region_material = +inner_cyl & -outer_cyl & +z_bot & -z_top & +x_plane & +y_plane
-        region_void = -inner_cyl & +z_bot & -z_top & +x_plane & +y_plane
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

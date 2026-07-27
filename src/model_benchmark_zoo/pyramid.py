@@ -2,7 +2,6 @@ import math
 
 from .utils import BaseCommonGeometryObject
 
-
 class Pyramid(BaseCommonGeometryObject):
     def __init__(self, base_width=10, height=10):
         self.base_width = base_width
@@ -31,12 +30,10 @@ class Pyramid(BaseCommonGeometryObject):
         my = openmc.Plane(a=0, b=-h, c=w, d=w * h / 2)
 
         region_material = -box & -px & -mx & -py & -my
-        region_void = -box & (+px | +mx | +py | +my)
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

@@ -22,12 +22,10 @@ class Ellipsoid(BaseCommonGeometryObject):
         bounding_sphere = openmc.Sphere(r=max(a, c) + 1, boundary_type="vacuum")
 
         region_material = -surface & -bounding_sphere
-        region_void = +surface & -bounding_sphere
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

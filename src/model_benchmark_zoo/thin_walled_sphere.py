@@ -14,12 +14,10 @@ class ThinWalledSphere(BaseCommonGeometryObject):
         inner = openmc.Sphere(r=self.inner_radius)
 
         region_wall = -outer & +inner
-        region_void = -inner
 
         cell1 = openmc.Cell(region=region_wall, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

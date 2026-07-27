@@ -1,6 +1,5 @@
 from .utils import BaseCommonGeometryObject
 
-
 class CylindricalIntersection(BaseCommonGeometryObject):
     def __init__(self, radius=3, length=20):
         self.radius = radius
@@ -29,12 +28,10 @@ class CylindricalIntersection(BaseCommonGeometryObject):
         region_mat = bounding & (-z_cyl | -x_cyl)
 
         # Void: inside bounding, outside both cylinders
-        region_void = bounding & +z_cyl & +x_cyl
 
         cell1 = openmc.Cell(region=region_mat, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
