@@ -1,6 +1,5 @@
 from .utils import BaseCommonGeometryObject
 
-
 class SteppedCylinder(BaseCommonGeometryObject):
     def __init__(self, height=20, large_radius=6, small_radius=3):
 
@@ -28,12 +27,10 @@ class SteppedCylinder(BaseCommonGeometryObject):
         region_material = region_lower | region_upper
 
         # Void: upper half, between small and large cylinder
-        region_void = +small_cyl & -large_cyl & +z_mid & -z_top
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

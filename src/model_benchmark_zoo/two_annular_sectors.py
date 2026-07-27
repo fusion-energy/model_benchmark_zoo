@@ -2,7 +2,6 @@ import math
 
 from .utils import BaseCommonGeometryObject
 
-
 class _TwoAnnularSectorsBase(BaseCommonGeometryObject):
     """Two nested annular sectors sharing part of a curved surface.
 
@@ -87,7 +86,6 @@ class _TwoAnnularSectorsBase(BaseCommonGeometryObject):
             second_start = radial_plane(start)
             second_end = radial_plane(start + self.second_angle)
 
-        wedge = +sector_start & -sector_end & +z_bot & -z_top & -outer_cyl
 
         # first sector: full height and full angle, between inner and mid radius
         region1 = (
@@ -97,13 +95,11 @@ class _TwoAnnularSectorsBase(BaseCommonGeometryObject):
         region2 = (
             +mid_cyl & -outer_cyl & +z2_bot & -z2_top & +second_start & -second_end
         )
-        region_void = wedge & ~region1 & ~region2
 
         cell1 = openmc.Cell(region=region1, fill=materials[0])
         cell2 = openmc.Cell(region=region2, fill=materials[1])
-        cell3 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2, cell3])
+        geometry = openmc.Geometry([cell1, cell2])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
@@ -147,7 +143,6 @@ class _TwoAnnularSectorsBase(BaseCommonGeometryObject):
         )
         return assembly
 
-
 class TwoAnnularSectors(_TwoAnnularSectorsBase):
     """Two annular sectors meeting over a band of a shared curved surface.
 
@@ -178,7 +173,6 @@ class TwoAnnularSectors(_TwoAnnularSectorsBase):
             angle=angle,
             second_angle=angle,
         )
-
 
 class TwoAnnularSectorsPartialArc(_TwoAnnularSectorsBase):
     """Two annular sectors meeting over an island patch of a shared curved surface.

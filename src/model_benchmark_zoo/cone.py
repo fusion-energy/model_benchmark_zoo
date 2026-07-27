@@ -17,15 +17,12 @@ class Cone(BaseCommonGeometryObject):
         cone = openmc.ZCone(z0=h / 2, r2=(r / h) ** 2)
         z_top = openmc.ZPlane(z0=h / 2, boundary_type="vacuum")
         z_bot = openmc.ZPlane(z0=-h / 2, boundary_type="vacuum")
-        outer_cyl = openmc.ZCylinder(r=r, boundary_type="vacuum")
 
         region_material = -cone & +z_bot & -z_top
-        region_void = +cone & -outer_cyl & +z_bot & -z_top
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

@@ -24,21 +24,16 @@ class SimpleTokamak(BaseCommonGeometryObject):
         surface_center_cylinder = openmc.ZCylinder(r=self.center_column_thicknesses)
         surface_top_cy = openmc.ZPlane(z0=center_column_height/2, boundary_type='vacuum')
         surface_bot_cy = openmc.ZPlane(z0=-center_column_height/2, boundary_type='vacuum')
-        outer_surface = openmc.ZCylinder(r=self.radius + self.blanket_thicknesses, boundary_type='vacuum')
         
-        region1 = -surface_inner_wall & +surface_center_cylinder  # plasma
         region2 = +surface_inner_wall & -surface_outer_wall & +surface_center_cylinder # blanket
         region3 = -surface_top_cy & +surface_bot_cy & -surface_center_cylinder  # center column
-        region4 = +surface_outer_wall & -surface_top_cy & +surface_bot_cy & +surface_center_cylinder & -outer_surface  # outer vessel
 
-        cell1 = openmc.Cell(region=region1) # plasma
         cell2 = openmc.Cell(region=region2) # blanket
         cell2.fill = materials[0]
         cell3 = openmc.Cell(region=region3) # center column
         cell3.fill = materials[1]
-        cell4 = openmc.Cell(region=region4) # outer vessel
 
-        geometry = openmc.Geometry([cell1, cell2, cell3, cell4])
+        geometry = openmc.Geometry([cell2, cell3])
         materials = openmc.Materials([materials[0], materials[1]])
         model = openmc.Model(geometry=geometry, materials=materials)
         return model

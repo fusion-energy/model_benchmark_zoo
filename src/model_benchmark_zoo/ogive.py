@@ -17,15 +17,12 @@ class Ogive(BaseCommonGeometryObject):
         ogive_sphere = openmc.Sphere(z0=z_c, r=rho)
         z_base = openmc.ZPlane(z0=0, boundary_type="vacuum")
         z_tip = openmc.ZPlane(z0=L, boundary_type="vacuum")
-        outer_cyl = openmc.ZCylinder(r=rho + 1, boundary_type="vacuum")
 
         region_material = -ogive_sphere & +z_base & -z_tip
-        region_void = +ogive_sphere & +z_base & -z_tip & -outer_cyl
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

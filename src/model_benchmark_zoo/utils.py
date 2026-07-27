@@ -42,55 +42,32 @@ class BaseCommonGeometryObject:
                           max(b.ymax for b in boxes),
                           max(b.zmax for b in boxes)]))
 
-    def bounding_box(self, materials):
+    def bounding_box(self):
         """Return the padded bounding box shared by the CSG and the CAD model.
 
-        The box has to contain both representations, so it is the union of the
-        extent OpenMC reports for the CSG geometry and the exact extent of the
-        CadQuery solids. Neither alone is sufficient.
-
-        OpenMC propagates bounding boxes one surface at a time, so it cannot
-        work out that truncating an infinite surface also bounds it sideways. A
+        The extent comes from the CadQuery solids. OpenMC cannot be used for it,
+        because it propagates bounding boxes one surface at a time and so cannot
+        work out that truncating an infinite surface also bounds it sideways: a
         cone cut by two planes is reported as bounded in z but infinite in x and
-        y, and a torus sector is reported as the whole torus, so the CSG extent
-        is sometimes infinite and often loose. The CAD extent fills those gaps,
-        being exact and always finite.
+        y, and a torus sector is reported as the whole torus. The CAD extent has
+        neither problem, being exact and always finite, and it is the geometry
+        the DAGMC mesh is built from.
 
-        The CAD extent cannot be used on its own, because several models build
-        cells that reach beyond the solids. The hemisphere fills the unused half
-        of its sphere with a void cell and the Oktavian model surrounds itself
-        with void out to a radius of 100. A box drawn round the solids alone
-        cuts through those cells and OpenMC then loses particles crossing them.
-
-        Args:
-            materials: materials to build the CSG model with, only used to
-                construct the geometry whose extent is measured.
+        This is only safe because :meth:`csg_model` keeps the filled cells alone.
+        A void cell is free to reach anywhere, and several models used to define
+        one that did, so a box drawn round the solids would have cut through it.
 
         Returns:
             The lower left and upper right corners as two tuples of floats.
         """
-        import numpy as np
-
-        csg_lower, csg_upper = self._csg_model(materials).geometry.bounding_box
-        cad_lower, cad_upper = self.cad_bounding_box()
-
-        # Fall back to the CAD value wherever OpenMC reports an infinity, then
-        # take whichever extent reaches further in each direction.
-        csg_lower = np.array(csg_lower, dtype=float)
-        csg_upper = np.array(csg_upper, dtype=float)
-        csg_lower = np.where(np.isfinite(csg_lower), csg_lower, cad_lower)
-        csg_upper = np.where(np.isfinite(csg_upper), csg_upper, cad_upper)
-
-        lower = np.minimum(csg_lower, cad_lower)
-        upper = np.maximum(csg_upper, cad_upper)
-
+        lower, upper = self.cad_bounding_box()
         return (tuple(lower - BOUNDING_BOX_PADDING),
                 tuple(upper + BOUNDING_BOX_PADDING))
 
-    def _bounding_surface(self, materials):
+    def _bounding_surface(self):
         import openmc
 
-        lower, upper = self.bounding_box(materials)
+        lower, upper = self.bounding_box()
         return openmc.model.RectangularParallelepiped(
             lower[0], upper[0], lower[1], upper[1], lower[2], upper[2],
             boundary_type="vacuum"
@@ -105,6 +82,12 @@ class BaseCommonGeometryObject:
         particles that a non-convex shape lets back in, for example one that
         leaves the inner surface of a torus and crosses the hole, which the CAD
         model transports because it has the same void region around it.
+
+        Only the filled cells are carried over. Any void cell a model happens to
+        define is dropped, because everything the filled cells do not claim ends
+        up in the surrounding void anyway, whether it is a cavity inside the
+        geometry or the space around it. Dropping them also keeps the bounding
+        box tied to the solids, since a void cell is free to reach anywhere.
 
         Args:
             materials: materials to fill the model's cells with.
@@ -121,12 +104,12 @@ class BaseCommonGeometryObject:
             if surface.boundary_type == "vacuum":
                 surface.boundary_type = "transmission"
 
-        cells = list(geometry.get_all_cells().values())
+        cells = [c for c in geometry.get_all_cells().values() if c.fill is not None]
         occupied = cells[0].region
         for cell in cells[1:]:
             occupied = occupied | cell.region
 
-        boundary = self._bounding_surface(materials)
+        boundary = self._bounding_surface()
         surrounding_void = openmc.Cell(region=-boundary & ~occupied)
 
         return openmc.Model(
@@ -191,7 +174,7 @@ class BaseCommonGeometryObject:
         if not Path(h5m_filename).exists():
             print(f'DAGMC h5m file with filename = {h5m_filename} not found, try making use of export_h5m_file first')
 
-        boundary = self._bounding_surface(materials)
+        boundary = self._bounding_surface()
         bounding_cell = openmc.Cell(
             fill=openmc.DAGMCUniverse(h5m_filename), region=-boundary
         )

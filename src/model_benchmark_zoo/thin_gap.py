@@ -1,6 +1,5 @@
 from .utils import BaseCommonGeometryObject
 
-
 class ThinGap(BaseCommonGeometryObject):
     def __init__(self, box_width=10, box_height=10, box_depth=10, gap=0.5):
         self.box_width = box_width
@@ -28,14 +27,13 @@ class ThinGap(BaseCommonGeometryObject):
         yz_region = +y_min & -y_max & +z_min & -z_max
 
         region_left = +x_min & -x_left & yz_region
-        region_gap = +x_left & -x_right & yz_region
         region_right = +x_right & -x_max & yz_region
 
         cell1 = openmc.Cell(region=region_left, fill=materials[0])
-        cell2 = openmc.Cell(region=region_gap)  # void gap
+  # void gap
         cell3 = openmc.Cell(region=region_right, fill=materials[1])
 
-        geometry = openmc.Geometry([cell1, cell2, cell3])
+        geometry = openmc.Geometry([cell1, cell3])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

@@ -30,18 +30,12 @@ class Capsule(BaseCommonGeometryObject):
         )
 
         # Bounding surfaces
-        bound_cyl = openmc.ZCylinder(r=r + 1, boundary_type="vacuum")
-        z_top = openmc.ZPlane(z0=h / 2 + r + 1, boundary_type="vacuum")
-        z_bot = openmc.ZPlane(z0=-(h / 2 + r + 1), boundary_type="vacuum")
 
-        bounding = -bound_cyl & -z_top & +z_bot
 
-        region_void = bounding & ~region_material
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

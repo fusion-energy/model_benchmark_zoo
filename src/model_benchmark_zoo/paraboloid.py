@@ -2,7 +2,6 @@ import math
 
 from .utils import BaseCommonGeometryObject
 
-
 class Paraboloid(BaseCommonGeometryObject):
     def __init__(self, focal_length=5, height=10):
         self.focal_length = focal_length
@@ -13,7 +12,6 @@ class Paraboloid(BaseCommonGeometryObject):
 
         f = self.focal_length
         h = self.height
-        rim_radius = math.sqrt(2 * f * h)
 
         # Paraboloid surface: x² + y² - 2fz = 0
         # -quadric is where x² + y² - 2fz < 0, i.e. z > (x²+y²)/(2f) (above the surface)
@@ -21,17 +19,14 @@ class Paraboloid(BaseCommonGeometryObject):
 
         z_top = openmc.ZPlane(z0=h, boundary_type="vacuum")
         z_bot = openmc.ZPlane(z0=-0.01, boundary_type="vacuum")
-        outer_cyl = openmc.ZCylinder(r=rim_radius, boundary_type="vacuum")
 
         # Material region: inside the paraboloid surface and below the cap
         region_material = -quadric & -z_top & +z_bot
         # Void region: outside the paraboloid but inside the bounding box
-        region_void = +quadric & -z_top & +z_bot & -outer_cyl
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

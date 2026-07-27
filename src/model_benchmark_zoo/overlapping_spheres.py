@@ -1,6 +1,5 @@
 from .utils import BaseCommonGeometryObject
 
-
 class OverlappingSpheres(BaseCommonGeometryObject):
     def __init__(self, radius=5, separation=6):
 
@@ -18,20 +17,17 @@ class OverlappingSpheres(BaseCommonGeometryObject):
 
         sphere1 = openmc.Sphere(x0=-d, r=r)
         sphere2 = openmc.Sphere(x0=d, r=r)
-        bounding = openmc.Sphere(r=r + d + 1, boundary_type="vacuum")
 
         # Sphere 1 (including overlap region): mat1
         region1 = -sphere1
         # Sphere 2 minus sphere 1: mat2
         region2 = -sphere2 & +sphere1
         # Void outside both
-        region_void = -bounding & +sphere1 & +sphere2
 
         cell1 = openmc.Cell(region=region1, fill=materials[0])
         cell2 = openmc.Cell(region=region2, fill=materials[1])
-        cell3 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2, cell3])
+        geometry = openmc.Geometry([cell1, cell2])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

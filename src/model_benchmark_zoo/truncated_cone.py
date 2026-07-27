@@ -27,15 +27,12 @@ class TruncatedCone(BaseCommonGeometryObject):
         cone_surface = openmc.ZCone(z0=z_apex, r2=r2)
         z_top = openmc.ZPlane(z0=0.5 * h, boundary_type="vacuum")
         z_bot = openmc.ZPlane(z0=-0.5 * h, boundary_type="vacuum")
-        outer_cyl = openmc.ZCylinder(r=r_bot, boundary_type="vacuum")
 
         region_material = -cone_surface & +z_bot & -z_top
-        region_void = +cone_surface & -outer_cyl & +z_bot & -z_top
 
         cell1 = openmc.Cell(region=region_material, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

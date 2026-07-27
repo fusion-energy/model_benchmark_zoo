@@ -1,6 +1,5 @@
 from .utils import BaseCommonGeometryObject
 
-
 class PipeElbow(BaseCommonGeometryObject):
     def __init__(self, bend_radius=10, outer_radius=3, inner_radius=2):
 
@@ -25,21 +24,11 @@ class PipeElbow(BaseCommonGeometryObject):
         x_plane = openmc.XPlane(x0=0)
         y_plane = openmc.YPlane(y0=0)
 
-        # Bounding
-        outer_cyl = openmc.ZCylinder(r=R + r_out + 1, boundary_type="vacuum")
-        z_top = openmc.ZPlane(z0=r_out + 1, boundary_type="vacuum")
-        z_bot = openmc.ZPlane(z0=-(r_out + 1), boundary_type="vacuum")
-
         region_wall = -outer_torus & +inner_torus & +x_plane & +y_plane
-        region_void = (
-            -outer_cyl & +z_bot & -z_top
-            & (+outer_torus | -inner_torus | -x_plane | -y_plane)
-        )
 
         cell1 = openmc.Cell(region=region_wall, fill=materials[0])
-        cell2 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

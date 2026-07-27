@@ -26,13 +26,11 @@ class DivertorMonoblock(BaseCommonGeometryObject):
 
         region_block = -box & +outer_pipe
         region_pipe = -outer_pipe & +inner_pipe & -box
-        region_void = -inner_pipe & -box
 
         cell1 = openmc.Cell(region=region_block, fill=materials[0])
         cell2 = openmc.Cell(region=region_pipe, fill=materials[1])
-        cell3 = openmc.Cell(region=region_void)
 
-        geometry = openmc.Geometry([cell1, cell2, cell3])
+        geometry = openmc.Geometry([cell1, cell2])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

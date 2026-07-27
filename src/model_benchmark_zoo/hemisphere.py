@@ -13,10 +13,8 @@ class Hemisphere(BaseCommonGeometryObject):
         hemisphere_region = -sphere_surface & +z_plane
         hemisphere_cell = openmc.Cell(region=hemisphere_region, fill=materials[0])
 
-        void_region = -sphere_surface & -z_plane
-        void_cell = openmc.Cell(region=void_region)
 
-        geometry = openmc.Geometry([hemisphere_cell, void_cell])
+        geometry = openmc.Geometry([hemisphere_cell])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model

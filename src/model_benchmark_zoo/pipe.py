@@ -19,12 +19,10 @@ class Pipe(BaseCommonGeometryObject):
         z_bot = openmc.ZPlane(z0=-0.5 * self.height, boundary_type="vacuum")
 
         region_wall = -outer_cyl & +inner_cyl & +z_bot & -z_top
-        region_hole = -inner_cyl & +z_bot & -z_top
 
         cell1 = openmc.Cell(region=region_wall, fill=materials[0])
-        cell2 = openmc.Cell(region=region_hole)
 
-        geometry = openmc.Geometry([cell1, cell2])
+        geometry = openmc.Geometry([cell1])
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)
         return model
