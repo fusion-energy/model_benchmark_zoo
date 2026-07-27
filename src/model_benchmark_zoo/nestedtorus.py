@@ -23,9 +23,19 @@ class Nestedtorus(BaseCommonGeometryObject):
             raise ValueError(f"Number of materials ({len(materials)}) must be at least equal to the number of minor radii ({len(self.minor_radii)}).")
 
         surfaces = [openmc.ZTorus(a=self.major_radius, b=r, c=r) for r in self.minor_radii]
-        
-        # Add vacuum boundary to the outermost surface
-        surfaces[0].boundary_type = "vacuum"
+
+        # A torus is not convex, so a particle leaving the inner surface can cross
+        # the hole and re-enter on the far side of the ring. Putting the vacuum
+        # boundary on the outermost torus surface itself would kill those
+        # particles, while the CAD model transports them because dagmc_model wraps
+        # the geometry with bounded_universe, which leaves a void region around it.
+        # Enclose the tori in a void so both models describe the same transport
+        # problem. Re-entering particles cross the outer shells first, so those are
+        # the ones most affected.
+        boundary = openmc.Sphere(
+            r=2 * (self.major_radius + self.minor_radii[0]),
+            boundary_type="vacuum"
+        )
 
         regions = []
         # Create the shells
@@ -44,7 +54,9 @@ class Nestedtorus(BaseCommonGeometryObject):
             cell = openmc.Cell(region=region)
             cell.fill = materials[i]
             cells.append(cell)
-        
+
+        cells.append(openmc.Cell(region=+surfaces[0] & -boundary))
+
         geometry = openmc.Geometry(cells)
         my_materials = openmc.Materials(materials)
         model = openmc.Model(geometry=geometry, materials=my_materials)

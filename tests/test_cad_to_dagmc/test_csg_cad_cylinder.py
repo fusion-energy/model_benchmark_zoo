@@ -3,9 +3,14 @@ from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
 import openmc
 import pytest
 
+# The cylinder has a radius of 1, so a max_mesh_size of 0.5 leaves only about a
+# dozen facets around the circumference and the faceted volume falls around 2%
+# short of the analytic cylinder. Refining to 0.1 brings the CAD result to within
+# 0.1% of the CSG result. The other two backends already resolve this radius at
+# their settings below.
 kwargs_options = [{'meshing_backend': 'gmsh',
         'min_mesh_size': 0.01,
-        'max_mesh_size': 0.5},
+        'max_mesh_size': 0.1},
         {'meshing_backend': 'cadquery',
         'tolerance': 0.1,
         'angular_tolerance': 0.1,},
