@@ -20,14 +20,47 @@ class BaseCommonGeometryObject:
     def export_stp_file(self, filename: str="common_geometry_object.step"):
         self.cadquery_assembly().save(filename, "STEP")
 
+    def cad_bounding_box(self):
+        """Return the exact bounding box of the CadQuery solids.
+
+        CadQuery computes this with ``BRepBndLib.AddOptimal``, so it is exact
+        rather than a triangulated estimate, and it is always finite.
+
+        Returns:
+            The lower left and upper right corners as two numpy arrays.
+        """
+        import numpy as np
+
+        boxes = []
+        for shape, _, location, _ in self.cadquery_assembly():
+            moved = shape.moved(location) if hasattr(shape, "moved") else shape
+            boxes.append(moved.BoundingBox())
+        return (np.array([min(b.xmin for b in boxes),
+                          min(b.ymin for b in boxes),
+                          min(b.zmin for b in boxes)]),
+                np.array([max(b.xmax for b in boxes),
+                          max(b.ymax for b in boxes),
+                          max(b.zmax for b in boxes)]))
+
     def bounding_box(self, materials):
         """Return the padded bounding box shared by the CSG and the CAD model.
 
-        The box comes from the CSG geometry where OpenMC can bound it. Some
-        surfaces, cones and paraboloids among them, have no finite bounding box
-        even when the region built from them does, so the CadQuery solids are
-        used instead in that case. Both describe the same geometry, so either
-        gives the same answer where both are available.
+        The box has to contain both representations, so it is the union of the
+        extent OpenMC reports for the CSG geometry and the exact extent of the
+        CadQuery solids. Neither alone is sufficient.
+
+        OpenMC propagates bounding boxes one surface at a time, so it cannot
+        work out that truncating an infinite surface also bounds it sideways. A
+        cone cut by two planes is reported as bounded in z but infinite in x and
+        y, and a torus sector is reported as the whole torus, so the CSG extent
+        is sometimes infinite and often loose. The CAD extent fills those gaps,
+        being exact and always finite.
+
+        The CAD extent cannot be used on its own, because several models build
+        cells that reach beyond the solids. The hemisphere fills the unused half
+        of its sphere with a void cell and the Oktavian model surrounds itself
+        with void out to a radius of 100. A box drawn round the solids alone
+        cuts through those cells and OpenMC then loses particles crossing them.
 
         Args:
             materials: materials to build the CSG model with, only used to
@@ -38,21 +71,18 @@ class BaseCommonGeometryObject:
         """
         import numpy as np
 
-        lower, upper = self._csg_model(materials).geometry.bounding_box
-        lower = np.array(lower, dtype=float)
-        upper = np.array(upper, dtype=float)
+        csg_lower, csg_upper = self._csg_model(materials).geometry.bounding_box
+        cad_lower, cad_upper = self.cad_bounding_box()
 
-        if not (np.all(np.isfinite(lower)) and np.all(np.isfinite(upper))):
-            boxes = []
-            for shape, _, location, _ in self.cadquery_assembly():
-                moved = shape.moved(location) if hasattr(shape, "moved") else shape
-                boxes.append(moved.BoundingBox())
-            lower = np.array([min(b.xmin for b in boxes),
-                              min(b.ymin for b in boxes),
-                              min(b.zmin for b in boxes)])
-            upper = np.array([max(b.xmax for b in boxes),
-                              max(b.ymax for b in boxes),
-                              max(b.zmax for b in boxes)])
+        # Fall back to the CAD value wherever OpenMC reports an infinity, then
+        # take whichever extent reaches further in each direction.
+        csg_lower = np.array(csg_lower, dtype=float)
+        csg_upper = np.array(csg_upper, dtype=float)
+        csg_lower = np.where(np.isfinite(csg_lower), csg_lower, cad_lower)
+        csg_upper = np.where(np.isfinite(csg_upper), csg_upper, cad_upper)
+
+        lower = np.minimum(csg_lower, cad_lower)
+        upper = np.maximum(csg_upper, cad_upper)
 
         return (tuple(lower - BOUNDING_BOX_PADDING),
                 tuple(upper + BOUNDING_BOX_PADDING))
