@@ -47,7 +47,12 @@ def test_compare(kwargs):
     my_settings = openmc.Settings()
     my_settings.batches = 10
     my_settings.inactive = 0
-    my_settings.particles = 500
+    # The mat2 blanket tally carries around 7.5% statistical uncertainty at 500
+    # particles, so comparing it against the 1% relative tolerance below tests the
+    # random number stream rather than the geometry. At this particle count that
+    # uncertainty drops to around 1% and all three meshing backends agree with the
+    # CSG result to better than 0.15%.
+    my_settings.particles = 50000
     my_settings.run_mode = 'fixed source'
 
     # Create a DT ring source
