@@ -13,7 +13,7 @@ class TwoTetrahedrons(BaseCommonGeometryObject):
     ):
         self.length = length
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         """
         Creates a CSG model of two tetrahedrons sharing a face.
 

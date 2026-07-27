@@ -7,7 +7,7 @@ class Cone(BaseCommonGeometryObject):
         self.height = height
         self.base_radius = base_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         h = self.height

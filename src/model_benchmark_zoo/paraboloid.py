@@ -8,7 +8,7 @@ class Paraboloid(BaseCommonGeometryObject):
         self.focal_length = focal_length
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         f = self.focal_length

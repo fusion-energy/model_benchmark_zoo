@@ -14,7 +14,7 @@ class SimpleTokamak(BaseCommonGeometryObject):
         self.center_column_thicknesses = center_column_thicknesses
         self.center_column_extent_beyond_blanket = center_column_extent_beyond_blanket
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
         
         center_column_height = (self.radius + self.blanket_thicknesses + self.center_column_extent_beyond_blanket)*2

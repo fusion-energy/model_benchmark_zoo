@@ -5,7 +5,7 @@ class Ogive(BaseCommonGeometryObject):
         self.base_radius = base_radius
         self.length = length
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         R = self.base_radius

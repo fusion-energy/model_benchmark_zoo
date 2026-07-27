@@ -10,7 +10,7 @@ class OverlappingSpheres(BaseCommonGeometryObject):
         self.radius = radius
         self.separation = separation
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         d = self.separation / 2

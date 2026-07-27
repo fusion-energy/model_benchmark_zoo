@@ -6,7 +6,7 @@ class Wedge(BaseCommonGeometryObject):
         self.height = height
         self.depth = depth
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         b = self.base

@@ -12,7 +12,7 @@ class NestedCylinder(BaseCommonGeometryObject):
         self.radius1 = radius1
         self.radius2 = radius2
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         outer_cyl = openmc.ZCylinder(x0=0.0, y0=0.0, r=self.radius1, boundary_type="vacuum")

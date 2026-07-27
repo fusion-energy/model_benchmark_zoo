@@ -6,7 +6,7 @@ class EllipticCylinder(BaseCommonGeometryObject):
         self.b = b
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         # Elliptic cylinder: x²/a² + y²/b² = 1

@@ -8,7 +8,7 @@ class BlanketModule(BaseCommonGeometryObject):
         self.wall_thickness = wall_thickness
         self.channel_radius = channel_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         ow = self.outer_width

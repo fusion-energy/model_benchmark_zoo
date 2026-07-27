@@ -4,7 +4,7 @@ class Cylinder(BaseCommonGeometryObject):
         self.radius = radius
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         surface_1 = openmc.ZCylinder(x0=0.0, y0=0.0, r=self.radius, boundary_type="vacuum")

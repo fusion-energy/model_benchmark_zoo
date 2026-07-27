@@ -6,7 +6,7 @@ class CylinderInBox(BaseCommonGeometryObject):
         self.cylinder_radius = cylinder_radius
         self.cylinder_height = cylinder_height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.box_width

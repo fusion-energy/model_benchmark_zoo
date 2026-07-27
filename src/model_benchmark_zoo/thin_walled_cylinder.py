@@ -11,7 +11,7 @@ class ThinWalledCylinder(BaseCommonGeometryObject):
         self.outer_radius = outer_radius
         self.wall_thickness = wall_thickness
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         r_out = self.outer_radius

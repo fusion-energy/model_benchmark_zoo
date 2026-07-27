@@ -9,7 +9,7 @@ class BoxWithSphericalCavity(BaseCommonGeometryObject):
         self.width = width
         self.sphere_radius = sphere_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         box_surface = openmc.model.RectangularParallelepiped(

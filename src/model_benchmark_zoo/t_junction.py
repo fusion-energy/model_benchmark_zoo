@@ -8,7 +8,7 @@ class TJunction(BaseCommonGeometryObject):
         self.branch_width = branch_width
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         ml = self.main_length

@@ -15,7 +15,7 @@ class EccentricNestedCylinders(BaseCommonGeometryObject):
         self.inner_radius = inner_radius
         self.offset = offset
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         h = self.height

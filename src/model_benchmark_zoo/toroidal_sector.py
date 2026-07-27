@@ -9,7 +9,7 @@ class ToroidalSector(BaseCommonGeometryObject):
         self.minor_radius = minor_radius
         self.angle = angle
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         R = self.major_radius

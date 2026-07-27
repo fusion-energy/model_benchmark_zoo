@@ -10,7 +10,7 @@ class SphereWithMultipleHoles(BaseCommonGeometryObject):
         self.sphere_radius = sphere_radius
         self.cylinder_radius = cylinder_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         r = self.sphere_radius

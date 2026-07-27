@@ -11,7 +11,7 @@ class PipeElbow(BaseCommonGeometryObject):
         self.outer_radius = outer_radius
         self.inner_radius = inner_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         R = self.bend_radius

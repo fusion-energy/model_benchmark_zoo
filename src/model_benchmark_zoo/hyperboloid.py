@@ -14,7 +14,7 @@ class Hyperboloid(BaseCommonGeometryObject):
         self.top_radius = top_radius
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         a = self.waist_radius

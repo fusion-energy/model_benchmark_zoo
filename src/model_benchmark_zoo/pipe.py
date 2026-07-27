@@ -10,7 +10,7 @@ class Pipe(BaseCommonGeometryObject):
         self.outer_radius = outer_radius
         self.inner_radius = inner_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         outer_cyl = openmc.ZCylinder(r=self.outer_radius, boundary_type="vacuum")

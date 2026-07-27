@@ -7,7 +7,7 @@ class ChamferedBox(BaseCommonGeometryObject):
         self.width = width
         self.chamfer = chamfer
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.width

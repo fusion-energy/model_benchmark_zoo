@@ -5,7 +5,7 @@ class SphereInBox(BaseCommonGeometryObject):
         self.box_width = box_width
         self.sphere_radius = sphere_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.box_width

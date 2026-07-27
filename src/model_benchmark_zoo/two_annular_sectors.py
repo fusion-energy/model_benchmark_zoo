@@ -44,7 +44,7 @@ class _TwoAnnularSectorsBase(BaseCommonGeometryObject):
         """Angle at which the second sector starts, centred within the first."""
         return (self.angle - self.second_angle) / 2
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         ri = self.inner_radius

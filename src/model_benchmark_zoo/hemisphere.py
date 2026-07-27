@@ -4,7 +4,7 @@ class Hemisphere(BaseCommonGeometryObject):
     def __init__(self, radius=10):
         self.radius = radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         sphere_surface = openmc.Sphere(r=self.radius, boundary_type="vacuum")

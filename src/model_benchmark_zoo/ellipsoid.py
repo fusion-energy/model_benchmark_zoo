@@ -7,7 +7,7 @@ class Ellipsoid(BaseCommonGeometryObject):
         self.equatorial_radius = equatorial_radius
         self.polar_radius = polar_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         a = self.equatorial_radius

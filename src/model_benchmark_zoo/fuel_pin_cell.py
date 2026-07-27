@@ -7,7 +7,7 @@ class FuelPinCell(BaseCommonGeometryObject):
         self.pitch = pitch
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         rf = self.fuel_radius
