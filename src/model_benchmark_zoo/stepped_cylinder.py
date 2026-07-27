@@ -11,7 +11,7 @@ class SteppedCylinder(BaseCommonGeometryObject):
         self.large_radius = large_radius
         self.small_radius = small_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         h = self.height

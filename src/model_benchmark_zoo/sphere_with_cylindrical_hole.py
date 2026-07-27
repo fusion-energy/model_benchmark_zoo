@@ -9,7 +9,7 @@ class SphereWithCylindricalHole(BaseCommonGeometryObject):
         self.sphere_radius = sphere_radius
         self.cylinder_radius = cylinder_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         sphere_surface = openmc.Sphere(r=self.sphere_radius, boundary_type="vacuum")

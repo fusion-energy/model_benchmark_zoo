@@ -7,7 +7,7 @@ class LShaped(BaseCommonGeometryObject):
         self.leg_thickness = leg_thickness
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         l = self.length

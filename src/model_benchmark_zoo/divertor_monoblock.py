@@ -8,7 +8,7 @@ class DivertorMonoblock(BaseCommonGeometryObject):
         self.pipe_outer_radius = pipe_outer_radius
         self.pipe_inner_radius = pipe_inner_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.width

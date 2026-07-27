@@ -6,7 +6,7 @@ class ThinPlate(BaseCommonGeometryObject):
         self.width = width
         self.thickness = thickness
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         surface = openmc.model.RectangularParallelepiped(

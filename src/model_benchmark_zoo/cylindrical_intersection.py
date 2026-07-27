@@ -6,7 +6,7 @@ class CylindricalIntersection(BaseCommonGeometryObject):
         self.radius = radius
         self.length = length
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         r = self.radius

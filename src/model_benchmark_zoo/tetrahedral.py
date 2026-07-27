@@ -3,7 +3,7 @@ class Tetrahedral(BaseCommonGeometryObject):
     def __init__(self, length:float=1.,):
         self.length = length
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         coord_a = (0, 0, 0)

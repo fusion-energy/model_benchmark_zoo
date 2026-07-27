@@ -14,7 +14,7 @@ class TwoTouchingCuboids(BaseCommonGeometryObject):
         self.width1 = width1
         self.width2 = width2
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
         surface1 = openmc.ZPlane(z0=self.width1*0.5, boundary_type="vacuum")
         surface2 = openmc.ZPlane(z0=self.width1*-0.5, boundary_type="vacuum")

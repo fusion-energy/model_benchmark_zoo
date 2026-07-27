@@ -4,7 +4,7 @@ class Cuboid(BaseCommonGeometryObject):
     def __init__(self, width=10):
         self.width = width
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
         
         surface = openmc.model.RectangularParallelepiped(

@@ -4,7 +4,7 @@ class NestedSphere(BaseCommonGeometryObject):
         self.radius1 = radius1
         self.radius2 = radius2
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
         
         surface1 = openmc.Sphere(r=self.radius1)

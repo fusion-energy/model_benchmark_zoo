@@ -9,7 +9,7 @@ class AnnularSector(BaseCommonGeometryObject):
         self.height = height
         self.angle = angle
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         ri = self.inner_radius

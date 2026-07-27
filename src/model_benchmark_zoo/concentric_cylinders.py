@@ -11,7 +11,7 @@ class ConcentricCylinders(BaseCommonGeometryObject):
         self.height = height
         self.radii = radii
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         h = self.height

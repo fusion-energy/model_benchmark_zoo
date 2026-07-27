@@ -8,7 +8,7 @@ class Pyramid(BaseCommonGeometryObject):
         self.base_width = base_width
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.base_width / 2

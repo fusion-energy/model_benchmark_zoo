@@ -8,7 +8,7 @@ class ThinGap(BaseCommonGeometryObject):
         self.box_depth = box_depth
         self.gap = gap
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.box_width

@@ -5,7 +5,7 @@ class Capsule(BaseCommonGeometryObject):
         self.radius = radius
         self.cylinder_height = cylinder_height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         r = self.radius

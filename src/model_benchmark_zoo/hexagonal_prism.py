@@ -8,7 +8,7 @@ class HexagonalPrism(BaseCommonGeometryObject):
         self.outer_radius = outer_radius
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         r = self.outer_radius

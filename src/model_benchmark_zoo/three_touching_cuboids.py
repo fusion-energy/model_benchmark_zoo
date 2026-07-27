@@ -12,7 +12,7 @@ class ThreeTouchingCuboids(BaseCommonGeometryObject):
     def __init__(self, width=5):
         self.width = width
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.width

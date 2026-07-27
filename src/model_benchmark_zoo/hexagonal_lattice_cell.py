@@ -6,7 +6,7 @@ class HexagonalLatticeCell(BaseCommonGeometryObject):
         self.pin_radius = pin_radius
         self.height = height
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         r_pin = self.pin_radius

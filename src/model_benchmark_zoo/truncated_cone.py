@@ -12,7 +12,7 @@ class TruncatedCone(BaseCommonGeometryObject):
         self.bottom_radius = bottom_radius
         self.top_radius = top_radius
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         h = self.height

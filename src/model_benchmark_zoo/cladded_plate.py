@@ -7,7 +7,7 @@ class CladdedPlate(BaseCommonGeometryObject):
         self.core_thickness = core_thickness
         self.clad_thickness = clad_thickness
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.width

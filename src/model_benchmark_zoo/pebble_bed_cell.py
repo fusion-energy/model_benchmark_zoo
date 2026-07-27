@@ -9,7 +9,7 @@ class PebbleBedCell(BaseCommonGeometryObject):
         self.sphere_radius = sphere_radius
         self.sphere_positions = sphere_positions
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         w = self.box_width

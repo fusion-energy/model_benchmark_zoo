@@ -7,7 +7,7 @@ class CrossJunction(BaseCommonGeometryObject):
         self.arm_width = arm_width
         self.depth = depth
 
-    def csg_model(self, materials):
+    def _csg_model(self, materials):
         import openmc
 
         al = self.arm_length
