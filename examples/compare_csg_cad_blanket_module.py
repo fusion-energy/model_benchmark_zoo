@@ -41,7 +41,11 @@ my_tallies = openmc.Tallies([tally1, tally2, tally3])
 my_settings = openmc.Settings()
 my_settings.batches = 10
 my_settings.inactive = 0
-my_settings.particles = 500
+# The mat3 coolant channel is only 176 cm3 of the 24000 cm3 module and sits away
+# from the source, so it collects far fewer tracks than the wall and the breeder.
+# Its flux tally needs many more particles than the other two before the CSG and
+# CAD results can be meaningfully compared.
+my_settings.particles = 100000
 my_settings.run_mode = 'fixed source'
 
 # Source inside the structural wall (top wall region)
