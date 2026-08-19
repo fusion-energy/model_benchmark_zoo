@@ -36,6 +36,7 @@ from .hexagonal_prism import *
 from .pyramid import *
 from .stepped_cylinder import *
 from .thin_walled_cylinder import *
+from .thin_walled_box import *
 from .sphere_with_multiple_holes import *
 from .overlapping_spheres import *
 from .eccentric_nested_cylinders import *

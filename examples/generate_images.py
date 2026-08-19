@@ -50,6 +50,7 @@ from model_benchmark_zoo import (
     Pyramid,
     SteppedCylinder,
     ThinWalledCylinder,
+    ThinWalledBox,
     SphereWithMultipleHoles,
     OverlappingSpheres,
     EccentricNestedCylinders,
@@ -259,6 +260,11 @@ GEOMETRIES = {
         ThinWalledCylinder,
         "thin_walled_cylinder.png",
         {"position": (8, 12, 20), "dolly": 0.95},
+    ),
+    "ThinWalledBox": (
+        ThinWalledBox,
+        "thin_walled_box.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
     ),
     "SphereWithMultipleHoles": (
         SphereWithMultipleHoles,

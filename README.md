@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 57 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+The table below lists every model with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
   
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -54,6 +54,7 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/hyperboloid.png" alt="Hyperboloid" width="100"></p> | Hyperboloid | 1 | Negative Gaussian curvature surface; concave and convex directions simultaneously |
 | <p align="center"><img src="images/thin_walled_sphere.png" alt="Thin-walled sphere" width="100"></p> | Thin-walled sphere | 1 | Curved thin shell; element quality in narrow gap between two concentric curved surfaces |
 | <p align="center"><img src="images/thin_walled_cylinder.png" alt="Thin-walled cylinder" width="100"></p> | Thin-walled cylinder | 1 | Cylindrical thin shell; element quality in narrow annular gap between concentric surfaces |
+| <p align="center"><img src="images/thin_walled_box.png" alt="Thin-walled box" width="100"></p> | Thin-walled box | 1 | Planar thin shell (50:1 span to wall); walls carry no curvature to be refined by, unlike the curved shells, and enclose a cavity |
 | <p align="center"><img src="images/nestedsphere.png" width="100"></p> | Nested sphere | 2 | Concentric curved shells requiring conformal surface meshes at the shared interface |
 | <p align="center"><img src="images/cylinder_in_box.png" alt="Cylinder in box" width="100"></p> | Cylinder in box | 2 | Curved surface tangent to flat faces; cylindrical-to-planar imprinting along tangent lines |
 | <p align="center"><img src="images/sphere_in_box.png" alt="Sphere in box" width="100"></p> | Sphere in box | 2 | Curved surface enclosed in rectilinear body; pebble-in-moderator case |
