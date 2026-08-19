@@ -28,6 +28,7 @@ from model_benchmark_zoo import (
     TwoTetrahedrons,
     SphereWithCylindricalHole,
     BoxWithSphericalCavity,
+    NotchedBox,
     ThreeTouchingCuboids,
     Hemisphere,
     Pipe,
@@ -49,6 +50,7 @@ from model_benchmark_zoo import (
     HexagonalPrism,
     Pyramid,
     SteppedCylinder,
+    SteppedCorner,
     ThinWalledCylinder,
     SphereWithMultipleHoles,
     OverlappingSpheres,
@@ -149,6 +151,11 @@ GEOMETRIES = {
         BoxWithSphericalCavity,
         "box_with_spherical_cavity.png",
         {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "NotchedBox": (
+        NotchedBox,
+        "notched_box.png",
+        {"position": (15, -12, 18), "dolly": 0.95},
     ),
     "ThreeTouchingCuboids": (
         ThreeTouchingCuboids,
@@ -254,6 +261,11 @@ GEOMETRIES = {
         SteppedCylinder,
         "stepped_cylinder.png",
         {"position": (12, 18, 20), "dolly": 0.95},
+    ),
+    "SteppedCorner": (
+        SteppedCorner,
+        "stepped_corner.png",
+        {"position": (18, -14, 16), "dolly": 0.95},
     ),
     "ThinWalledCylinder": (
         ThinWalledCylinder,

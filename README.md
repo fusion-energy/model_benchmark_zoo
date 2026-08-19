@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 57 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+The table below lists every model with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
   
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -50,6 +50,7 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/ogive.png" alt="Ogive" width="100"></p> | Ogive | 1 | Nose cone (spherical section); curved surface meeting a flat base plane at the perimeter |
 | <p align="center"><img src="images/sphere_with_cylindrical_hole.png" width="100"></p> | Sphere with cylindrical hole | 1 | Curved-to-curved boolean intersection producing saddle-shaped seam edges |
 | <p align="center"><img src="images/box_with_spherical_cavity.png" width="100"></p> | Box with spherical cavity | 1 | Flat-to-curved boolean intersection; sharp curvature transition at cavity edge |
+| <p align="center"><img src="images/notched_box.png" alt="Notched box" width="100"></p> | Notched box | 1 | Open rectangular pocket; eight re-entrant edges in three directions meeting at four re-entrant vertices, and an opening strictly interior to the face it is cut from |
 | <p align="center"><img src="images/eccentric_nested_cylinders.png" alt="Eccentric nested cylinders" width="100"></p> | Eccentric nested cylinders | 2 | Non-concentric annular gap; varying thin-wall thickness around the circumference |
 | <p align="center"><img src="images/hyperboloid.png" alt="Hyperboloid" width="100"></p> | Hyperboloid | 1 | Negative Gaussian curvature surface; concave and convex directions simultaneously |
 | <p align="center"><img src="images/thin_walled_sphere.png" alt="Thin-walled sphere" width="100"></p> | Thin-walled sphere | 1 | Curved thin shell; element quality in narrow gap between two concentric curved surfaces |
@@ -67,6 +68,7 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/two_annular_sectors.png" alt="Two annular sectors" width="100"></p> | Two annular sectors | 2 | Partial contact on a curved surface; the shorter outer sector spans the full arc so the imprint edges reach the face boundary |
 | <p align="center"><img src="images/two_annular_sectors_partial_arc.png" alt="Two annular sectors with a partial arc" width="100"></p> | Two annular sectors, partial arc | 2 | Partial contact on a curved surface where the patch is strictly interior to the larger face in both the axial and angular directions |
 | <p align="center"><img src="images/stepped_cylinder.png" alt="Stepped cylinder" width="100"></p> | Stepped cylinder | 2 | Abrupt radius change at step; imprinting of a contact patch strictly interior to the larger face |
+| <p align="center"><img src="images/stepped_corner.png" alt="Stepped corner" width="100"></p> | Stepped corner | 1 | Cube with one octant removed (the Fichera corner); the smallest solid whose only non-convexity is one re-entrant vertex |
 | <p align="center"><img src="images/cone.png" alt="Cone" width="100"></p> | Cone | 1 | Degenerate apex where surface converges to a point; element collapse at tip |
 | <p align="center"><img src="images/pyramid.png" alt="Pyramid" width="100"></p> | Pyramid | 1 | Four flat faces converging to a degenerate apex point; element collapse at tip on planar faces |
 | <p align="center"><img src="images/two_tetrahedrons.png" width="100"></p> | Two tetrahedrons in contact | 2 | Shared triangular face with acute dihedral angles at all edges |

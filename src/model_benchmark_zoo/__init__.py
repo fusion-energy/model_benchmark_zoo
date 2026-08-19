@@ -14,6 +14,7 @@ from .two_tetrahedrons import *
 from .nestedtorus import *
 from .sphere_with_cylindrical_hole import *
 from .box_with_spherical_cavity import *
+from .notched_box import *
 from .three_touching_cuboids import *
 from .hemisphere import *
 from .pipe import *
@@ -35,6 +36,7 @@ from .chamfered_box import *
 from .hexagonal_prism import *
 from .pyramid import *
 from .stepped_cylinder import *
+from .stepped_corner import *
 from .thin_walled_cylinder import *
 from .sphere_with_multiple_holes import *
 from .overlapping_spheres import *
