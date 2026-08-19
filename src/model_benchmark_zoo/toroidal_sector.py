@@ -8,6 +8,13 @@ class ToroidalSector(BaseCommonGeometryObject):
         self.minor_radius = minor_radius
         self.angle = angle
 
+    def analytic_volumes(self):
+        """Exact volume, the full torus scaled by the arc."""
+        return (
+            2 * math.pi ** 2 * self.major_radius * self.minor_radius ** 2
+            * self.angle / 360,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

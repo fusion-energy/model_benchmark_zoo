@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 
@@ -14,6 +16,14 @@ class EccentricNestedCylinders(BaseCommonGeometryObject):
         self.outer_radius = outer_radius
         self.inner_radius = inner_radius
         self.offset = offset
+
+    def analytic_volumes(self):
+        """Exact volume of the inner cylinder and of the annulus around it."""
+        return (
+            math.pi * self.inner_radius ** 2 * self.height,
+            math.pi * (self.outer_radius ** 2 - self.inner_radius ** 2)
+            * self.height,
+        )
 
     def _csg_model(self, materials):
         import openmc

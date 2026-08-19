@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class ConcentricCylinders(BaseCommonGeometryObject):
@@ -10,6 +12,15 @@ class ConcentricCylinders(BaseCommonGeometryObject):
             raise ValueError('radii must be in ascending order')
         self.height = height
         self.radii = radii
+
+    def analytic_volumes(self):
+        """Exact volume of the core and of each shell outside it."""
+        volumes = []
+        previous = 0.0
+        for radius in self.radii:
+            volumes.append(math.pi * (radius ** 2 - previous ** 2) * self.height)
+            previous = radius
+        return tuple(volumes)
 
     def _csg_model(self, materials):
         import openmc

@@ -7,6 +7,12 @@ class Pyramid(BaseCommonGeometryObject):
         self.base_width = base_width
         self.height = height
 
+    def analytic_volumes(self):
+        """Exact volume, a third of the enclosing prism."""
+        return (
+            self.base_width ** 2 * self.height / 3,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

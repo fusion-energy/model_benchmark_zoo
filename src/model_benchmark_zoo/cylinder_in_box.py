@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class CylinderInBox(BaseCommonGeometryObject):
@@ -5,6 +7,14 @@ class CylinderInBox(BaseCommonGeometryObject):
         self.box_width = box_width
         self.cylinder_radius = cylinder_radius
         self.cylinder_height = cylinder_height
+
+    def analytic_volumes(self):
+        """Exact volume of the cylinder and of the box around it."""
+        return (
+            math.pi * self.cylinder_radius ** 2 * self.cylinder_height,
+            self.box_width ** 3
+            - math.pi * self.cylinder_radius ** 2 * self.cylinder_height,
+        )
 
     def _csg_model(self, materials):
         import openmc

@@ -1,9 +1,18 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class SphereInBox(BaseCommonGeometryObject):
     def __init__(self, box_width=12, sphere_radius=4):
         self.box_width = box_width
         self.sphere_radius = sphere_radius
+
+    def analytic_volumes(self):
+        """Exact volume of the sphere and of the box around it."""
+        return (
+            4 / 3 * math.pi * self.sphere_radius ** 3,
+            self.box_width ** 3 - 4 / 3 * math.pi * self.sphere_radius ** 3,
+        )
 
     def _csg_model(self, materials):
         import openmc

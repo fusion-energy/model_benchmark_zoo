@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class Pipe(BaseCommonGeometryObject):
@@ -9,6 +11,13 @@ class Pipe(BaseCommonGeometryObject):
         self.height = height
         self.outer_radius = outer_radius
         self.inner_radius = inner_radius
+
+    def analytic_volumes(self):
+        """Exact volume of the annular wall."""
+        return (
+            math.pi * (self.outer_radius ** 2 - self.inner_radius ** 2)
+            * self.height,
+        )
 
     def _csg_model(self, materials):
         import openmc

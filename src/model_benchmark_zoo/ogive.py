@@ -1,9 +1,18 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class Ogive(BaseCommonGeometryObject):
     def __init__(self, base_radius=5, length=15):
         self.base_radius = base_radius
         self.length = length
+
+    def analytic_volumes(self):
+        """Exact volume of the spherical cap the ogive is a section of."""
+        return (
+            math.pi * self.length
+            * (3 * self.base_radius ** 2 + self.length ** 2) / 6,
+        )
 
     def _csg_model(self, materials):
         import openmc

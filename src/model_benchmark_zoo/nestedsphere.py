@@ -1,8 +1,18 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 class NestedSphere(BaseCommonGeometryObject):
     def __init__(self, radius1=10, radius2=5):
         self.radius1 = radius1
         self.radius2 = radius2
+
+    def analytic_volumes(self):
+        """Exact volume of the inner sphere and of the shell on it."""
+        return (
+            4 / 3 * math.pi * self.radius1 ** 3,
+            4 / 3 * math.pi * (self.radius1 + self.radius2) ** 3
+            - 4 / 3 * math.pi * self.radius1 ** 3,
+        )
 
     def _csg_model(self, materials):
         import openmc

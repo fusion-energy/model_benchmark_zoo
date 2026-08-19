@@ -8,6 +8,13 @@ class TJunction(BaseCommonGeometryObject):
         self.branch_width = branch_width
         self.height = height
 
+    def analytic_volumes(self):
+        """Exact volume of the main bar and of the branch."""
+        return (
+            self.main_length * self.main_width * self.height,
+            self.branch_width * self.branch_length * self.height,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

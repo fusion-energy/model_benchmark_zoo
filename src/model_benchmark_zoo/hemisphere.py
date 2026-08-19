@@ -1,8 +1,16 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class Hemisphere(BaseCommonGeometryObject):
     def __init__(self, radius=10):
         self.radius = radius
+
+    def analytic_volumes(self):
+        """Exact volume, half of 4/3 pi r cubed."""
+        return (
+            2 / 3 * math.pi * self.radius ** 3,
+        )
 
     def _csg_model(self, materials):
         import openmc

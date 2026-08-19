@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class FuelPinCell(BaseCommonGeometryObject):
@@ -6,6 +8,16 @@ class FuelPinCell(BaseCommonGeometryObject):
         self.clad_outer_radius = clad_outer_radius
         self.pitch = pitch
         self.height = height
+
+    def analytic_volumes(self):
+        """Exact volume of the fuel, the clad and the moderator."""
+        return (
+            math.pi * self.fuel_radius ** 2 * self.height,
+            math.pi * (self.clad_outer_radius ** 2 - self.fuel_radius ** 2)
+            * self.height,
+            self.pitch ** 2 * self.height
+            - math.pi * self.clad_outer_radius ** 2 * self.height,
+        )
 
     def _csg_model(self, materials):
         import openmc

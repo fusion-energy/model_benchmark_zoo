@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class HexagonalLatticeCell(BaseCommonGeometryObject):
@@ -5,6 +7,14 @@ class HexagonalLatticeCell(BaseCommonGeometryObject):
         self.hex_edge_length = hex_edge_length
         self.pin_radius = pin_radius
         self.height = height
+
+    def analytic_volumes(self):
+        """Exact volume of the pin and of the hexagon round it."""
+        return (
+            math.pi * self.pin_radius ** 2 * self.height,
+            3 * math.sqrt(3) / 2 * self.hex_edge_length ** 2 * self.height
+            - math.pi * self.pin_radius ** 2 * self.height,
+        )
 
     def _csg_model(self, materials):
         import openmc

@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class DivertorMonoblock(BaseCommonGeometryObject):
@@ -7,6 +9,16 @@ class DivertorMonoblock(BaseCommonGeometryObject):
         self.depth = depth
         self.pipe_outer_radius = pipe_outer_radius
         self.pipe_inner_radius = pipe_inner_radius
+
+    def analytic_volumes(self):
+        """Exact volume of the block and of the pipe wall."""
+        return (
+            self.width * self.height * self.depth
+            - math.pi * self.pipe_outer_radius ** 2 * self.depth,
+            math.pi * (self.pipe_outer_radius ** 2
+            - self.pipe_inner_radius ** 2)
+            * self.depth,
+        )
 
     def _csg_model(self, materials):
         import openmc

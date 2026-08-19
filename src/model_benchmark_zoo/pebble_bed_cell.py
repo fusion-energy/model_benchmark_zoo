@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 
@@ -8,6 +10,12 @@ class PebbleBedCell(BaseCommonGeometryObject):
         self.box_width = box_width
         self.sphere_radius = sphere_radius
         self.sphere_positions = sphere_positions
+
+    def analytic_volumes(self):
+        """Exact volume of each pebble, then of the box round them."""
+        sphere = 4 / 3 * math.pi * self.sphere_radius ** 3
+        pebbles = len(self.sphere_positions)
+        return (sphere,) * pebbles + (self.box_width ** 3 - pebbles * sphere,)
 
     def _csg_model(self, materials):
         import openmc

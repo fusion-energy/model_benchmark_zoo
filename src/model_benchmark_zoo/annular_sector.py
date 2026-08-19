@@ -9,6 +9,13 @@ class AnnularSector(BaseCommonGeometryObject):
         self.height = height
         self.angle = angle
 
+    def analytic_volumes(self):
+        """Exact volume, the annulus scaled by the arc."""
+        return (
+            math.pi * (self.outer_radius ** 2 - self.inner_radius ** 2)
+            * self.height * self.angle / 360,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

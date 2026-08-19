@@ -7,6 +7,12 @@ class Cone(BaseCommonGeometryObject):
         self.height = height
         self.base_radius = base_radius
 
+    def analytic_volumes(self):
+        """Exact volume, a third of the enclosing cylinder."""
+        return (
+            math.pi * self.base_radius ** 2 * self.height / 3,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

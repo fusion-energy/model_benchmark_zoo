@@ -7,6 +7,14 @@ class LShaped(BaseCommonGeometryObject):
         self.leg_thickness = leg_thickness
         self.height = height
 
+    def analytic_volumes(self):
+        """Exact volume, the two legs with the shared corner counted once."""
+        return (
+            self.width * self.leg_thickness * self.height
+            + self.leg_thickness * (self.length - self.leg_thickness)
+            * self.height,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

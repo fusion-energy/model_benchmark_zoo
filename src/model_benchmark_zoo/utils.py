@@ -17,6 +17,32 @@ class BaseCommonGeometryObject:
     side has to reason about where the vacuum boundary belongs.
     """
 
+    def analytic_volumes(self):
+        """Return the exact volume of each solid, or None if there is no formula.
+
+        The volumes come in the same order as the solids of
+        :meth:`cadquery_assembly`, which is the order the material tags are given
+        in, so ``analytic_volumes()[i]`` belongs to the same solid as
+        ``material_tags[i]``.
+
+        These exist so that a mesh can be checked against ground truth rather than
+        against OCCT's answer. A facet chord lies inside the surface it
+        approximates, so a meshed volume comes out under the true one for a convex
+        curved solid and exactly right for a planar one, and that difference is the
+        thing worth measuring. OCCT cannot supply the reference for it, because its
+        own volume is an integral taken to a tolerance and on a B-spline or revolved
+        face that integral carries an error of its own, which is the same size as
+        the faceting error being looked for.
+
+        Returns:
+            A tuple holding one volume per solid, or None where no closed form is
+            available. Oktavian, SimpleTokamak and SphereWithMultipleHoles return
+            None: the first two are assemblies of revolved profiles, and the third
+            has three mutually intersecting bores whose overlaps do not reduce to a
+            standard solid.
+        """
+        return None
+
     def export_stp_file(self, filename: str="common_geometry_object.step"):
         self.cadquery_assembly().save(filename, "STEP")
 

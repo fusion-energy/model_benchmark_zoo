@@ -1,9 +1,18 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class Capsule(BaseCommonGeometryObject):
     def __init__(self, radius=5, cylinder_height=10):
         self.radius = radius
         self.cylinder_height = cylinder_height
+
+    def analytic_volumes(self):
+        """Exact volume, the barrel plus one whole sphere of end caps."""
+        return (
+            math.pi * self.radius ** 2 * self.cylinder_height
+            + 4 / 3 * math.pi * self.radius ** 3,
+        )
 
     def _csg_model(self, materials):
         import openmc
