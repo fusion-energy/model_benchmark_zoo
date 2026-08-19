@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 57 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+The table below lists every model with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
   
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -56,6 +56,7 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/thin_walled_cylinder.png" alt="Thin-walled cylinder" width="100"></p> | Thin-walled cylinder | 1 | Cylindrical thin shell; element quality in narrow annular gap between concentric surfaces |
 | <p align="center"><img src="images/nestedsphere.png" width="100"></p> | Nested sphere | 2 | Concentric curved shells requiring conformal surface meshes at the shared interface |
 | <p align="center"><img src="images/cylinder_in_box.png" alt="Cylinder in box" width="100"></p> | Cylinder in box | 2 | Curved surface tangent to flat faces; cylindrical-to-planar imprinting along tangent lines |
+| <p align="center"><img src="images/cylinder_tangent_to_plate.png" alt="Cylinder tangent to plate" width="100"></p> | Cylinder tangent to plate | 2 | Curved surface touching a flat face along a line; zero dihedral angle where a chord-refined face meets a minimally triangulated one |
 | <p align="center"><img src="images/sphere_in_box.png" alt="Sphere in box" width="100"></p> | Sphere in box | 2 | Curved surface enclosed in rectilinear body; pebble-in-moderator case |
 | <p align="center"><img src="images/cross_junction.png" alt="Cross junction" width="100"></p> | Cross junction | 2 | Four-way body contact; non-coincident face imprinting at 4 re-entrant corners |
 | <p align="center"><img src="images/t_junction.png" alt="T-junction" width="100"></p> | T-junction | 2 | Right-angle body contact; non-coincident face imprinting at a partial shared surface |

@@ -30,6 +30,7 @@ from .concentric_cylinders import *
 from .t_junction import *
 from .l_shaped import *
 from .cylinder_in_box import *
+from .cylinder_tangent_to_plate import *
 from .sphere_in_box import *
 from .chamfered_box import *
 from .hexagonal_prism import *
