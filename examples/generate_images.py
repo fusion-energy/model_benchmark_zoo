@@ -32,6 +32,8 @@ from model_benchmark_zoo import (
     Hemisphere,
     Pipe,
     TruncatedCone,
+    NurbsTruncatedCone,
+    NurbsCylinder,
     Ellipsoid,
     Hyperboloid,
     Paraboloid,
@@ -169,6 +171,16 @@ GEOMETRIES = {
         TruncatedCone,
         "truncated_cone.png",
         {"position": (10, 15, 8), "dolly": 0.95},
+    ),
+    "NurbsTruncatedCone": (
+        NurbsTruncatedCone,
+        "nurbs_truncated_cone.png",
+        {"position": (10, 15, 8), "dolly": 0.95},
+    ),
+    "NurbsCylinder": (
+        NurbsCylinder,
+        "nurbs_cylinder.png",
+        {"position": (12, 18, 15), "dolly": 0.95},
     ),
     "Ellipsoid": (
         Ellipsoid,

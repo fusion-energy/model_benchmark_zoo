@@ -18,6 +18,7 @@ from .three_touching_cuboids import *
 from .hemisphere import *
 from .pipe import *
 from .truncated_cone import *
+from .nurbs_solids import *
 from .ellipsoid import *
 from .hyperboloid import *
 from .paraboloid import *
