@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 57 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+The table below lists every model with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
   
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -84,6 +84,7 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/cladded_plate.png" alt="Cladded plate" width="100"></p> | Cladded plate | 3 | Three-layer planar sandwich; multi-body conformal meshing at shared flat interfaces |
 | <p align="center"><img src="images/thin_gap.png" alt="Thin gap" width="100"></p> | Thin gap | 2 | Two cuboids separated by narrow void gap; thin-slit meshing and streaming path fidelity |
 | <p align="center"><img src="images/thin_plate.png" alt="Thin plate" width="100"></p> | Thin plate | 1 | High aspect ratio (20:1); thin-wall volume meshing with very few layers through thickness |
+| <p align="center"><img src="images/large_planar_face.png" alt="Large planar face" width="100"></p> | Large planar face | 1 | Flat faces spanning 100 target edge lengths; a planar face has no curvature to size triangles by, so it is triangulated as coarsely as its boundary allows however fine an edge length is requested |
 | <p align="center"><img src="images/tetrahedral.png" width="100"></p> | Tetrahedron | 1 | Acute edges and vertices; mesh quality at sharp corners of a simplex |
 | <p align="center"><img src="images/cuboid.png" width="100"></p> | Cuboid | 1 | All-planar baseline; tests basic flat-face meshing and 90-degree edges |
 
