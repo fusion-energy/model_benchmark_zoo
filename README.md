@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 57 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+The table below lists every model with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
   
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -51,6 +51,7 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/sphere_with_cylindrical_hole.png" width="100"></p> | Sphere with cylindrical hole | 1 | Curved-to-curved boolean intersection producing saddle-shaped seam edges |
 | <p align="center"><img src="images/box_with_spherical_cavity.png" width="100"></p> | Box with spherical cavity | 1 | Flat-to-curved boolean intersection; sharp curvature transition at cavity edge |
 | <p align="center"><img src="images/eccentric_nested_cylinders.png" alt="Eccentric nested cylinders" width="100"></p> | Eccentric nested cylinders | 2 | Non-concentric annular gap; varying thin-wall thickness around the circumference |
+| <p align="center"><img src="images/cylinder_tangent_in_bore.png" alt="Cylinder tangent in bore" width="100"></p> | Cylinder tangent in bore | 2 | Rod touching a bore from the inside; the void closes into a cusp either side of the contact rather than opening out |
 | <p align="center"><img src="images/hyperboloid.png" alt="Hyperboloid" width="100"></p> | Hyperboloid | 1 | Negative Gaussian curvature surface; concave and convex directions simultaneously |
 | <p align="center"><img src="images/thin_walled_sphere.png" alt="Thin-walled sphere" width="100"></p> | Thin-walled sphere | 1 | Curved thin shell; element quality in narrow gap between two concentric curved surfaces |
 | <p align="center"><img src="images/thin_walled_cylinder.png" alt="Thin-walled cylinder" width="100"></p> | Thin-walled cylinder | 1 | Cylindrical thin shell; element quality in narrow annular gap between concentric surfaces |
