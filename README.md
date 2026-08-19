@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 57 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+The table below lists every model with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
   
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -78,6 +78,8 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/truncated_cone.png" alt="Truncated cone" width="100"></p> | Truncated cone | 1 | Linearly varying radius; mesh grading from wide base to narrow top |
 | <p align="center"><img src="images/wedge.png" alt="Wedge" width="100"></p> | Wedge | 1 | Acute dihedral angle (~17 degrees); tet quality degrades at sharp edges |
 | <p align="center"><img src="images/l_shaped.png" alt="L-shaped solid" width="100"></p> | L-shaped solid | 1 | Non-convex body with a sharp 90-degree re-entrant corner |
+| <p align="center"><img src="images/t_shaped.png" alt="T-shaped solid" width="100"></p> | T-shaped solid | 1 | Single non-convex body with two sharp 90-degree re-entrant corners |
+| <p align="center"><img src="images/cross_shaped.png" alt="Cross-shaped solid" width="100"></p> | Cross-shaped solid | 1 | Single non-convex body with four sharp 90-degree re-entrant corners |
 | <p align="center"><img src="images/hexagonal_prism.png" alt="Hexagonal prism" width="100"></p> | Hexagonal prism | 1 | Non-90-degree planar edge angles; 120-degree junctions between flat faces |
 | <p align="center"><img src="images/chamfered_box.png" alt="Chamfered box" width="100"></p> | Chamfered box | 1 | Angled planar chamfer faces at non-90-degree edge intersections |
 | <p align="center"><img src="images/cylinder.png" width="100"></p> | Cylinder | 1 | Single curvature surface; baseline for cylindrical faceting accuracy |

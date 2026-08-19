@@ -29,6 +29,8 @@ from .cone import *
 from .concentric_cylinders import *
 from .t_junction import *
 from .l_shaped import *
+from .t_shaped import *
+from .cross_shaped import *
 from .cylinder_in_box import *
 from .sphere_in_box import *
 from .chamfered_box import *
