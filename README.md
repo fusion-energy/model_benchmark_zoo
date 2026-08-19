@@ -25,7 +25,7 @@ The repository then grew into a way to test my DAGMC geometry making package [ca
 
 ## Models
 
-The table below lists all 57 models with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
+The table below lists every model with details of each model. The combined collection covers a significant number of CAD meshing challenges, but feel free to make a pull request if there are more edge cases to cover.
   
 | Model | Description | Materials | Meshing challenge |
 |---|---|---|---|
@@ -45,6 +45,7 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/circulartorus.png" width="100"></p> | Circular torus | 1 | Genus-1 topology with double curvature and saddle-point regions |
 | <p align="center"><img src="images/toroidal_sector.png" alt="Toroidal sector" width="100"></p> | Toroidal sector | 1 | Partial torus arc with open cut faces; double curvature meeting flat end planes |
 | <p align="center"><img src="images/overlapping_spheres.png" alt="Overlapping spheres" width="100"></p> | Overlapping spheres | 2 | Lens-shaped curved intersection seam between two partially overlapping spheres |
+| <p align="center"><img src="images/tangent_spheres.png" alt="Tangent spheres" width="100"></p> | Tangent spheres | 2 | Two spheres touching at a single point; zero dihedral angle at the contact, which faceting cannot reproduce |
 | <p align="center"><img src="images/hexagonal_lattice_cell.png" alt="Hexagonal lattice cell" width="100"></p> | Hexagonal lattice cell | 2 | Cylindrical pin inside hexagonal prism; curved-to-planar imprint at 120-degree face junctions |
 | <p align="center"><img src="images/capsule.png" alt="Capsule" width="100"></p> | Capsule | 1 | Cylinder with hemispherical end caps; curved-to-curved tangent join at cap-barrel seam |
 | <p align="center"><img src="images/ogive.png" alt="Ogive" width="100"></p> | Ogive | 1 | Nose cone (spherical section); curved surface meeting a flat base plane at the perimeter |
