@@ -55,3 +55,4 @@ from .cubic_lattice import *
 from .divertor_monoblock import *
 from .blanket_module import *
 from .two_annular_sectors import *
+from .large_planar_face import *

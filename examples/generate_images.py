@@ -37,6 +37,7 @@ from model_benchmark_zoo import (
     Paraboloid,
     EllipticCylinder,
     ThinPlate,
+    LargePlanarFace,
     ThinWalledSphere,
     Wedge,
     Cone,
@@ -194,6 +195,11 @@ GEOMETRIES = {
         ThinPlate,
         "thin_plate.png",
         {"position": (15, 20, 8), "dolly": 0.95},
+    ),
+    "LargePlanarFace": (
+        LargePlanarFace,
+        "large_planar_face.png",
+        {"position": (60, 80, 45), "dolly": 0.95},
     ),
     "ThinWalledSphere": (
         ThinWalledSphere,
