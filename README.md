@@ -79,6 +79,8 @@ The table below lists every model with details of each model. The combined colle
 | <p align="center"><img src="images/wedge.png" alt="Wedge" width="100"></p> | Wedge | 1 | Acute dihedral angle (~17 degrees); tet quality degrades at sharp edges |
 | <p align="center"><img src="images/dihedral_wedge.png" alt="Dihedral wedge" width="100"></p> | Dihedral wedge | 1 | Two planar faces meeting at a chosen dihedral angle (5 degrees by default); small input angles are the standard reason a conforming tet mesher fails to terminate |
 | <p align="center"><img src="images/l_shaped.png" alt="L-shaped solid" width="100"></p> | L-shaped solid | 1 | Non-convex body with a sharp 90-degree re-entrant corner |
+| <p align="center"><img src="images/t_shaped.png" alt="T-shaped solid" width="100"></p> | T-shaped solid | 1 | Single non-convex body with two sharp 90-degree re-entrant corners |
+| <p align="center"><img src="images/cross_shaped.png" alt="Cross-shaped solid" width="100"></p> | Cross-shaped solid | 1 | Single non-convex body with four sharp 90-degree re-entrant corners |
 | <p align="center"><img src="images/hexagonal_prism.png" alt="Hexagonal prism" width="100"></p> | Hexagonal prism | 1 | Non-90-degree planar edge angles; 120-degree junctions between flat faces |
 | <p align="center"><img src="images/chamfered_box.png" alt="Chamfered box" width="100"></p> | Chamfered box | 1 | Angled planar chamfer faces at non-90-degree edge intersections |
 | <p align="center"><img src="images/cylinder.png" width="100"></p> | Cylinder | 1 | Single curvature surface; baseline for cylindrical faceting accuracy |

@@ -45,6 +45,8 @@ from model_benchmark_zoo import (
     ConcentricCylinders,
     TJunction,
     LShaped,
+    TShaped,
+    CrossShaped,
     CylinderInBox,
     SphereInBox,
     ChamferedBox,
@@ -235,6 +237,16 @@ GEOMETRIES = {
     "LShaped": (
         LShaped,
         "l_shaped.png",
+        {"position": (15, -12, 18), "dolly": 0.95},
+    ),
+    "TShaped": (
+        TShaped,
+        "t_shaped.png",
+        {"position": (15, -12, 18), "dolly": 0.95},
+    ),
+    "CrossShaped": (
+        CrossShaped,
+        "cross_shaped.png",
         {"position": (15, -12, 18), "dolly": 0.95},
     ),
     "CylinderInBox": (
