@@ -1,0 +1,77 @@
+from model_benchmark_zoo import DihedralWedge
+from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
+import openmc
+import pytest
+
+kwargs_options = [{'meshing_backend': 'gmsh',
+        'min_mesh_size': 0.01,
+        'max_mesh_size': 0.5},
+        {'meshing_backend': 'cadquery',
+        'tolerance': 0.1,
+        'angular_tolerance': 0.1,},
+        {'meshing_backend': 'cad-to-dagmc-mesher',
+        'tolerance': 0.01,
+        'angular_tolerance': 0.2,},]
+
+@pytest.mark.parametrize('kwargs', kwargs_options)
+def test_compare(kwargs):
+    # single material used in both simulations
+    mat1 = openmc.Material(name='1')
+    mat1.add_nuclide('Fe56', 1)
+    mat1.set_density('g/cm3', 1)
+
+    # geometry used in both simulations
+    common_geometry_object = DihedralWedge(angle=5, length=10, depth=10)
+    # just writing a CAD step file for visulisation
+    common_geometry_object.export_stp_file("dihedral_wedge.stp")
+
+    mat_filter = openmc.MaterialFilter(mat1)
+    tally = openmc.Tally(name='mat1_flux_tally')
+    tally.filters = [mat_filter]
+    tally.scores = ['flux']
+    my_tallies = openmc.Tallies([tally])
+
+    my_settings = openmc.Settings()
+    my_settings.batches = 10
+    my_settings.inactive = 0
+    my_settings.particles = 500
+    my_settings.run_mode = 'fixed source'
+
+    # Create a DT point source at the centroid of the triangular cross-section
+    my_source = openmc.IndependentSource()
+    my_source.space = openmc.stats.Point((6.67, 0.29, 0))
+    my_source.angle = openmc.stats.Isotropic()
+    my_source.energy = openmc.stats.Discrete([14e6], [1])
+    my_settings.source = my_source
+
+    # making openmc.Model with CSG geometry
+    csg_model = common_geometry_object.csg_model(materials=[mat1])
+    csg_model.tallies = my_tallies
+    csg_model.settings = my_settings
+
+    output_file_from_csg = csg_model.run()
+
+    # extracting the tally result from the CSG simulation
+    with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
+        csg_result = read_tally(sp_from_csg, "mat1_flux_tally")
+
+    # making openmc.Model with DAGMC geometry
+    common_geometry_object.export_h5m_file_with_cad_to_dagmc(
+        filename='dihedral_wedge.h5m',
+        material_tags=['1'],
+        **kwargs
+    )
+    dag_model = common_geometry_object.dagmc_model(
+        h5m_filename='dihedral_wedge.h5m',
+        materials=[mat1]
+    )
+    dag_model.tallies = my_tallies
+    dag_model.settings = my_settings
+
+    output_file_from_cad = dag_model.run()
+
+    # extracting the tally result from the DAGMC simulation
+    with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
+        cad_result = read_tally(sp_from_cad, "mat1_flux_tally")
+
+    assert_tally_agreement(cad_result, csg_result)

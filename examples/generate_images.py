@@ -40,6 +40,7 @@ from model_benchmark_zoo import (
     LargePlanarFace,
     ThinWalledSphere,
     Wedge,
+    DihedralWedge,
     Cone,
     ConcentricCylinders,
     TJunction,
@@ -210,6 +211,11 @@ GEOMETRIES = {
         Wedge,
         "wedge.png",
         {"position": (10, 15, 12), "dolly": 0.95},
+    ),
+    "DihedralWedge": (
+        DihedralWedge,
+        "dihedral_wedge.png",
+        {"position": (16, 10, 18), "view_up": (0, 1, 0), "dolly": 0.95},
     ),
     "Cone": (
         Cone,
