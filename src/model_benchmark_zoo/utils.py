@@ -7,6 +7,14 @@ from typing import Sequence
 #: box, so the two describe the same transport problem.
 BOUNDING_BOX_PADDING = 1.0
 
+#: First ID given to the bounding box of a DAGMC model. DAGMC numbers its own
+#: surfaces and cells from 1, and OpenMC refuses to load a model where the same ID
+#: appears both inside a DAGMC universe and in the CSG geometry around it. Leaving
+#: the box on automatic IDs works only until the automatic counter happens to reach
+#: the range the DAGMC file already uses. 10000 is the offset OpenMC's own
+#: ``DAGMCUniverse.bounded_universe`` picks for the same reason.
+DAGMC_BOUNDING_ID = 10000
+
 
 class BaseCommonGeometryObject:
     """Base class giving every model a CSG and a CAD form of the same geometry.
@@ -64,14 +72,26 @@ class BaseCommonGeometryObject:
         return (tuple(lower - BOUNDING_BOX_PADDING),
                 tuple(upper + BOUNDING_BOX_PADDING))
 
-    def _bounding_surface(self):
+    def _bounding_surface(self, starting_id=None):
+        """Return the padded bounding box as a single composite surface.
+
+        Args:
+            starting_id: ID to give the first of the box's six planes, with the
+                rest following on from it. Left as None the planes take whatever
+                the automatic counter offers, which is right for the CSG model and
+                wrong for the DAGMC one.
+        """
         import openmc
 
         lower, upper = self.bounding_box()
-        return openmc.model.RectangularParallelepiped(
+        surface = openmc.model.RectangularParallelepiped(
             lower[0], upper[0], lower[1], upper[1], lower[2], upper[2],
             boundary_type="vacuum"
         )
+        if starting_id is not None:
+            for offset, name in enumerate(surface._surface_names):
+                getattr(surface, name).id = starting_id + offset
+        return surface
 
     def csg_model(self, materials):
         """Return the CSG model enclosed in the padded void box.
@@ -174,9 +194,11 @@ class BaseCommonGeometryObject:
         if not Path(h5m_filename).exists():
             print(f'DAGMC h5m file with filename = {h5m_filename} not found, try making use of export_h5m_file first')
 
-        boundary = self._bounding_surface()
+        boundary = self._bounding_surface(starting_id=DAGMC_BOUNDING_ID)
         bounding_cell = openmc.Cell(
-            fill=openmc.DAGMCUniverse(h5m_filename), region=-boundary
+            cell_id=DAGMC_BOUNDING_ID,
+            fill=openmc.DAGMCUniverse(h5m_filename),
+            region=-boundary,
         )
         geometry = openmc.Geometry(openmc.Universe(cells=[bounding_cell]))
 
