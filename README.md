@@ -81,6 +81,8 @@ The table below lists every model with details of each model. The combined colle
 | <p align="center"><img src="images/sphere.png" width="100"></p> | Sphere | 1 | Uniform curvature with poles; baseline for faceting error on curved surfaces |
 | <p align="center"><img src="images/pipe.png" alt="Pipe" width="100"></p> | Pipe | 1 | Hollow cylindrical wall; thin annular cross-section with inner void |
 | <p align="center"><img src="images/truncated_cone.png" alt="Truncated cone" width="100"></p> | Truncated cone | 1 | Linearly varying radius; mesh grading from wide base to narrow top |
+| <p align="center"><img src="images/nurbs_truncated_cone.png" alt="NURBS truncated cone" width="100"></p> | NURBS truncated cone | 1 | Lofted frustum kept as a rational B-spline surface rather than the cone OCCT recognises it to be; the loft is between two different cross-sections |
+| <p align="center"><img src="images/nurbs_cylinder.png" alt="NURBS cylinder" width="100"></p> | NURBS cylinder | 1 | Same shape as the cylinder but with every face a B-spline; the control for whether a NURBS input meshes worse than an analytic one |
 | <p align="center"><img src="images/wedge.png" alt="Wedge" width="100"></p> | Wedge | 1 | Acute dihedral angle (~17 degrees); tet quality degrades at sharp edges |
 | <p align="center"><img src="images/dihedral_wedge.png" alt="Dihedral wedge" width="100"></p> | Dihedral wedge | 1 | Two planar faces meeting at a chosen dihedral angle (5 degrees by default); small input angles are the standard reason a conforming tet mesher fails to terminate |
 | <p align="center"><img src="images/l_shaped.png" alt="L-shaped solid" width="100"></p> | L-shaped solid | 1 | Non-convex body with a sharp 90-degree re-entrant corner |

@@ -1,0 +1,64 @@
+from model_benchmark_zoo import NurbsCylinder
+from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
+import openmc
+
+def test_compare():
+    # single material used in both simulations
+    mat1 = openmc.Material(name='1')
+    mat1.add_nuclide('Fe56', 1)
+    mat1.set_density('g/cm3', 1)
+
+    # geometry used in both simulations
+    common_geometry_object = NurbsCylinder(radius=5, height=10)
+    # just writing a CAD step file for visulisation
+    common_geometry_object.export_stp_file("nurbs_cylinder.stp")
+
+    mat_filter = openmc.MaterialFilter(mat1)
+    tally = openmc.Tally(name='mat1_flux_tally')
+    tally.filters = [mat_filter]
+    tally.scores = ['flux']
+    my_tallies = openmc.Tallies([tally])
+
+    my_settings = openmc.Settings()
+    my_settings.batches = 10
+    my_settings.inactive = 0
+    my_settings.particles = 500
+    my_settings.run_mode = 'fixed source'
+
+    # Create a DT point source at the centre of the cylinder
+    my_source = openmc.IndependentSource()
+    my_source.space = openmc.stats.Point((0, 0, 0))
+    my_source.angle = openmc.stats.Isotropic()
+    my_source.energy = openmc.stats.Discrete([14e6], [1])
+    my_settings.source = my_source
+
+    # making openmc.Model with CSG geometry
+    csg_model = common_geometry_object.csg_model(materials=[mat1])
+    csg_model.tallies = my_tallies
+    csg_model.settings = my_settings
+
+    output_file_from_csg = csg_model.run()
+
+    # extracting the tally result from the CSG simulation
+    with openmc.StatePoint(output_file_from_csg) as sp_from_csg:
+        csg_result = read_tally(sp_from_csg, "mat1_flux_tally")
+
+    # making openmc.Model with DAGMC geometry
+    common_geometry_object.export_h5m_file_with_cad_to_openmc(
+        h5m_filename='nurbs_cylinder.h5m',
+        material_tags=['1'],
+    )
+    dag_model = common_geometry_object.dagmc_model(
+        h5m_filename='nurbs_cylinder.h5m',
+        materials=[mat1]
+    )
+    dag_model.tallies = my_tallies
+    dag_model.settings = my_settings
+
+    output_file_from_cad = dag_model.run()
+
+    # extracting the tally result from the DAGMC simulation
+    with openmc.StatePoint(output_file_from_cad) as sp_from_cad:
+        cad_result = read_tally(sp_from_cad, "mat1_flux_tally")
+
+    assert_tally_agreement(cad_result, csg_result)
