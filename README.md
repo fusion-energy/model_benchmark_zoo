@@ -89,6 +89,7 @@ The table below lists every model with details of each model. The combined colle
 | <p align="center"><img src="images/hexagonal_prism.png" alt="Hexagonal prism" width="100"></p> | Hexagonal prism | 1 | Non-90-degree planar edge angles; 120-degree junctions between flat faces |
 | <p align="center"><img src="images/chamfered_box.png" alt="Chamfered box" width="100"></p> | Chamfered box | 1 | Angled planar chamfer faces at non-90-degree edge intersections |
 | <p align="center"><img src="images/cylinder.png" width="100"></p> | Cylinder | 1 | Single curvature surface; baseline for cylindrical faceting accuracy |
+| <p align="center"><img src="images/scaled_cylinder.png" alt="Scaled cylinder" width="100"></p> | Scaled cylinder | 1 | One shape emitted at any absolute size; separates genuine geometry failures from coupling to the mesher's absolute length settings |
 | <p align="center"><img src="images/cladded_plate.png" alt="Cladded plate" width="100"></p> | Cladded plate | 3 | Three-layer planar sandwich; multi-body conformal meshing at shared flat interfaces |
 | <p align="center"><img src="images/thin_gap.png" alt="Thin gap" width="100"></p> | Thin gap | 2 | Two cuboids separated by narrow void gap; thin-slit meshing and streaming path fidelity |
 | <p align="center"><img src="images/thin_plate.png" alt="Thin plate" width="100"></p> | Thin plate | 1 | High aspect ratio (20:1); thin-wall volume meshing with very few layers through thickness |

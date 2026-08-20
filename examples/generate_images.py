@@ -17,6 +17,7 @@ from model_benchmark_zoo import (
     Sphere,
     NestedSphere,
     Cylinder,
+    ScaledCylinder,
     NestedCylinder,
     TwoTouchingCuboids,
     Circulartorus,
@@ -104,6 +105,11 @@ GEOMETRIES = {
         Cylinder,
         "cylinder.png",
         {"position": (5, 15, 25), "dolly": 0.95},
+    ),
+    "ScaledCylinder": (
+        ScaledCylinder,
+        "scaled_cylinder.png",
+        {"position": (12, 18, 15), "dolly": 0.95},
     ),
     "NestedCylinder": (
         NestedCylinder,
