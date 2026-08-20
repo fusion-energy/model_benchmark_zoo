@@ -7,6 +7,14 @@ class CladdedPlate(BaseCommonGeometryObject):
         self.core_thickness = core_thickness
         self.clad_thickness = clad_thickness
 
+    def analytic_volumes(self):
+        """Exact volume of the clad, the core and the clad."""
+        return (
+            self.width * self.length * self.clad_thickness,
+            self.width * self.length * self.core_thickness,
+            self.width * self.length * self.clad_thickness,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

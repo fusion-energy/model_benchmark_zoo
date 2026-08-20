@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class EllipticCylinder(BaseCommonGeometryObject):
@@ -5,6 +7,12 @@ class EllipticCylinder(BaseCommonGeometryObject):
         self.a = a
         self.b = b
         self.height = height
+
+    def analytic_volumes(self):
+        """Exact volume, the ellipse's area times the height."""
+        return (
+            math.pi * self.a * self.b * self.height,
+        )
 
     def _csg_model(self, materials):
         import openmc

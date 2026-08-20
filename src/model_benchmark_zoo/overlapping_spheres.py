@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class OverlappingSpheres(BaseCommonGeometryObject):
@@ -8,6 +10,17 @@ class OverlappingSpheres(BaseCommonGeometryObject):
 
         self.radius = radius
         self.separation = separation
+
+    def analytic_volumes(self):
+        """Exact volume of the whole first sphere, then the second less the lens.
+
+        The lens the two share is a pair of spherical caps of height
+        radius - separation / 2, and the second sphere is the one cut back by it.
+        """
+        whole = 4 / 3 * math.pi * self.radius ** 3
+        cap_height = self.radius - self.separation / 2
+        cap = math.pi * cap_height ** 2 * (3 * self.radius - cap_height) / 3
+        return (whole, whole - 2 * cap)
 
     def _csg_model(self, materials):
         import openmc

@@ -1,9 +1,16 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class CubicLattice(BaseCommonGeometryObject):
     def __init__(self, box_width=20, sphere_radius=3):
         self.box_width = box_width
         self.sphere_radius = sphere_radius
+
+    def analytic_volumes(self):
+        """Exact volume of each of the eight spheres, then of the box round them."""
+        sphere = 4 / 3 * math.pi * self.sphere_radius ** 3
+        return (sphere,) * 8 + (self.box_width ** 3 - 8 * sphere,)
 
     def _csg_model(self, materials):
         import openmc

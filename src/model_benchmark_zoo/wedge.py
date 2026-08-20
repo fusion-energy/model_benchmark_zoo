@@ -6,6 +6,12 @@ class Wedge(BaseCommonGeometryObject):
         self.height = height
         self.depth = depth
 
+    def analytic_volumes(self):
+        """Exact volume of the triangular prism."""
+        return (
+            self.base * self.height / 2 * self.depth,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

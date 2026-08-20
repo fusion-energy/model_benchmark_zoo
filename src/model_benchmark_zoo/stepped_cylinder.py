@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class SteppedCylinder(BaseCommonGeometryObject):
@@ -9,6 +11,13 @@ class SteppedCylinder(BaseCommonGeometryObject):
         self.height = height
         self.large_radius = large_radius
         self.small_radius = small_radius
+
+    def analytic_volumes(self):
+        """Exact volume of each half height step."""
+        return (
+            math.pi * self.large_radius ** 2 * self.height / 2,
+            math.pi * self.small_radius ** 2 * self.height / 2,
+        )
 
     def _csg_model(self, materials):
         import openmc

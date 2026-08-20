@@ -1,9 +1,18 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class CylindricalIntersection(BaseCommonGeometryObject):
     def __init__(self, radius=3, length=20):
         self.radius = radius
         self.length = length
+
+    def analytic_volumes(self):
+        """Exact volume of the union, two cylinders less the Steinmetz solid they share."""
+        return (
+            2 * math.pi * self.radius ** 2 * self.length
+            - 16 * self.radius ** 3 / 3,
+        )
 
     def _csg_model(self, materials):
         import openmc

@@ -6,6 +6,14 @@ class CrossJunction(BaseCommonGeometryObject):
         self.arm_width = arm_width
         self.depth = depth
 
+    def analytic_volumes(self):
+        """Exact volume of the through bar and of the two arms it separates."""
+        return (
+            2 * self.arm_length * self.arm_width * self.depth,
+            self.arm_width * (self.arm_length - self.arm_width / 2) * self.depth,
+            self.arm_width * (self.arm_length - self.arm_width / 2) * self.depth,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

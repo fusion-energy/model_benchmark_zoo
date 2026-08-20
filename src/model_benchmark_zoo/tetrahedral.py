@@ -3,6 +3,12 @@ class Tetrahedral(BaseCommonGeometryObject):
     def __init__(self, length:float=1.,):
         self.length = length
 
+    def analytic_volumes(self):
+        """Exact volume of a corner tetrahedron, a sixth of the cube."""
+        return (
+            self.length ** 3 / 6,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

@@ -13,6 +13,13 @@ class TwoTetrahedrons(BaseCommonGeometryObject):
     ):
         self.length = length
 
+    def analytic_volumes(self):
+        """Exact volume of each tetrahedron, a sixth of the cube."""
+        return (
+            self.length ** 3 / 6,
+            self.length ** 3 / 6,
+        )
+
     def _csg_model(self, materials):
         """
         Creates a CSG model of two tetrahedrons sharing a face.

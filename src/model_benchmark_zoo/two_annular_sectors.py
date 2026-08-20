@@ -43,6 +43,15 @@ class _TwoAnnularSectorsBase(BaseCommonGeometryObject):
         """Angle at which the second sector starts, centred within the first."""
         return (self.angle - self.second_angle) / 2
 
+    def analytic_volumes(self):
+        """Exact volume of each sector, its annulus scaled by its arc."""
+        return (
+            math.pi * (self.mid_radius ** 2 - self.inner_radius ** 2)
+            * self.height * self.angle / 360,
+            math.pi * (self.outer_radius ** 2 - self.mid_radius ** 2)
+            * self.second_height * self.second_angle / 360,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

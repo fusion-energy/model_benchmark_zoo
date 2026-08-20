@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class BlanketModule(BaseCommonGeometryObject):
@@ -7,6 +9,16 @@ class BlanketModule(BaseCommonGeometryObject):
         self.outer_depth = outer_depth
         self.wall_thickness = wall_thickness
         self.channel_radius = channel_radius
+
+    def analytic_volumes(self):
+        """Exact volume of the wall, the breeder and the coolant channel."""
+        outer = self.outer_width * self.outer_depth * self.outer_height
+        inner_width = self.outer_width - 2 * self.wall_thickness
+        inner_depth = self.outer_depth - 2 * self.wall_thickness
+        inner_height = self.outer_height - 2 * self.wall_thickness
+        inner = inner_width * inner_depth * inner_height
+        channel = math.pi * self.channel_radius ** 2 * inner_depth
+        return (outer - inner, inner - channel, channel)
 
     def _csg_model(self, materials):
         import openmc

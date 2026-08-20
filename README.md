@@ -87,6 +87,46 @@ The table below lists all 57 models with details of each model. The combined col
 | <p align="center"><img src="images/tetrahedral.png" width="100"></p> | Tetrahedron | 1 | Acute edges and vertices; mesh quality at sharp corners of a simplex |
 | <p align="center"><img src="images/cuboid.png" width="100"></p> | Cuboid | 1 | All-planar baseline; tests basic flat-face meshing and 90-degree edges |
 
+## Sweeping a parameter
+
+Every model takes its dimensions as constructor arguments, so a study varies one and
+leaves the rest alone rather than comparing two models that differ in several ways at
+once:
+
+```python
+from model_benchmark_zoo import DihedralWedge
+
+for angle in (20, 10, 5, 2, 1):
+    model = DihedralWedge(angle=angle)
+    model.export_h5m_file_with_cad_to_dagmc(
+        filename=f"wedge_{angle}.h5m", material_tags=["1"],
+        meshing_backend="gmsh", min_mesh_size=0.01, max_mesh_size=0.5,
+    )
+```
+
+Two things are worth knowing before sweeping a size rather than an angle.
+
+The meshing arguments that are lengths, `min_mesh_size`, `max_mesh_size` and
+`tolerance`, are absolute distances, so they have to be scaled along with the model or
+the sweep measures the settings instead of the geometry. `angular_tolerance` is an
+angle and should be left alone. `ScaledCylinder` exists to isolate exactly this.
+
+`analytic_volumes()` returns the exact volume of each solid, in the same order as the
+material tags, for every model that has a closed form:
+
+```python
+from model_benchmark_zoo import Pipe
+
+model = Pipe(height=20, outer_radius=5, inner_radius=4)
+model.analytic_volumes()  # (565.4866776461628,)
+```
+
+Use it as the reference when checking how much volume a mesh loses. A facet chord lies
+inside the surface it approximates, so a mesh comes out under the true volume for a
+convex curved solid and exactly right for a planar one. OCCT's own volume cannot
+measure that, because on a revolved or B-spline face it is an integral carrying an
+error of its own.
+
 ## Installation
 
 First clone the repository:

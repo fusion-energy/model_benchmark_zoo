@@ -7,6 +7,12 @@ class Paraboloid(BaseCommonGeometryObject):
         self.focal_length = focal_length
         self.height = height
 
+    def analytic_volumes(self):
+        """Exact volume, pi f h squared, half the enclosing cylinder."""
+        return (
+            math.pi * self.focal_length * self.height ** 2,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

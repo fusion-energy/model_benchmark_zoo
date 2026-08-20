@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class ThinWalledCylinder(BaseCommonGeometryObject):
@@ -9,6 +11,14 @@ class ThinWalledCylinder(BaseCommonGeometryObject):
         self.height = height
         self.outer_radius = outer_radius
         self.wall_thickness = wall_thickness
+
+    def analytic_volumes(self):
+        """Exact volume of the annular wall."""
+        return (
+            math.pi * self.height
+            * (self.outer_radius ** 2
+               - (self.outer_radius - self.wall_thickness) ** 2),
+        )
 
     def _csg_model(self, materials):
         import openmc

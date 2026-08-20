@@ -44,4 +44,5 @@ jobs:
           pip install openmc_data_downloader
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9 Al27
           pip install .[tests]
+          pytest tests/test_analytic_volumes.py
           pytest tests/test_cad_to_openmc

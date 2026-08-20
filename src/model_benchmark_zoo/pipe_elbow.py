@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class PipeElbow(BaseCommonGeometryObject):
@@ -9,6 +11,13 @@ class PipeElbow(BaseCommonGeometryObject):
         self.bend_radius = bend_radius
         self.outer_radius = outer_radius
         self.inner_radius = inner_radius
+
+    def analytic_volumes(self):
+        """Exact volume, a quarter of the toroidal annulus."""
+        return (
+            2 * math.pi ** 2 * self.bend_radius
+            * (self.outer_radius ** 2 - self.inner_radius ** 2) / 4,
+        )
 
     def _csg_model(self, materials):
         import openmc

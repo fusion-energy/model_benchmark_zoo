@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 class NestedCylinder(BaseCommonGeometryObject):
     def __init__(self, height1=15, height2=8, radius1=15, radius2=8):
@@ -11,6 +13,14 @@ class NestedCylinder(BaseCommonGeometryObject):
         self.height2 = height2
         self.radius1 = radius1
         self.radius2 = radius2
+
+    def analytic_volumes(self):
+        """Exact volume of the outer solid, less the inner, then the inner."""
+        return (
+            math.pi * self.radius1 ** 2 * self.height1
+            - math.pi * self.radius2 ** 2 * self.height2,
+            math.pi * self.radius2 ** 2 * self.height2,
+        )
 
     def _csg_model(self, materials):
         import openmc

@@ -7,6 +7,14 @@ class ChamferedBox(BaseCommonGeometryObject):
         self.width = width
         self.chamfer = chamfer
 
+    def analytic_volumes(self):
+        """Exact volume, the cube less twelve edge prisms and eight corners."""
+        return (
+            self.width ** 3
+            - 6 * self.chamfer ** 2 * (self.width - 2 * self.chamfer)
+            - 20 * self.chamfer ** 3 / 3,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

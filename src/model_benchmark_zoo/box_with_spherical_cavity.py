@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class BoxWithSphericalCavity(BaseCommonGeometryObject):
@@ -8,6 +10,12 @@ class BoxWithSphericalCavity(BaseCommonGeometryObject):
 
         self.width = width
         self.sphere_radius = sphere_radius
+
+    def analytic_volumes(self):
+        """Exact volume, the box less the enclosed sphere."""
+        return (
+            self.width ** 3 - 4 / 3 * math.pi * self.sphere_radius ** 3,
+        )
 
     def _csg_model(self, materials):
         import openmc

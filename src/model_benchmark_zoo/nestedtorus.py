@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 import cadquery as cq
 import openmc
@@ -14,6 +16,18 @@ class Nestedtorus(BaseCommonGeometryObject):
             raise ValueError("minor_radii must be in descending order.")
         self.major_radius = major_radius
         self.minor_radii = minor_radii
+
+    def analytic_volumes(self):
+        """Exact volume of the core and of each toroidal shell outside it."""
+        volumes = []
+        previous = 0.0
+        for minor_radius in sorted(self.minor_radii):
+            volumes.append(
+                2 * math.pi ** 2 * self.major_radius
+                * (minor_radius ** 2 - previous ** 2)
+            )
+            previous = minor_radius
+        return tuple(volumes)
 
     def _csg_model(self, materials):
         """

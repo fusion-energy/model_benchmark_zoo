@@ -6,6 +6,12 @@ class ThinPlate(BaseCommonGeometryObject):
         self.width = width
         self.thickness = thickness
 
+    def analytic_volumes(self):
+        """Exact volume, the product of the three sides."""
+        return (
+            self.length * self.width * self.thickness,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

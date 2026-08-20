@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class TruncatedCone(BaseCommonGeometryObject):
@@ -11,6 +13,15 @@ class TruncatedCone(BaseCommonGeometryObject):
         self.height = height
         self.bottom_radius = bottom_radius
         self.top_radius = top_radius
+
+    def analytic_volumes(self):
+        """Exact volume of the frustum."""
+        return (
+            math.pi * self.height / 3
+            * (self.bottom_radius ** 2
+            + self.bottom_radius * self.top_radius
+            + self.top_radius ** 2),
+        )
 
     def _csg_model(self, materials):
         import openmc

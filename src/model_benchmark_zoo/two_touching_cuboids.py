@@ -14,6 +14,13 @@ class TwoTouchingCuboids(BaseCommonGeometryObject):
         self.width1 = width1
         self.width2 = width2
 
+    def analytic_volumes(self):
+        """Exact volume of the cube and of the slab on its face."""
+        return (
+            self.width1 ** 3,
+            self.width1 ** 2 * self.width2,
+        )
+
     def _csg_model(self, materials):
         import openmc
         surface1 = openmc.ZPlane(z0=self.width1*0.5, boundary_type="vacuum")

@@ -1,8 +1,16 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 class Cylinder(BaseCommonGeometryObject):
     def __init__(self, radius=1, height=20):
         self.radius = radius
         self.height = height
+
+    def analytic_volumes(self):
+        """Exact volume, pi r squared times the height."""
+        return (
+            math.pi * self.radius ** 2 * self.height,
+        )
 
     def _csg_model(self, materials):
         import openmc

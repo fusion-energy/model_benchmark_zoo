@@ -12,6 +12,14 @@ class ThreeTouchingCuboids(BaseCommonGeometryObject):
     def __init__(self, width=5):
         self.width = width
 
+    def analytic_volumes(self):
+        """Exact volume of each of the three equal cubes."""
+        return (
+            self.width ** 3,
+            self.width ** 3,
+            self.width ** 3,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

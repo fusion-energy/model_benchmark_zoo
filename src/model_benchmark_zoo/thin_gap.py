@@ -7,6 +7,13 @@ class ThinGap(BaseCommonGeometryObject):
         self.box_depth = box_depth
         self.gap = gap
 
+    def analytic_volumes(self):
+        """Exact volume of each box; the gap holds no material."""
+        return (
+            self.box_width * self.box_height * self.box_depth,
+            self.box_width * self.box_height * self.box_depth,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

@@ -8,6 +8,12 @@ class HexagonalPrism(BaseCommonGeometryObject):
         self.outer_radius = outer_radius
         self.height = height
 
+    def analytic_volumes(self):
+        """Exact volume, the regular hexagon's area times the height."""
+        return (
+            3 * math.sqrt(3) / 2 * self.outer_radius ** 2 * self.height,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

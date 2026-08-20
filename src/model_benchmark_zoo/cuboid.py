@@ -4,6 +4,12 @@ class Cuboid(BaseCommonGeometryObject):
     def __init__(self, width=10):
         self.width = width
 
+    def analytic_volumes(self):
+        """Exact volume, the cube of the width."""
+        return (
+            self.width ** 3,
+        )
+
     def _csg_model(self, materials):
         import openmc
         

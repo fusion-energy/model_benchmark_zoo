@@ -14,6 +14,21 @@ class Hyperboloid(BaseCommonGeometryObject):
         self.top_radius = top_radius
         self.height = height
 
+    def analytic_volumes(self):
+        """Exact volume of the hyperboloid of one sheet.
+
+        The radius grows as r(z) squared = a squared (1 + z squared / c squared),
+        with c the same scale the CSG quadric uses, so integrating pi r squared over
+        the height gives pi a squared (h + h cubed / (12 c squared)).
+        """
+        c = (0.5 * self.height) / math.sqrt(
+            (self.top_radius / self.waist_radius) ** 2 - 1
+        )
+        return (
+            math.pi * self.waist_radius ** 2
+            * (self.height + self.height ** 3 / 12 / c ** 2),
+        )
+
     def _csg_model(self, materials):
         import openmc
 

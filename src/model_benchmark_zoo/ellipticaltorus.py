@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 class Ellipticaltorus(BaseCommonGeometryObject):
     def __init__(self, major_radius=10, minor_radius1=2, minor_radius2=1):
@@ -7,6 +9,13 @@ class Ellipticaltorus(BaseCommonGeometryObject):
         self.major_radius = major_radius
         self.minor_radius1 = minor_radius1
         self.minor_radius2 = minor_radius2
+
+    def analytic_volumes(self):
+        """Exact volume, 2 pi squared R times the two minor radii."""
+        return (
+            2 * math.pi ** 2 * self.major_radius
+            * self.minor_radius1 * self.minor_radius2,
+        )
 
     def _csg_model(self, materials):
         import openmc

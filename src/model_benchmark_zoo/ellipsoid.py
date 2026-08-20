@@ -7,6 +7,13 @@ class Ellipsoid(BaseCommonGeometryObject):
         self.equatorial_radius = equatorial_radius
         self.polar_radius = polar_radius
 
+    def analytic_volumes(self):
+        """Exact volume of the spheroid, 4/3 pi a squared c."""
+        return (
+            4 / 3 * math.pi * self.equatorial_radius ** 2
+            * self.polar_radius,
+        )
+
     def _csg_model(self, materials):
         import openmc
 

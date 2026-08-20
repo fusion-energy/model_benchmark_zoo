@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class ThinWalledSphere(BaseCommonGeometryObject):
@@ -6,6 +8,13 @@ class ThinWalledSphere(BaseCommonGeometryObject):
             raise ValueError('inner_radius should be less than outer_radius')
         self.outer_radius = outer_radius
         self.inner_radius = inner_radius
+
+    def analytic_volumes(self):
+        """Exact volume of the spherical shell."""
+        return (
+            4 / 3 * math.pi * self.outer_radius ** 3
+            - 4 / 3 * math.pi * self.inner_radius ** 3,
+        )
 
     def _csg_model(self, materials):
         import openmc

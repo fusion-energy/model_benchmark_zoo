@@ -1,3 +1,5 @@
+import math
+
 from .utils import BaseCommonGeometryObject
 
 class SphereWithCylindricalHole(BaseCommonGeometryObject):
@@ -8,6 +10,13 @@ class SphereWithCylindricalHole(BaseCommonGeometryObject):
 
         self.sphere_radius = sphere_radius
         self.cylinder_radius = cylinder_radius
+
+    def analytic_volumes(self):
+        """Exact volume of a sphere with a bore through it, 4/3 pi (R squared - a squared) to the three halves."""
+        return (
+            4 / 3 * math.pi
+            * (self.sphere_radius ** 2 - self.cylinder_radius ** 2) ** 1.5,
+        )
 
     def _csg_model(self, materials):
         import openmc
