@@ -61,6 +61,7 @@ from model_benchmark_zoo import (
     OverlappingSpheres,
     TangentSpheres,
     EccentricNestedCylinders,
+    CylinderTangentInBore,
     CrossJunction,
     ToroidalSector,
     PipeElbow,
@@ -323,6 +324,11 @@ GEOMETRIES = {
         EccentricNestedCylinders,
         "eccentric_nested_cylinders.png",
         {"position": (15, 20, 18), "dolly": 0.95},
+    ),
+    "CylinderTangentInBore": (
+        CylinderTangentInBore,
+        "cylinder_tangent_in_bore.png",
+        {"position": (12, 16, 22), "dolly": 0.9},
     ),
     "CrossJunction": (
         CrossJunction,

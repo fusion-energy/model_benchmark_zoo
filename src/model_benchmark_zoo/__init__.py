@@ -46,6 +46,7 @@ from .sphere_with_multiple_holes import *
 from .overlapping_spheres import *
 from .tangent_spheres import *
 from .eccentric_nested_cylinders import *
+from .cylinder_tangent_in_bore import *
 from .cross_junction import *
 from .toroidal_sector import *
 from .pipe_elbow import *
