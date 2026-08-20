@@ -42,7 +42,14 @@ def test_compare(kwargs):
     my_settings = openmc.Settings()
     my_settings.batches = 10
     my_settings.inactive = 0
-    my_settings.particles = 500
+    # Oktavian is compared against a 1 percent relative bound rather than the 2
+    # percent default. At 500 particles the run to run scatter in that comparison is
+    # itself of order 1 percent, so the bound tests the random number stream: the same
+    # geometry measures 0.68 percent here and 1.010 percent on CI, which fails. The
+    # difference is not systematic, it converges away as 0.59 percent at 5000 particles
+    # and 0.07 percent at 50000, so the particle count is raised until the comparison is
+    # dominated by the geometry, as was done for blanket_module and simple_tokamak.
+    my_settings.particles = 50000
     my_settings.run_mode = 'fixed source'
 
     # Create a DT point source
