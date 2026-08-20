@@ -49,6 +49,7 @@ from model_benchmark_zoo import (
     TShaped,
     CrossShaped,
     CylinderInBox,
+    CylinderTangentToPlate,
     SphereInBox,
     ChamferedBox,
     HexagonalPrism,
@@ -262,6 +263,11 @@ GEOMETRIES = {
         CylinderInBox,
         "cylinder_in_box.png",
         {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "CylinderTangentToPlate": (
+        CylinderTangentToPlate,
+        "cylinder_tangent_to_plate.png",
+        {"position": (24, 26, 14), "dolly": 0.9},
     ),
     "SphereInBox": (
         SphereInBox,
