@@ -43,6 +43,7 @@ from .stepped_corner import *
 from .thin_walled_cylinder import *
 from .sphere_with_multiple_holes import *
 from .overlapping_spheres import *
+from .tangent_spheres import *
 from .eccentric_nested_cylinders import *
 from .cross_junction import *
 from .toroidal_sector import *

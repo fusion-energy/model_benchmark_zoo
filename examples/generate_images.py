@@ -58,6 +58,7 @@ from model_benchmark_zoo import (
     ThinWalledCylinder,
     SphereWithMultipleHoles,
     OverlappingSpheres,
+    TangentSpheres,
     EccentricNestedCylinders,
     CrossJunction,
     ToroidalSector,
@@ -76,6 +77,7 @@ from model_benchmark_zoo import (
     BlanketModule,
     ThinGap,
     CylindricalIntersection,
+
 )
 
 # Each entry: (class, output_filename, camera_kwargs)
@@ -305,6 +307,11 @@ GEOMETRIES = {
         OverlappingSpheres,
         "overlapping_spheres.png",
         {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "TangentSpheres": (
+        TangentSpheres,
+        "tangent_spheres.png",
+        {"position": (0, 35, 12), "view_up": (0, 0, 1), "dolly": 0.95},
     ),
     "EccentricNestedCylinders": (
         EccentricNestedCylinders,
