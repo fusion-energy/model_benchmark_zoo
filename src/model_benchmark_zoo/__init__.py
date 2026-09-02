@@ -45,6 +45,7 @@ from .stepped_cylinder import *
 from .stepped_corner import *
 from .thin_walled_cylinder import *
 from .thin_walled_box import *
+from .partially_embedded_sphere import *
 from .sphere_with_multiple_holes import *
 from .overlapping_spheres import *
 from .tangent_spheres import *
