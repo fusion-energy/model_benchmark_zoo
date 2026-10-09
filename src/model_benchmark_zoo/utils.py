@@ -52,7 +52,7 @@ class BaseCommonGeometryObject:
         return None
 
     def export_stp_file(self, filename: str="common_geometry_object.step"):
-        self.cadquery_assembly().save(filename, "STEP")
+        self.cadquery_assembly().export(filename, exportType="STEP")
 
     def cad_bounding_box(self):
         """Return the exact bounding box of the CadQuery solids.
