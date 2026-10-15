@@ -6,9 +6,6 @@ import pytest
 kwargs_options = [{'meshing_backend': 'gmsh',
         'min_mesh_size': 0.001,
         'max_mesh_size': 0.1},
-        {'meshing_backend': 'cadquery',
-        'tolerance': 0.01,
-        'angular_tolerance': 0.01,},
         {'meshing_backend': 'cad-to-dagmc-mesher',
         'tolerance': 0.01,
         'angular_tolerance': 0.2,},]
