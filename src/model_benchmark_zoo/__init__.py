@@ -4,6 +4,7 @@ from .cylinder import *
 from .scaled_cylinder import *
 from .two_touching_cuboids import *
 from .nestedsphere import *
+from .rotated_nested_sphere import *
 from .cylinder import *
 from .circulartorus import *
 from .nestedcylinder import *
@@ -38,6 +39,7 @@ from .cross_shaped import *
 from .cylinder_in_box import *
 from .cylinder_tangent_to_plate import *
 from .sphere_in_box import *
+from .revolved_sphere_in_box import *
 from .chamfered_box import *
 from .hexagonal_prism import *
 from .pyramid import *
