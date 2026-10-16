@@ -2,6 +2,16 @@ from model_benchmark_zoo import RevolvedSphereInBox
 from model_benchmark_zoo.comparison import assert_tally_agreement, read_tally
 import openmc
 
+import pytest
+
+# CAD_to_OpenMC meshes the shared spherical face of this model short: the
+# imprint leaves the other sphere's seam on it as edges no other face uses,
+# and the face is triangulated as though they closed it. Strict, so this
+# turns into a failure to remove once CAD_to_OpenMC handles it.
+@pytest.mark.xfail(
+    strict=True,
+    reason="CAD_to_OpenMC meshes a shared spherical face with misaligned seams short",
+)
 def test_compare():
     mat1 = openmc.Material(name='1')
     mat1.add_nuclide('Fe56', 1)
