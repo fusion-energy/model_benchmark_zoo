@@ -43,6 +43,7 @@ jobs:
           pip install cadquery
           pip install cadquery-vtk
           pip install cad_to_dagmc
+          pip install git+https://github.com/fusion-energy/cad-to-dagmc-mesher@strip-free-internal-edges
           pip install openmc_data_downloader
           openmc_data_downloader -l ENDFB-7.1-NNDC -i Fe56 Be9 Al27
           pip install .[tests]
