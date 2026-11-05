@@ -16,6 +16,7 @@ from model_benchmark_zoo import (
     Cuboid,
     Sphere,
     NestedSphere,
+    RotatedNestedSphere,
     Cylinder,
     ScaledCylinder,
     NestedCylinder,
@@ -54,6 +55,7 @@ from model_benchmark_zoo import (
     CylinderInBox,
     CylinderTangentToPlate,
     SphereInBox,
+    RevolvedSphereInBox,
     ChamferedBox,
     HexagonalPrism,
     Pyramid,
@@ -102,6 +104,11 @@ GEOMETRIES = {
     "NestedSphere": (
         NestedSphere,
         "nestedsphere.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "RotatedNestedSphere": (
+        RotatedNestedSphere,
+        "rotated_nested_sphere.png",
         {"position": (15, 20, 12), "dolly": 0.95},
     ),
     "Cylinder": (
@@ -292,6 +299,11 @@ GEOMETRIES = {
     "SphereInBox": (
         SphereInBox,
         "sphere_in_box.png",
+        {"position": (15, 20, 12), "dolly": 0.95},
+    ),
+    "RevolvedSphereInBox": (
+        RevolvedSphereInBox,
+        "revolved_sphere_in_box.png",
         {"position": (15, 20, 12), "dolly": 0.95},
     ),
     "ChamferedBox": (
